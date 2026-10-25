@@ -13,7 +13,7 @@ It runs in the browser, works offline, and keeps each plan on the user's own dev
 | The data files: recipes, ingredients, stores, plans | [docs/DATA.md](docs/DATA.md) |
 | How amounts are calculated | [src/lib/kitchen-engine/SPEC.md](src/lib/kitchen-engine/SPEC.md) |
 | How to put the site online and test it on phones | [docs/DEPLOY.md](docs/DEPLOY.md) |
-| The design | `UI.fig`, open it with [OpenPencil](https://openpencil.dev) |
+| The design, and how it becomes code | `UI.fig`, open it with [OpenPencil](https://openpencil.dev); [docs/DESIGN.md](docs/DESIGN.md) |
 
 ## Working on it
 
@@ -35,6 +35,8 @@ data/                  recipes, ingredients, stores (YAML)
 docs/                  decisions, formats, stack, deployment
 scripts/validate-data.ts  checks the data files
 scripts/import-excel/  the one-off import from the old Excel sheet
+src/lib/components/    the shared building blocks of the screens
+src/lib/styles/        the design tokens: colors, type, spacing
 src/lib/data/          the rules for the data files, and the checks
 src/lib/kitchen-engine/  the calculation, with its own spec
 src/lib/integration/   tests that compare the engine with the old Excel

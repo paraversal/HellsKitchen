@@ -43,8 +43,8 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 - [x] **9. Kitchen engine code and tests.** The rules from the spec, one small file each, with tests named by rule id and the spec's worked examples run as tests. A test keeps the spec and the code in step. The engine's totals are compared with the Excel's own numbers for every recipe the Excel got right, and for the Excel workbook as it was saved.
   *Done when:* the spec's examples pass, and the engine's totals match the Excel for every recipe the Excel got right (the known differences are tested too).
 
-- [ ] **10. Design tokens in code.** Export colors and type from `UI.fig` as CSS variables; build the shared components (buttons, chips, meal row, store tabs).
-  *Done when:* a style-sheet page matches the design board.
+- [x] **10. Design tokens in code.** Colors exported from `UI.fig`, the other tokens written from the design, and 15 shared components (buttons, chips, meal row, store tabs, shopping row, cost block and more), all described in [docs/DESIGN.md](docs/DESIGN.md). A style sheet page at `/styleguide/` shows them.
+  *Done when:* a style-sheet page matches the design board. Built and compared in the browser at desktop and phone width.
 
 - [ ] **11. Recipes screens.** List with search and filters; recipe detail with the portions stepper.
 

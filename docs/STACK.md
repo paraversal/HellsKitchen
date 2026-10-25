@@ -28,7 +28,7 @@ app code ───────────────────────�
 | Language | **TypeScript 6** | JavaScript with types. The compiler catches mistakes like adding grams to litres before anyone runs the code. We pin version 6, because SvelteKit asks for it, even though 7 exists. | Plain JavaScript with JSDoc comments |
 | App framework | **Svelte 5 + SvelteKit 3** with the static adapter | Svelte builds the screens; SvelteKit adds pages and routing and, with the static adapter, turns everything into plain files. Svelte code reads close to HTML, which keeps it approachable for newcomers. | Vite + Preact |
 | Styling | **Plain CSS with variables** | The colors, type and spacing from `UI.fig` become CSS variables, and each component styles itself. No CSS framework to learn. | Tailwind |
-| Icons | **Lucide** (`@lucide/svelte`) | The icon set the design already uses. | Inline SVG files |
+| Icons | **Lucide** (`@lucide/svelte`) | The icon set the design already uses. Each icon is imported on its own, so only the ones in use are shipped. | Inline SVG files |
 | Font | **Bricolage Grotesque, self-hosted** (`@fontsource-variable/bricolage-grotesque`) | The font ships with the app, so it also shows up offline. A font loaded from Google would not. | A system font |
 | Interface language | **English, no translation library** | One language means no translation machinery. | None needed |
 
@@ -125,6 +125,8 @@ data/
   recipes/            one YAML file per recipe, named after the recipe id
 scripts/              checks the data (validate-data.ts) and, later, builds the data file
 src/
+  lib/components/     the shared building blocks of the screens
+  lib/styles/         the design tokens (colors from UI.fig, type, spacing)
   lib/data/           the data rules (Zod schemas) and the checks between files
   lib/kitchen-engine/ the calculation: pure code, no screens, fully tested, with its own SPEC.md
   lib/data/           the Zod schemas

@@ -1,0 +1,23 @@
+/*
+ * The colors of the design. GENERATED from the color variables in UI.fig (OpenPencil: design_to_tokens, format css, on 2026-10-25).
+ * Do not edit by hand. After a color change in the design, export again and replace the whole :root block below.
+ * The other tokens (type, spacing, radii) are in tokens.css.
+ */
+:root {
+  --color-paper: #F7F1E5;
+  --color-sheet: #FFFBF3;
+  --color-ink: #2B2118;
+  --color-ink-soft: #6B5F51;
+  --color-line: #E4DAC7;
+  --color-tomato: #CF3F26;
+  --color-tomato-tint: #F8D9CF;
+  --color-mustard: #F2B531;
+  --color-mustard-tint: #FBE7B3;
+  --color-leaf: #3F7D4E;
+  --color-leaf-tint: #D9EAD0;
+  --color-plum: #7A3B5E;
+  --color-plum-tint: #EBD5E1;
+  --color-sky: #3F86B8;
+  --color-sky-tint: #D3E5F1;
+  --color-on-tomato: #FFF8EE;
+}

@@ -4,9 +4,25 @@
 		{
 			"name": "preview-pages",
 			"runtimeExecutable": "sh",
-			"runtimeArgs": ["-c", "BASE_PATH=/HellsKitchen npm run preview -- --port 4173 --strictPort"],
+			"runtimeArgs": [
+				"-c",
+				"BASE_PATH=/HellsKitchen npm run preview -- --port 4173 --strictPort"
+			],
 			"port": 4173,
 			"url": "http://localhost:4173"
+		},
+		{
+			"name": "dev",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"run",
+				"dev",
+				"--",
+				"--port",
+				"5173",
+				"--strictPort"
+			],
+			"port": 5173
 		}
 	]
 }

@@ -77,7 +77,7 @@
 	</form>
 	<p>{saved === null ? 'Nothing saved yet.' : `Saved on this device: "${saved}"`}</p>
 
-	<p><a href={resolve('/about')}>Open another page</a></p>
+	<p><a href={resolve('/about')}>Open another page</a> · <a href={resolve('/styleguide')}>Style sheet</a></p>
 </main>
 
 <style>
@@ -97,7 +97,7 @@
 		font-weight: 800;
 	}
 	.soft {
-		color: var(--ink-soft);
+		color: var(--color-ink-soft);
 		margin: 0.25rem 0 1rem;
 	}
 	.checks {
@@ -109,7 +109,7 @@
 		display: flex;
 		gap: 0.75rem;
 		padding: 0.75rem 0;
-		border-bottom: 1px solid var(--line);
+		border-bottom: 1px solid var(--color-line);
 	}
 	.mark {
 		width: 1.5rem;
@@ -117,10 +117,10 @@
 		font-weight: 800;
 	}
 	.ok .mark {
-		color: var(--leaf);
+		color: var(--color-leaf);
 	}
 	.warn .mark {
-		color: var(--tomato);
+		color: var(--color-tomato);
 	}
 	form {
 		display: flex;
@@ -130,9 +130,9 @@
 		flex: 1;
 		font: inherit;
 		padding: 0.6rem 0.75rem;
-		border: 1.5px solid var(--line);
+		border: 1.5px solid var(--color-line);
 		border-radius: 0.75rem;
-		background: var(--sheet);
+		background: var(--color-sheet);
 	}
 	button {
 		font: inherit;
@@ -140,7 +140,7 @@
 		padding: 0.6rem 1.1rem;
 		border: 0;
 		border-radius: 0.75rem;
-		background: var(--tomato);
-		color: var(--sheet);
+		background: var(--color-tomato);
+		color: var(--color-sheet);
 	}
 </style>

@@ -1,0 +1,51 @@
+/*
+ * The type, spacing and shape of the design, written by hand from what UI.fig uses (OpenPencil: analyze_typography, analyze_spacing).
+ * The design is hand-tuned, so a component may use a value that is not in these lists (for example 14 px inside a row).
+ * The colors are in tokens.colors.css.
+ */
+:root {
+  /* One font, four weights. Self-hosted, so it also works offline. */
+  --font: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 600;
+  --weight-bold: 700;
+  --weight-heavy: 800;
+
+  /* Type sizes, named by what they are used for. */
+  --text-caption: 12px;
+  --text-note: 13px;
+  --text-small: 14px;
+  --text-compact: 15px;
+  --text-body: 16px;
+  --text-strong: 17px;
+  --text-heading: 22px;
+  --text-figure: 24px;
+  --text-title: 30px;
+  --text-title-large: 34px;
+  --text-display: 38px;
+  --text-counter: 44px;
+  --text-hero: 48px;
+  --leading-body: 1.45;
+  --leading-method: 1.44;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 40px;
+  --space-9: 56px;
+
+  /* Corners */
+  --radius-s: 12px;
+  --radius-m: 16px;
+  --radius-l: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* Lines */
+  --border: 1.5px solid var(--color-line);
+}
