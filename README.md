@@ -1,0 +1,40 @@
+# Hell's Kitchen
+
+A web app for planning the food of a big event: pick the meals, set the headcount, get the shopping list by store and a cost estimate.
+It runs in the browser, works offline, and keeps each plan on the user's own device. There is no server and no account.
+
+## Where to read first
+
+| What | Where |
+|---|---|
+| The plan and what is done | [ROADMAP.md](ROADMAP.md) |
+| What has been decided, and what is still open | [docs/DECISIONS.md](docs/DECISIONS.md) |
+| The tech stack, in plain words | [docs/STACK.md](docs/STACK.md) |
+| The data files: recipes, ingredients, stores, plans | [docs/DATA.md](docs/DATA.md) |
+| How amounts are calculated | [src/lib/kitchen-engine/SPEC.md](src/lib/kitchen-engine/SPEC.md) |
+| How to put the site online and test it on phones | [docs/DEPLOY.md](docs/DEPLOY.md) |
+| The design | `UI.fig`, open it with [OpenPencil](https://openpencil.dev) |
+
+## Working on it
+
+You need Node 24 (see `.nvmrc`).
+
+```
+npm ci            # install what the project needs
+npm run dev       # start it locally
+npm run check     # types
+npm test          # tests
+npm run build     # build the site into build/
+```
+
+## Folders
+
+```
+data/                  recipes, ingredients, stores (YAML)
+docs/                  decisions, formats, stack, deployment
+scripts/import-excel/  the one-off import from the old Excel sheet
+src/lib/kitchen-engine/  the calculation, with its own spec
+src/routes/            the screens
+src/service-worker/    makes the app work offline
+static/                icons and the web manifest
+```

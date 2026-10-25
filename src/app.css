@@ -1,0 +1,24 @@
+/* Temporary base styles for the walking skeleton. The real design tokens come from UI.fig (roadmap step 10). */
+:root {
+	--paper: #f7f1e5;
+	--sheet: #fffbf3;
+	--ink: #2b2118;
+	--ink-soft: #6b5f51;
+	--line: #e4dac7;
+	--tomato: #cf3f26;
+	--leaf: #3f7d4e;
+	--mustard: #f2b531;
+}
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.45;
+}
+
+a {
+	color: var(--tomato);
+}
