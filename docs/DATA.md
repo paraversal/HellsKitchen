@@ -139,8 +139,20 @@ Every message says which file and which line of the recipe is wrong, and how to 
 | `unknown-recipe`, `bad-date` | In a plan: a recipe that does not exist, or a date that is not real. |
 
 **Warnings** (shown, but do not stop a merge): `heavy-recipe` (ingredients weigh more than three times the finished dish), `light-recipe` (less than half),
-`unused-ingredient`, `no-price`, `no-method`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `plan-uses-needs-review`.
+`unused-ingredient`, `no-price`, `no-method`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `empty-meal`, `plan-uses-needs-review`.
 
 **Notes**: `needs-review` (a recipe marked as needing a second look, with its reason) and `no-pack` (an ingredient without a pack size).
 
 Warnings and notes are grouped and shortened. Add `--all` to list every one: `npm run validate -- --all`.
+
+## Plans on the device
+
+The app keeps its plans in the browser (IndexedDB), as one "library": the plans, and which one is open. Each plan is in the format above, so what is saved is also what can be exported and shared later.
+
+```
+{ version: 1, current: "plan-1", plans: { "plan-1": { id, updatedAt, plan: { ...a plan... } } } }
+```
+
+One rule above all: **saved data is never overwritten unless it has been read successfully first.** After a restart without a connection, a phone can report "nothing saved" when there is something.
+So the app also keeps a small mark that this device has saved before. If the library cannot be read, or looks empty although the mark is there, the app says so and offers "Try again". It starts a new plan only when the person confirms it.
+A library in a form this version does not know is left untouched.

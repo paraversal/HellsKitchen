@@ -2,9 +2,11 @@
 	import Flame from '@lucide/svelte/icons/flame';
 	import { resolve } from '$app/paths';
 	import { NAV, type NavId } from '#lib/nav.ts';
+	import Plate from './Plate.svelte';
 
-	// The red bar on the left of a desktop screen: the name of the app and the three places.
-	let { active }: { active: NavId } = $props();
+	// The red bar on the left of a desktop screen: the name of the app, the three places, and the open plan.
+	type Props = { active: NavId; openItems?: number; planName?: string };
+	let { active, openItems, planName }: Props = $props();
 </script>
 
 <aside>
@@ -16,10 +18,17 @@
 		{#each NAV as item (item.id)}
 			<a href={resolve(item.path)} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined}>
 				<item.icon size={22} />
-				{item.label}
+				<span class="label">{item.label}</span>
+				{#if item.id === 'shopping' && openItems}<span class="badge">{openItems}</span>{/if}
 			</a>
 		{/each}
 	</nav>
+	{#if planName}
+		<div class="plan">
+			<Plate seed={planName} size={36} />
+			<span>{planName}</span>
+		</div>
+	{/if}
 </aside>
 
 <style>
@@ -56,6 +65,29 @@
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
+	}
+	.label {
+		flex: 1;
+	}
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		height: 22px;
+		padding: 0 8px;
+		border-radius: 11px;
+		background: var(--color-mustard);
+		color: var(--color-ink);
+		font-size: var(--text-caption);
+		font-weight: var(--weight-heavy);
+	}
+	.plan {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: auto;
+		padding: var(--space-2) 6px;
+		font-size: var(--text-small);
+		font-weight: var(--weight-bold);
 	}
 	nav a {
 		display: flex;

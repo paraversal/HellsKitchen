@@ -69,11 +69,16 @@ In `src/lib/components/`, one small Svelte file each. They take plain props, con
 | `ShopRow` | One line of the shopping list. |
 | `SearchField` | The search box, with its own clear button. |
 | `RecipeRow` | One recipe in the list: plate, name, kind, and the plus that adds it to the plan. |
+| `Sheet` | A panel over the screen: it slides up from the bottom on a phone and sits in the middle on a desktop. The browser's own dialog, so Escape closes it. |
+| `Field` | A labelled box for a short value. It hands the change over when the person is done typing, not on every key. |
+| `Switch` | An on/off switch with its text. |
+| `Toasts` | Short messages at the bottom, like "Added to Saturday lunch". |
+| `EmptyNote` | What a screen says when there is nothing to show yet. |
 | `TabBar` | The bar at the bottom of a phone screen, with the three places. |
 | `Sidebar` | The red bar on the left of a desktop screen. |
 | `meal-types.ts` | How each kind of meal looks: name, icon, tint. |
 
-Not built yet, because they belong to later screens: the bottom sheet and the QR code (roadmap step 14).
+Not built yet, because they belong to later screens: the QR code and the printable sheets (roadmap step 14).
 
 The screens switch between the phone and the desktop layout at **900 px** wide.
 

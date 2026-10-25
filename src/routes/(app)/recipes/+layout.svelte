@@ -7,6 +7,8 @@
 	import RecipeRow from '#lib/components/RecipeRow.svelte';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import { appData } from '#lib/app-data.ts';
+	import { planStore } from '#lib/plan/browser.ts';
+	import { adding } from '#lib/plan/current.svelte.ts';
 	import { CATEGORIES, categoryName } from '#lib/categories.ts';
 	import type { Category } from '#lib/kitchen-engine/types.ts';
 	import { categoriesInUse, filterRecipes, groupByLetter, ingredientCountText, summaries } from '#lib/recipes.ts';
@@ -50,7 +52,8 @@
 					meta="{categoryName(recipe.category)} · {ingredientCountText(recipe.ingredientCount)}"
 					href={resolve('/(app)/recipes/[id]', { id: recipe.id })}
 					selected={selected === recipe.id}
-					canAdd={false}
+					canAdd={planStore.status === 'ready'}
+					onadd={() => (adding.recipe = recipe.id)}
 				/>
 			{/each}
 		{:else}

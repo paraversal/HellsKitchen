@@ -6,6 +6,7 @@ import { z } from 'zod';
 export const UNITS = ['g', 'ml', 'pcs', 'pack', 'jar'] as const;
 export const CATEGORIES = ['main', 'brunch', 'helper-snack', 'drink', 'misc'] as const;
 export const MEAL_TYPES = ['breakfast', 'lunch', 'coffee', 'dinner', 'snack'] as const;
+export type MealType = (typeof MEAL_TYPES)[number];
 
 /** Ids use lower case letters, digits and single hyphens: `red-lentils`. */
 export const ID_FORMAT = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -48,7 +49,8 @@ const planMeal = z.strictObject({
 		.optional(),
 	for: z.enum(['everyone', 'organisers']).optional(),
 	appetite: z.boolean().optional(),
-	dishes: z.array(planDish).min(1, 'a meal needs at least one dish')
+	// A meal that was just added has no dishes yet. validatePlan only warns about it.
+	dishes: z.array(planDish)
 });
 
 const planDay = z.strictObject({
@@ -68,6 +70,9 @@ export const planSchema = z.strictObject({
 	days: z.array(planDay).min(1, 'a plan needs at least one day'),
 	shopping: z.strictObject({ checked: z.array(z.string()) }).optional()
 });
+
+/** A plan, as it is written in a plan file and saved on the device. */
+export type PlanFile = z.infer<typeof planSchema>;
 
 /** Every field name a file of each kind may contain. Used to suggest the right name when someone mistypes one. */
 export const FIELD_NAMES = {

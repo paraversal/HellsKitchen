@@ -320,6 +320,7 @@ export function validatePlan(raw: unknown, data: DataSet, file: string, broken: 
 			report('error', 'bad-date', `"${day.date}" is not a real date`, { where: `days > #${d + 1} > date` });
 		}
 		day.meals.forEach((meal, m) => {
+			if (!meal.dishes.length) report('warning', 'empty-meal', 'this meal has no dishes', { where: `days > #${d + 1} > meals > #${m + 1}` });
 			const seen = new Set<string>();
 			meal.dishes.forEach((dish, k) => {
 				const at = `days > #${d + 1} > meals > #${m + 1} > dishes > #${k + 1}`;

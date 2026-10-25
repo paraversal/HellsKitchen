@@ -10,6 +10,8 @@
 	import Stepper from '#lib/components/Stepper.svelte';
 	import { appData } from '#lib/app-data.ts';
 	import { categoryName } from '#lib/categories.ts';
+	import { planStore } from '#lib/plan/browser.ts';
+	import { adding } from '#lib/plan/current.svelte.ts';
 	import { formatAmount } from '#lib/format.ts';
 	import { scaledIngredients } from '#lib/recipes.ts';
 
@@ -44,7 +46,7 @@
 					{#if source}<span class="soft note">Source: {source}</span>{/if}
 				</div>
 			</div>
-			<div class="action"><Button icon={Plus} disabled>Add to plan</Button></div>
+			<div class="action"><Button icon={Plus} disabled={planStore.status !== 'ready'} onclick={() => (adding.recipe = id)}>Add to plan</Button></div>
 		</header>
 
 		<div class="columns">
@@ -69,7 +71,7 @@
 			{/if}
 		</div>
 
-		<div class="cta"><Button icon={Plus} block disabled>Add to plan</Button></div>
+		<div class="cta"><Button icon={Plus} block disabled={planStore.status !== 'ready'} onclick={() => (adding.recipe = id)}>Add to plan</Button></div>
 	</article>
 {/if}
 

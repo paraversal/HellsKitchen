@@ -36,6 +36,17 @@ On a computer, with the server switched off after the first visit: the home page
 the data file and font loaded, and a note saved while offline was still there after navigating away and back.
 The site was also built and served under a sub-path (`/HellsKitchen/`), as on GitHub Pages.
 
+## The plan screens (step 12)
+
+On the phone, also try this. It should take a few minutes, not fifteen.
+
+1. In **Plan**, open the event settings (the sliders button) and set the headcount and the number of organisers.
+2. Add a meal, choose its kind and time, and add three or four dishes with "Add dish".
+3. In **Recipes**, press the plus next to a recipe and put it in a new meal.
+4. In **Shopping**, switch between the store tabs, tick a few items, and look at the estimated cost.
+5. Close the app completely and open it again: the plan and the ticks must still be there.
+6. Switch on airplane mode, restart the phone, and open the app once more. If the plan is not there yet, the app must say so and offer "Try again", and it must not show an empty new plan. Turn the connection back on, press "Try again", and the plan returns.
+
 ## Results
 
 ### iPhone, 2026-10-25

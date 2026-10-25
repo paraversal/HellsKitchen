@@ -4,8 +4,9 @@
 	import Plate from './Plate.svelte';
 
 	// One meal of the plan: what kind, when, how many people, and its dishes. `compact` is the narrow version for the desktop day columns.
-	type Props = { type: MealType; time?: string; people: number; dishes: { id: string; name: string }[]; compact?: boolean };
-	let { type, time, people, dishes, compact = false }: Props = $props();
+	// With `onopen`, the whole row can be pressed, for example to edit the meal.
+	type Props = { type: MealType; time?: string; people: number; dishes: { id: string; name: string }[]; compact?: boolean; onopen?: () => void };
+	let { type, time, people, dishes, compact = false, onopen }: Props = $props();
 	const meal = $derived(MEAL_TYPES[type]);
 </script>
 
@@ -15,7 +16,7 @@
 	</span>
 {/snippet}
 
-<div class="meal" class:compact>
+{#snippet inner()}
 	{#if !compact}{@render badge(40, 20)}{/if}
 	<div class="body">
 		<div class="heading">
@@ -24,13 +25,36 @@
 			{#if time}<span class="time">{time}</span>{/if}
 			<span class="people"><Users size={compact ? 14 : 15} />{people}</span>
 		</div>
-		<ul>
-			{#each dishes as dish (dish.id)}
-				<li><Plate seed={dish.id} size={compact ? 24 : 22} />{dish.name}</li>
-			{/each}
-		</ul>
+		{#if dishes.length}
+			<ul>
+				{#each dishes as dish (dish.id)}
+					<li><Plate seed={dish.id} size={compact ? 24 : 22} />{dish.name}</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
-</div>
+{/snippet}
+
+{#if onopen}
+	<div
+		class="meal open"
+		class:compact
+		role="button"
+		tabindex="0"
+		aria-label="Edit {meal.label}"
+		onclick={onopen}
+		onkeydown={(event) => {
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				onopen();
+			}
+		}}
+	>
+		{@render inner()}
+	</div>
+{:else}
+	<div class="meal" class:compact>{@render inner()}</div>
+{/if}
 
 <style>
 	.meal {
@@ -38,6 +62,9 @@
 		align-items: flex-start;
 		gap: 14px;
 		padding: 14px 0;
+	}
+	.open {
+		cursor: pointer;
 	}
 	.icon {
 		display: inline-flex;

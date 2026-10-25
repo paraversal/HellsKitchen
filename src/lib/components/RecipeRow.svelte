@@ -4,8 +4,8 @@
 	import IconButton from './IconButton.svelte';
 
 	// One recipe in the list: plate, name, and what kind it is. The plus adds it to the plan.
-	type Props = { id: string; name: string; meta: string; href: string; selected?: boolean; canAdd?: boolean };
-	let { id, name, meta, href, selected = false, canAdd = true }: Props = $props();
+	type Props = { id: string; name: string; meta: string; href: string; selected?: boolean; canAdd?: boolean; onadd?: () => void };
+	let { id, name, meta, href, selected = false, canAdd = true, onadd }: Props = $props();
 </script>
 
 <div class="row" class:selected>
@@ -16,7 +16,7 @@
 			<span class="meta">{meta}</span>
 		</span>
 	</a>
-	<IconButton icon={Plus} label="Add {name} to the plan" size={34} disabled={!canAdd} />
+	<IconButton icon={Plus} label="Add {name} to the plan" size={34} disabled={!canAdd} onclick={onadd} />
 </div>
 
 <style>

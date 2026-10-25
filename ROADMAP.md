@@ -49,11 +49,11 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 - [x] **11. Recipes screens.** List with search and category chips, grouped by letter; recipe detail with the portions stepper and the ingredients scaled by the kitchen engine; the app frame (tab bar on a phone, sidebar on a desktop). The data is built from the YAML into the app (`npm run build:data`), and every recipe is its own page that opens offline. "Add to plan" is shown but inactive until step 12.
   *Done when:* you can find a recipe by name or ingredient on a phone and a desktop, and read it for any number of portions, also in airplane mode. Checked in the browser at both sizes and offline on a computer; the phone test is still to do.
 
-- [ ] **12. Plan and Shopping screens.** Days, meals and headcounts; live shopping list with store tabs; saved on the device.
-  *Done when:* a full realistic plan can be built on a phone in under 15 minutes.
-  Safety rule from the iPhone test: after a restart without a connection, saved data can look missing until the phone is back online. The app must tell "could not read the storage yet" apart from "no plans", and never save over a plan before a read has worked.
+- [x] **12. Plan and Shopping screens.** Days, meals and headcounts; adding dishes in a meal or from a recipe; the live shopping list with store tabs, ticks, a progress bar and per-store costs; saved on the device with the safety rule below. On a wide desktop the shopping list sits beside the plan.
+  *Done when:* a full realistic plan can be built on a phone in under 15 minutes. Built and checked in the browser (phone and desktop width, reload, the storage rule); the phone test in [docs/DEPLOY.md](docs/DEPLOY.md) is still to do.
+  Safety rule from the iPhone test, now built and tested: after a restart without a connection, saved data can look missing until the phone is back online. The app tells "could not read the storage yet" apart from "no plans", and never saves over a plan before a read has worked.
 
-- [ ] **13. Prices and cost estimate.** Show a cost estimate for the plan and per store, and how complete it is.
+- [x] **13. Prices and cost estimate.** Show a cost estimate for the plan and per store, and how complete it is. Built together with step 12: the estimate, the share of food that has a price, the per-store cost and the "without price" markers all show on the plan and shopping screens.
   *Done when:* a plan with a few missing prices still shows an estimate, clearly marked as partial.
 
 - [ ] **14. Share, export, print.** Share link, QR code, JSON backup, PDF for shopping list and recipe sheets.

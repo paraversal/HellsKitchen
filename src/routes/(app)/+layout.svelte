@@ -1,7 +1,12 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import Sidebar from '#lib/components/Sidebar.svelte';
 	import TabBar from '#lib/components/TabBar.svelte';
+	import Toasts from '#lib/components/Toasts.svelte';
+	import { planStore } from '#lib/plan/browser.ts';
+	import { current } from '#lib/plan/current.svelte.ts';
+	import AddToPlanSheet from '#lib/screens/AddToPlanSheet.svelte';
 	import type { NavId } from '#lib/nav.ts';
 
 	// The frame around the three places of the app: a bar at the bottom on a phone (below 900 px), a bar on the left on a desktop.
@@ -11,13 +16,29 @@
 	const active: NavId = $derived(path.includes('/recipes') ? 'recipes' : path.includes('/shopping') ? 'shopping' : 'plan');
 	// A recipe on a phone has its own button at the bottom, which takes the place of the tab bar.
 	const reading = $derived(page.route.id === '/(app)/recipes/[id]');
+
+	// Read the saved plans when the app opens, and save for good when the page is hidden.
+	onMount(() => {
+		void planStore.load();
+		const save = () => void planStore.flush();
+		const hidden = () => document.visibilityState === 'hidden' && save();
+		document.addEventListener('visibilitychange', hidden);
+		addEventListener('pagehide', save);
+		return () => {
+			document.removeEventListener('visibilitychange', hidden);
+			removeEventListener('pagehide', save);
+		};
+	});
 </script>
 
 <div class="app" class:reading>
-	<div class="sidebar"><Sidebar {active} /></div>
+	<div class="sidebar"><Sidebar {active} openItems={current.shopping?.open} planName={planStore.plan?.name} /></div>
 	<main>{@render children()}</main>
 	<div class="tabbar"><TabBar {active} /></div>
 </div>
+
+<AddToPlanSheet />
+<Toasts />
 
 <style>
 	.app {

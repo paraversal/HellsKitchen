@@ -279,6 +279,13 @@ describe('plans', () => {
 		expect(find(issues, 'unknown-ingredient')?.fix).toContain('"red-lentils"');
 	});
 
+	it('empty-meal: a meal without dishes is only a warning', () => {
+		const issues = run((p) => {
+			p.days[0].meals[0].dishes = [];
+		});
+		expect(find(issues, 'empty-meal')?.severity).toBe('warning');
+	});
+
 	it('duplicate-dish: the same recipe twice in a meal', () => {
 		const issues = run((p) => {
 			p.days[0].meals[0].dishes.push({ recipe: 'dal' });

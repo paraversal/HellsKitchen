@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { resolve } from '$app/paths';
 
-// The start of the app. Until the plan screen exists, that is the recipes.
+// The start of the app. The plan.
 export function load() {
-	redirect(307, resolve('recipes/'));
+	redirect(307, resolve('plan/'));
 }
