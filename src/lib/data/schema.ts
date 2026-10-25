@@ -1,3 +1,4 @@
+// R1. A recipe is defined per 100 g of finished dish: the `per_100g` field below. See src/lib/kitchen-engine/SPEC.md.
 // The shape of every data file, written once, as in docs/DATA.md. Field names are the ones used in the YAML files.
 // This checks the SHAPE of one file at a time. The checks between files (does that ingredient exist?) are in validate.ts.
 import { z } from 'zod';

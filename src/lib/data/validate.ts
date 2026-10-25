@@ -2,7 +2,7 @@
 // "does this ingredient exist?". It is what a database would do with keys and constraints, see docs/STACK.md.
 // It only works on data it is given and never reads files, so the app and the command line can share it.
 import type { z } from 'zod';
-import { FIELD_NAMES, ID_FORMAT, ingredientsSchema, planSchema, recipeSchema, storesSchema } from './schema.ts';
+import { CATEGORIES, FIELD_NAMES, ID_FORMAT, ingredientsSchema, planSchema, recipeSchema, storesSchema } from './schema.ts';
 import { parseQuantity, type DataUnit } from './quantity.ts';
 import { closest, type Issue, type Severity } from './issues.ts';
 
@@ -20,7 +20,7 @@ export const LIGHT_RECIPE = 50;
 export type Ingredient = { name: string; unit: DataUnit; store: string; price?: number; pack?: number };
 export type Recipe = {
 	name: string;
-	category: string;
+	category: (typeof CATEGORIES)[number];
 	/** Grams one guest is expected to eat. */
 	portion: number;
 	/** Per 100 g of finished dish, in the ingredient's own unit (g, ml, pcs, pack or jar). */

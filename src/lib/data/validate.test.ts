@@ -31,6 +31,15 @@ const lentils = (raw: RawData) => (raw.ingredients as Record<string, Record<stri
 const find = (issues: Issue[], code: string) => issues.find((i) => i.code === code);
 const errors = (issues: Issue[]) => issues.filter((i) => i.severity === 'error');
 
+describe('R1: a recipe is defined per 100 g of finished dish', () => {
+	it('reads the amounts under per_100g as numbers in the base unit', () => {
+		const { data } = check((raw) => {
+			dal(raw).per_100g = { 'red-lentils': '0.01 kg', water: '40 ml' };
+		});
+		expect(data.recipes.dal.per100g).toEqual({ 'red-lentils': 10, water: 40 });
+	});
+});
+
 describe('a correct data set', () => {
 	it('has no errors and is turned into plain numbers', () => {
 		const { issues, data } = check();
@@ -130,7 +139,7 @@ describe('recipes', () => {
 });
 
 describe('ingredients and stores', () => {
-	it('unknown-store: the store must exist', () => {
+	it('Known difference 5: unknown-store, an unknown store code is an error, not a silently missing list', () => {
 		const { issues } = check((raw) => {
 			lentils(raw).store = 'supermarkt';
 		});

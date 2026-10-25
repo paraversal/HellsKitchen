@@ -1,6 +1,8 @@
 # Kitchen engine: calculation spec
 
-Rules version: **0 (draft)**. Nothing here is implemented yet. Rules R1 to R11 were reviewed one by one on 2026-10-25.
+Rules version: **0**. Rules R1 to R11 were reviewed one by one on 2026-10-25 and are implemented in `rules/`. Rules marked `inferred` are still to be revisited (roadmap step 15).
+
+This file is the single source of truth. The code only points at it, with a header like `// R6. ... See SPEC.md.`, and a test (`spec-sync.test.ts`) fails if a rule, a worked example or a known difference exists here but not in the code and tests, or the other way round.
 
 This is the one place where every calculation rule is written down. The first version is **inferred** from the old
 Excel workbook (see [docs/EXCEL.md](../../../docs/EXCEL.md)) so that we can start with real data. When we have a working
@@ -24,6 +26,24 @@ product we revisit every `inferred` rule on a clean slate.
 | Portion share | The share of a meal's guests who get this dish. |
 | Appetite factor | A multiplier on a meal for when people eat more than usual. |
 | Base unit | `g`, `ml` or `pcs`. All calculations use these. |
+
+## Where each rule lives
+
+| Rule | Code |
+|---|---|
+| R1 | `src/lib/data/schema.ts` and `quantity.ts`: the data layer reads recipes in this form, the engine receives them as numbers |
+| R2 | `rules/portion.ts` |
+| R3 | `rules/people.ts` |
+| R4 | `rules/share.ts` |
+| R5 | `rules/appetite.ts` |
+| R6 | `rules/amount.ts` |
+| R7 | `rules/totals.ts` |
+| R8 | `rules/units.ts` |
+| R9 | `rules/stores.ts` |
+| R10 | `rules/packs.ts` |
+| R11 | `rules/cost.ts` |
+
+`calculate.ts` chains them in this order.
 
 ## The rules
 
@@ -66,6 +86,9 @@ The share of a meal's people who get a given dish.
 - **Every other category:** 1.
 - **Override:** a person can set any share on a dish.
 
+Worked example: 125 g of dry spaghetti for 200 people, as the only main dish of a meal: `100 × 1.25 × 200 × 1 = 25,000 g`.
+<!-- example: R4-single-main -->
+
 Why not a fixed ½: the Excel halved every main, which under-cooks a meal that has only one main. Whether the old ½ meant "two mains per meal" is our best guess, not confirmed.
 
 Evidence: the previous maintainer: "Main is /2 for all selections except 2, where it is (x/2) × hunger", and for everything else "recipe × planned amount × people in the event".
@@ -92,9 +115,11 @@ The appetite factor is 1 for every dish that is not a main dish, or whose meal h
 Worked example 1, as the Excel intended and now calculated correctly:
 alcohol-free punch, apple 10 g per 100 g, 250 g per person, meal of 200 people, share 1, appetite 1.
 `10 × 2.5 × 200 × 1 × 1 = 5,000 g = 5 kg.` (The old shopping formula gave 2.5 kg.)
+<!-- example: R6-punch-apple -->
 
 Worked example 2: main dish dry spaghetti, 100 g pasta per 100 g, 125 g per person, 200 people, share 1/2, appetite 1.3.
 `100 × 1.25 × 200 × 0.5 × 1.3 = 16,250 g = 16.25 kg.`
+<!-- example: R6-spaghetti-friday -->
 
 ### R7. Total need per ingredient
 `inferred`
@@ -102,9 +127,13 @@ Worked example 2: main dish dry spaghetti, 100 g pasta per 100 g, 125 g per pers
 Add up R6 over every dish in every meal of the plan, per ingredient, in base units.
 
 ### R8. Purchase units
-`inferred`
+`inferred`, display rounding is `new`
 
-Show `g` as `kg` and `ml` as `L`. A piece stays a piece (`pcs`). Packs and jars are counts.
+Amounts below 1000 g or ml are shown as g or ml. From 1000 up they are shown as kg or L. Amounts are shown with three significant digits
+(74,600 g is "74.6 kg", 630 g stays "630 g", 9,298.8 g is "9.3 kg"). A value that rounds to 1000 is shown in the next unit up (999.6 g is "1 kg").
+Pieces, packs and jars stay counts. The exact amounts stay available for calculating.
+
+Evidence: the Excel shows kg and L only, rounded up to two decimals. The design shows "630 g needed" and "14.4 L needed".
 
 ### R9. Grouping by store
 `new` (the Excel does it by a code in the ingredient's column name)
@@ -119,6 +148,9 @@ Ingredients that are never bought, such as tap water, have the special store **N
 
 Each ingredient has one default pack size. For every ingredient the list shows the number of packs, **always rounded up**, next to the exact need,
 for example "36 cans, 14.4 L needed" or "8 × 10 kg, 74.6 kg needed". For pieces, packs and jars the pack size is 1, so the count is simply rounded up.
+
+Worked example: 74,600 g of potatoes in 10 kg sacks is 8 sacks.
+<!-- example: R10-potatoes -->
 
 An ingredient with no pack size shows only the exact need and is flagged.
 
