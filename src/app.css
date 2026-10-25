@@ -21,6 +21,11 @@ a {
 	color: var(--color-tomato);
 }
 
+/* While a sheet is open, the page behind it stays where it is. */
+html:has(dialog[open]) {
+	overflow: hidden;
+}
+
 button {
 	font: inherit;
 	color: inherit;
