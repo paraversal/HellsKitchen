@@ -49,4 +49,18 @@
 		border: 0;
 		color: var(--color-paper);
 	}
+	@media (hover: hover) {
+		.light:not(:disabled):hover {
+			background: var(--color-mustard-tint);
+		}
+		.dark:not(:disabled):hover {
+			background: color-mix(in srgb, var(--color-paper) 18%, var(--color-ink));
+		}
+	}
+	.light:not(:disabled):active {
+		background: var(--color-mustard);
+	}
+	.dark:not(:disabled):active {
+		background: color-mix(in srgb, var(--color-paper) 30%, var(--color-ink));
+	}
 </style>

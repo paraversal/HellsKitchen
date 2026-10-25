@@ -27,6 +27,14 @@
 		white-space: nowrap;
 		cursor: pointer;
 	}
+	@media (hover: hover) {
+		.chip:not(.active):hover {
+			background: var(--color-mustard-tint);
+		}
+	}
+	.chip:not(.active):active {
+		background: var(--color-mustard);
+	}
 	.active {
 		background: var(--color-ink);
 		border-color: var(--color-ink);

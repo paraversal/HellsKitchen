@@ -24,6 +24,11 @@
 		color: var(--color-sheet);
 		cursor: pointer;
 	}
+	@media (hover: hover) {
+		.check:not(.checked):hover {
+			border-color: var(--color-ink);
+		}
+	}
 	.checked {
 		background: var(--color-leaf);
 		border-color: var(--color-leaf);

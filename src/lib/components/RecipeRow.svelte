@@ -27,6 +27,14 @@
 		padding: 10px var(--space-3);
 		border-radius: var(--radius-m);
 	}
+	@media (hover: hover) {
+		.row:not(.selected):hover {
+			background: var(--color-sheet);
+		}
+	}
+	.row:active {
+		background: var(--color-mustard-tint);
+	}
 	.selected {
 		background: var(--color-mustard-tint);
 	}

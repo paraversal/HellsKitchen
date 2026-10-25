@@ -8,12 +8,12 @@
 </script>
 
 {#if href}
-	<a class="action" {href}>
+	<a class="action pressable" {href}>
 		<span class="icon"><Icon size={20} /></span>
 		<span class="text"><span class="label">{label}</span>{#if hint}<span class="hint">{hint}</span>{/if}</span>
 	</a>
 {:else}
-	<button class="action" {...rest}>
+	<button class="action pressable" {...rest}>
 		<span class="icon"><Icon size={20} /></span>
 		<span class="text"><span class="label">{label}</span>{#if hint}<span class="hint">{hint}</span>{/if}</span>
 	</button>

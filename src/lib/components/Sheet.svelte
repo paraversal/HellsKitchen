@@ -139,6 +139,9 @@
 		font-weight: var(--weight-heavy);
 	}
 	.body {
+		/* Room at the sides for the patch that lights up behind a pressed row, which reaches past the row. */
+		margin: 0 calc(-1 * var(--space-3));
+		padding: 0 var(--space-3);
 		overflow-y: auto;
 		overscroll-behavior: contain;
 		touch-action: pan-y;

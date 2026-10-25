@@ -41,8 +41,14 @@
 		padding: 4px;
 		border: 0;
 		background: none;
+		border-radius: var(--radius-pill);
 		color: var(--color-ink-soft);
 		cursor: pointer;
+	}
+	@media (hover: hover) {
+		.clear:hover {
+			background: var(--color-line);
+		}
 	}
 	input::placeholder {
 		color: var(--color-ink-soft);

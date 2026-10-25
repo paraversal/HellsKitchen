@@ -27,4 +27,13 @@
 		font-weight: var(--weight-medium);
 		cursor: pointer;
 	}
+	@media (hover: hover) {
+		.add-row:hover {
+			background: var(--color-sheet);
+			color: var(--color-ink);
+		}
+	}
+	.add-row:active {
+		background: var(--color-mustard-tint);
+	}
 </style>

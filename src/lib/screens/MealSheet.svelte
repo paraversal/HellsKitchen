@@ -7,6 +7,7 @@
 	import AddRow from '#lib/components/AddRow.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Chip from '#lib/components/Chip.svelte';
+	import Confirm from '#lib/components/Confirm.svelte';
 	import Field from '#lib/components/Field.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import { MEAL_TYPES } from '#lib/components/meal-types.ts';
@@ -18,7 +19,7 @@
 	import { CATEGORIES, categoryName } from '#lib/categories.ts';
 	import type { Category } from '#lib/kitchen-engine/types.ts';
 	import { planStore } from '#lib/plan/browser.ts';
-	import { MEAL_ORDER, addDish, peopleIn, portionOverride, removeDish, removeMeal, setDish, updateMeal, type MealPatch } from '#lib/plan/plan.ts';
+	import { MEAL_ORDER, addDish, dayLabel, peopleIn, portionOverride, removeDish, removeMeal, setDish, updateMeal, type MealPatch } from '#lib/plan/plan.ts';
 	import { categoriesInUse, filterRecipes, summaries } from '#lib/recipes.ts';
 
 	// Everything about one meal: what kind, when, for whom, and its dishes. Changes apply at once.
@@ -30,6 +31,7 @@
 	let view = $state<'meal' | 'picker'>('meal');
 	let adjusting = $state<string | null>(null);
 	let bump = $state(0);
+	let deleting = $state(false);
 
 	$effect(() => {
 		open = !!meal;
@@ -150,7 +152,7 @@
 					<AddRow label="Add dish" onclick={() => (view = 'picker')} />
 				</section>
 
-				<Button variant="secondary" onclick={remove}>Delete this meal</Button>
+				<Button variant="secondary" onclick={() => (deleting = true)}>Delete this meal</Button>
 			</div>
 		{:else}
 			<div class="stack">
@@ -167,7 +169,7 @@
 				<ul class="picker">
 					{#each found as recipe (recipe.id)}
 						<li>
-							<button class="pick" onclick={() => toggle(recipe.id)} aria-pressed={present.has(recipe.id)}>
+							<button class="pick pressable" onclick={() => toggle(recipe.id)} aria-pressed={present.has(recipe.id)}>
 								<Plate seed={recipe.id} size={40} />
 								<span class="grow"><strong>{recipe.name}</strong><span class="soft note">{categoryName(recipe.category)}</span></span>
 								<span class="mark" class:on={present.has(recipe.id)}>{#if present.has(recipe.id)}<Check size={16} />{:else}<Plus size={16} />{/if}</span>
@@ -182,6 +184,13 @@
 		{/if}
 	{/if}
 </Sheet>
+
+<Confirm
+	bind:open={deleting}
+	title="Delete this meal?"
+	text={meal && target && plan ? `${dayLabel(plan.days[target.day].date).name} ${MEAL_TYPES[meal.type].label.toLowerCase()}${meal.dishes.length ? ` and its ${meal.dishes.length} ${meal.dishes.length === 1 ? 'dish' : 'dishes'}` : ''} will be taken out of the plan.` : undefined}
+	onconfirm={remove}
+/>
 
 <style>
 	.stack {

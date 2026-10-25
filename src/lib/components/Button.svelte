@@ -48,6 +48,20 @@
 		border: var(--border);
 		font-size: var(--text-compact);
 	}
+		@media (hover: hover) {
+		.primary:not(:disabled):hover {
+			background: color-mix(in srgb, var(--color-ink) 14%, var(--color-tomato));
+		}
+		.secondary:not(:disabled):hover {
+			background: var(--color-mustard-tint);
+		}
+	}
+	.primary:not(:disabled):active {
+		background: color-mix(in srgb, var(--color-ink) 24%, var(--color-tomato));
+	}
+	.secondary:not(:disabled):active {
+		background: var(--color-mustard);
+	}
 	.block {
 		display: flex;
 		width: 100%;

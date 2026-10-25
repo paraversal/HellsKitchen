@@ -100,6 +100,14 @@
 		font-weight: var(--weight-medium);
 		text-decoration: none;
 	}
+	@media (hover: hover) {
+		nav a:not(.active):hover {
+			background: color-mix(in srgb, var(--color-on-tomato) 16%, transparent);
+		}
+	}
+	nav a:not(.active):active {
+		background: color-mix(in srgb, var(--color-on-tomato) 28%, transparent);
+	}
 	nav .active {
 		background: var(--color-on-tomato);
 		color: var(--color-tomato);

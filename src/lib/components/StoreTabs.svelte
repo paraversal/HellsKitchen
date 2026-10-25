@@ -36,6 +36,11 @@
 		white-space: nowrap;
 		cursor: pointer;
 	}
+	@media (hover: hover) {
+		.tab:hover {
+			color: var(--color-ink);
+		}
+	}
 	.active {
 		color: var(--color-ink);
 		font-weight: var(--weight-heavy);

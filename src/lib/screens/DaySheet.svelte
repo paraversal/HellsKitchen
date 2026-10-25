@@ -1,9 +1,10 @@
 <script lang="ts">
 	import Button from '#lib/components/Button.svelte';
+	import Confirm from '#lib/components/Confirm.svelte';
 	import Field from '#lib/components/Field.svelte';
 	import Sheet from '#lib/components/Sheet.svelte';
 	import { planStore } from '#lib/plan/browser.ts';
-	import { removeDay, setDayDate } from '#lib/plan/plan.ts';
+	import { dayLabel, removeDay, setDayDate } from '#lib/plan/plan.ts';
 
 	// One day: its date, and removing it.
 	let { day = $bindable() }: { day: number | null } = $props();
@@ -11,6 +12,8 @@
 	const date = $derived(day !== null && plan ? plan.days[day]?.date : undefined);
 	let open = $state(false);
 	let bump = $state(0);
+	let deleting = $state(false);
+	const meals = $derived(day !== null && plan ? (plan.days[day]?.meals.length ?? 0) : 0);
 
 	$effect(() => {
 		open = date !== undefined;
@@ -39,12 +42,19 @@
 			<div class="stack">
 				<Field label="Date" type="date" value={date} oncommit={move} />
 				{#if (plan?.days.length ?? 0) > 1}
-					<Button variant="secondary" onclick={remove}>Delete this day and its meals</Button>
+					<Button variant="secondary" onclick={() => (deleting = true)}>Delete this day and its meals</Button>
 				{/if}
 			</div>
 		{/key}
 	{/if}
 </Sheet>
+
+<Confirm
+	bind:open={deleting}
+	title="Delete this day?"
+	text={date ? `${dayLabel(date).name} ${dayLabel(date).date}${meals ? ` and its ${meals} ${meals === 1 ? 'meal' : 'meals'}` : ''} will be taken out of the plan.` : undefined}
+	onconfirm={remove}
+/>
 
 <style>
 	.stack {

@@ -57,7 +57,7 @@
 										<Button variant="secondary" onclick={() => (deleting = null)}>Keep</Button>
 									</div>
 								{:else}
-									<button class="plan-row" disabled={p.open} onclick={() => { planStore.switchTo(p.id); open = false; }}>
+									<button class="plan-row pressable" disabled={p.open} onclick={() => { planStore.switchTo(p.id); open = false; }}>
 										<span class="name">{p.name}</span>
 										<span class="facts">{facts(p)}</span>
 									</button>

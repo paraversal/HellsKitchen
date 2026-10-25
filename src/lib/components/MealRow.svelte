@@ -37,7 +37,7 @@
 
 {#if onopen}
 	<div
-		class="meal open"
+		class="meal open pressable"
 		class:compact
 		role="button"
 		tabindex="0"

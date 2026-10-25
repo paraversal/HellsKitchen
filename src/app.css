@@ -21,6 +21,48 @@ a {
 	color: var(--color-tomato);
 }
 
+/* No grey or blue flash over a pressed thing: it is a square, and most things here are round. Pressed things show their own, rounded, state. */
+* {
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* The focus ring is for people using the keyboard. After a tap or a click it stays away, also when a closing sheet gives focus back to what opened it.
+   `data-input` is set in the root layout. */
+:focus-visible {
+	outline: none;
+}
+html[data-input='keyboard'] :focus-visible {
+	outline: 3px solid var(--color-tomato);
+	outline-offset: 2px;
+}
+
+/* A row that can be pressed: a rounded patch lights up behind it when the pointer is over it, and a warmer one while it is pressed.
+   It reaches a little past the row, so the row's own text does not touch the edge. */
+.pressable {
+	position: relative;
+	isolation: isolate;
+}
+.pressable::before {
+	content: '';
+	position: absolute;
+	inset: -6px -10px;
+	z-index: -1;
+	border-radius: var(--radius-m);
+	background: var(--color-sheet);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 120ms ease-out;
+}
+@media (hover: hover) {
+	.pressable:hover::before {
+		opacity: 1;
+	}
+}
+.pressable:active::before {
+	background: var(--color-mustard-tint);
+	opacity: 1;
+}
+
 /* While a sheet is open, the page behind it stays where it is. */
 html:has(dialog[open]) {
 	overflow: hidden;
