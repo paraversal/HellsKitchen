@@ -1,0 +1,13 @@
+name: Vegan aioli
+category: brunch
+portion: 40 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 6510 g per 100 g of finished dish (65.1 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  garlic: 5000 g
+  aqua-faba: 1000 ml
+  mustard: 200 g
+  vegetable-oil: 200 ml
+  red-onion: 100 g
+  apple-cider-vinegar: 10 ml

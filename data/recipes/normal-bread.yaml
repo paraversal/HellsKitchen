@@ -1,0 +1,6 @@
+name: Normal Bread
+category: misc
+portion: 250 g
+source: Old Excel sheet
+per_100g:
+  rye-bread: 100 g

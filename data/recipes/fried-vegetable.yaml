@@ -1,0 +1,13 @@
+name: Fried vegetable
+category: main
+portion: 450 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 800 g per 100 g of finished dish (8 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  aubergine: 200 g
+  courgette: 200 g
+  onions: 200 g
+  spring-onions: 100 g
+  red-cabbage: 50 g
+  white-cabbage: 50 g

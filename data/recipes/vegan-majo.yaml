@@ -1,0 +1,12 @@
+name: Vegan Majo
+category: brunch
+portion: 40 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 1510 g per 100 g of finished dish (15.1 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  aqua-faba: 1000 ml
+  mustard: 200 g
+  vegetable-oil: 200 ml
+  onions: 100 g
+  apple-cider-vinegar: 10 ml

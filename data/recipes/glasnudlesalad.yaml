@@ -1,0 +1,23 @@
+name: Glasnudlesalad
+category: brunch
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  cucumber: 28.571 g
+  glass-noodles: 21.4285 g
+  carrots: 17.8571 g
+  bean-sprouts: 14.2857 g
+  cashew-nuts: 7.1429 g
+  spring-onions: 3.5714 g
+  tamari-gluten-free-soy-sauce: 3.5714 ml
+  lemon-lime-juice: 2.8571 ml
+  vegetable-oil: 1.4286 ml
+  ginger: 1 g
+  fresh-chilli: 0.001 pcs
+method: |
+  Preparation:
+  1. Cook noodles (soak in warm water)
+  2. Choop ginger, coriander, cucumber
+  3. Choop Cashews using a food processor
+  4. Mix everything
+  5. Make sauce with oil soja sauce and spices

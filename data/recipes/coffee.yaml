@@ -1,0 +1,6 @@
+name: Coffee
+category: misc
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  coffee: 100 g

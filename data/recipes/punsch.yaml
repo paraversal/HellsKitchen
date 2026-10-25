@@ -1,0 +1,19 @@
+name: Punsch
+category: drink
+portion: 250 g
+source: Old Excel sheet
+per_100g:
+  red-wine: 68 ml
+  rum-dark: 12 ml
+  oranges-organic: 10 g
+  amaretto: 6 ml
+  brown-sugar: 6 g
+  apple: 4 g
+  raisins: 4 g
+  almonds-ground: 3 g
+  cinnamon-sticks: 3 g
+  vanilla-sugar: 3 g
+  ginger: 1.8 g
+  star-anise: 0.6 g
+  cloves: 0.06 g
+  lemon-organic: 0.005 pcs

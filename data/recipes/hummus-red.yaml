@@ -1,0 +1,20 @@
+name: Hummus - red
+category: brunch
+portion: 70 g
+source: Old Excel sheet
+per_100g:
+  chickpeas-canned: 72.9725 g
+  tahini: 13.5135 g
+  sun-dried-tomatoes-in-oil: 11.8243 g
+  olive-oil: 6.7568 ml
+  water: 6.7568 ml
+  garlic: 2.9728 g
+  lemon-lime-juice: 2.7027 ml
+  salt: 1.0811 g
+method: |
+  Preparation:
+  1. Mix Oil, tahini, garlic and additions
+  2. Add chickpeas, herbs and puree
+  3. Add lemon juice and spices for taste and constancy
+  Tipps:
+  • If you have a meat grinder the texture of the hummus will be improved

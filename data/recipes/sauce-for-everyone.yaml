@@ -1,0 +1,10 @@
+name: Sauce for everyone
+category: misc
+portion: 200 g
+source: Old Excel sheet
+per_100g:
+  curry-ketchup: 20 g
+  hot-sauce: 20 g
+  ketchup: 20 g
+  mustard: 20 g
+  worcestershire-sauce: 20 ml

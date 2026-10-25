@@ -1,0 +1,23 @@
+name: "Test_2 Spekulatius-spread (alc free)"
+category: brunch
+portion: 25 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Called a test recipe in the Excel."
+per_100g:
+  speculoos-biscuits: 56.6251 g
+  apple-juice: 32.0876 ml
+  margarine: 12.2688 g
+  rum-dark: 9.4375 ml
+  sugarcane-syrup: 6.1344 g
+  spekulatios-spice: 2.0833 g
+  almond-aroma: 0.6667 ml
+  rum-aroma: 0.25 ml
+method: |
+  Preparation:
+  1. Put the speculations through a food processor
+  2. Add Rum, Amaretto and Water to the cookies to achieve a lightly wet sand texture
+  3. Let it rest for 30 minutes
+  4. Mix with margarine, Zuckerrüben-Sirup, and Spekulatius spices
+  Tipps:
+  • You can add more rum and/or amaretto if wished, just try and see which amounts taste best for you

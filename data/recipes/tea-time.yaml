@@ -1,0 +1,16 @@
+name: "Tea time (100g -> 0,1 PCK)"
+category: misc
+portion: 200 g
+source: Old Excel sheet
+per_100g:
+  11-herbs-tea: 0.009091 pack
+  black-tea: 0.009091 pack
+  camimile-tea: 0.009091 pack
+  ginger-orange-tea: 0.009091 pack
+  grean-ginger-orange-tea: 0.009091 pack
+  green-tea: 0.009091 pack
+  hearb-tea: 0.009091 pack
+  limonetea: 0.009091 pack
+  peppermint-tea: 0.009091 pack
+  rooibos-tea: 0.009091 pack
+  winter-tea: 0.009091 pack

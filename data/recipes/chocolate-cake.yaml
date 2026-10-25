@@ -1,0 +1,18 @@
+name: Chocolate cake
+category: helper-snack
+portion: 150 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 3033 g per 100 g of finished dish (30.3 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  wheat-flour: 700 g
+  margarine: 500 g
+  oat-milk: 500 ml
+  dark-chocolate-couverture: 400 g
+  brown-sugar: 250 g
+  peanut-butter: 200 g
+  vegetable-oil: 200 ml
+  cocoa-powder-baking: 100 g
+  rum-dark: 100 ml
+  coffee: 50 g
+  baking-powder: 33 g

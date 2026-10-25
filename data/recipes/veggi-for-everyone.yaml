@@ -1,0 +1,9 @@
+name: Veggi for everyone
+category: misc
+portion: 500 g
+source: Old Excel sheet
+per_100g:
+  bell-pepper: 33.333 g
+  cucumber: 33.3 g
+  iceberg-salad: 16.6667 g
+  carrots: 16.6666 g

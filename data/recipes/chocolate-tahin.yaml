@@ -1,0 +1,19 @@
+name: Chocolate Tahin
+category: brunch
+portion: 25 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 6949 g per 100 g of finished dish (69.5 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  tahini: 3000 g
+  dark-chocolate-couverture: 2000 g
+  margarine: 1100 g
+  cocoa-powder-baking: 800 g
+  vanilla-sugar: 49.2 g
+method: |
+  Preparation:
+  1. Melt Chocolate and Margarine in a Water bath
+  2. After it is melted add Tahini and Kakao
+  3. Season with lots of Cinnamon and a little vanilla, maybe add sugar if needed
+  Tipps:
+  Might be pretty firm when cold, add more margarine to make it softer or form into balls as a snack

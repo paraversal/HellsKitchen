@@ -1,0 +1,23 @@
+name: Coconut-almond
+category: brunch
+portion: 25 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 432 g per 100 g of finished dish (4.3 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  almonds-ground: 166 g
+  desiccated-coconut: 166 g
+  amaretto: 33.333 ml
+  coconut-cream: 33.333 ml
+  brown-sugar: 25 g
+  lemon-lime-juice: 6.66 ml
+  vanilla-sugar: 2 g
+method: |
+  Preparation:
+  1. Mix sugar and ?ml of water in a put and lightly caramelise the mixture
+  2. Add the coconut milk and stir that in
+  3. After a cohesive liquid formed add almonds and coconut
+  4. Add lemon juice to taste and amaretto for the consistency
+  5. For a smoother consistency puree the mixture
+  Tipps:
+  • CAREFULL hot sugar is hot and can burn easily

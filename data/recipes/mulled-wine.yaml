@@ -1,0 +1,12 @@
+name: Mulled wine
+category: drink
+portion: 250 g
+source: Old Excel sheet
+per_100g:
+  red-wine: 75 ml
+  oranges-organic: 18 g
+  amaretto: 6 ml
+  mapel-syrup: 3 ml
+  cinnamon-sticks: 1.2 g
+  star-anise: 0.6 g
+  cloves: 0.06 g

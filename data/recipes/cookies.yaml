@@ -1,0 +1,12 @@
+name: Cookies
+category: helper-snack
+portion: 150 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 3498 g per 100 g of finished dish (35 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  wheat-flour: 1200 g
+  brown-sugar: 840 g
+  dark-chocolate-couverture: 700 g
+  margarine: 660 g
+  vanilla-sugar: 98.4 g

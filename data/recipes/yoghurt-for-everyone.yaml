@@ -1,0 +1,9 @@
+name: Yoghurt for everyone
+category: misc
+portion: 500 g
+source: Old Excel sheet
+per_100g:
+  yoghurt-natur-oat: 25 g
+  yoghurt-natur-soy: 25 g
+  yoghurt-vanille-oat: 25 g
+  yoghurt-vanille-soy: 25 g

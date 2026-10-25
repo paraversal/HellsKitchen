@@ -1,0 +1,12 @@
+name: Brownies
+category: helper-snack
+portion: 150 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 457 g per 100 g of finished dish (4.6 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  brown-sugar: 185 g
+  wheat-flour: 135 g
+  dark-chocolate-couverture: 75 g
+  cocoa-powder-baking: 45 g
+  baking-powder: 16.5 g

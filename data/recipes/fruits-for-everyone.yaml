@@ -1,0 +1,11 @@
+name: Fruits for everyone
+category: misc
+portion: 500 g
+source: Old Excel sheet
+per_100g:
+  apple: 16.666 g
+  banana: 16.666 g
+  grapes: 16.666 g
+  mandarin: 16.666 g
+  oranges-organic: 16.666 g
+  pear: 16.666 g

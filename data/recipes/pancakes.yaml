@@ -1,0 +1,14 @@
+name: Pancakes
+category: brunch
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  oat-milk: 46.6667 ml
+  wheat-flour: 41.6667 g
+  apple-juice: 15 ml
+  sugar: 9 g
+  canola-oil: 5 ml
+  baking-powder: 1.6667 g
+  salt: 0.1667 g
+method: |
+  they are pancakes

@@ -1,0 +1,8 @@
+# Where ingredients are bought. Every ingredient names exactly one store.
+# The store `none` is for things that are never bought, like tap water.
+
+supermarket: Supermarket
+asian-market: Asian market
+online: Online
+drugstore: Drugstore
+none: Not bought

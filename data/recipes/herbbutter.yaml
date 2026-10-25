@@ -1,0 +1,20 @@
+name: Herbbutter
+category: brunch
+portion: 65 g
+source: Old Excel sheet
+per_100g:
+  margarine: 89.3176 g
+  salt: 4.2872 g
+  basil: 3.5842 g
+  chives: 3.5842 g
+  parsley: 3.5842 g
+  lemon-lime-juice: 3.5727 ml
+  garlic: 2.6795 g
+  pepper: 1.7864 g
+method: |
+  Preparation:
+  1. Finely mince the herbs
+  2. Mix everything
+  Tipps:
+  We used basil, parsley, and chives but a lot of herbs work for this
+  You could also replace the margarine with butter. If you work with butter work at room temperature.

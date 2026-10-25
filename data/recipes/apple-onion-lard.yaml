@@ -1,0 +1,18 @@
+name: Apple-Onion-Lard
+category: brunch
+portion: 30 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 1100 g per 100 g of finished dish (11 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  onions: 600 g
+  margarine: 250 g
+  apple: 200 g
+  olive-oil: 50 ml
+method: |
+  Preparation:
+  1. Slice the onions into half rings and the apples as small as possible
+  2. Add onions, apples and margarine
+  3. Cook the till mixture reaches a dark brown
+  Tips:
+  • To prevent burning add a little water to the pot which softens and par cooks the onions making the caramelization easier

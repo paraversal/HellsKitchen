@@ -1,0 +1,14 @@
+name: Pesto Rosso
+category: brunch
+portion: 65 g
+source: Old Excel sheet
+per_100g:
+  tomato-paste: 27.9143 g
+  walnuts: 25.0626 g
+  sun-dried-tomatoes-in-oil: 25.0571 g
+  olive-oil: 11.2771 ml
+  garlic: 4.8872 g
+  basil: 1.2571 g
+method: |
+  Alle Zutaten verrühren
+  Pancakes auf mittel-hoher  Hitze mit einem Schuss (10% der ölmenge) Rapsöl goldbraun ausbacken

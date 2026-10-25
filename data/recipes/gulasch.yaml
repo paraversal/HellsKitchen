@@ -1,0 +1,21 @@
+name: Gulasch
+category: main
+portion: 500 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 6590 g per 100 g of finished dish (65.9 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  bread-lebanese: 3000 g
+  garlic: 2000 g
+  potatoes: 400 g
+  bell-pepper: 300 g
+  soy-cubes: 300 g
+  onions: 200 g
+  gherkins: 100 g
+  red-wine: 90 ml
+  tomato-paste: 80 g
+  balsamic-vinegar: 30 ml
+  olive-oil: 30 ml
+  worcestershire-sauce: 30 ml
+  corn-starch: 20 g
+  agave-syrup: 10 ml

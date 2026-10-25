@@ -1,0 +1,22 @@
+name: Nudelsalad
+category: brunch
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  tomatoes: 26.67 g
+  cucumber: 22.22 g
+  pasta: 13.33 g
+  onions: 6.67 g
+  sun-dried-tomatoes-in-oil: 4.44 g
+  tofu: 4.44 g
+  basil: 2.22 g
+  lemon-lime-juice: 2.22 ml
+  balsamic-vinegar: 1.33 ml
+  salt: 1.11 g
+  tomato-paste: 1.11 g
+  pepper: 0.22 g
+method: |
+  1. cook pasta with some of the salt (don't use everything in the salat)
+  2. if you are motivated fry the tofu
+  3. use oil from sundried tomato
+  4. cut everything up und throw it together

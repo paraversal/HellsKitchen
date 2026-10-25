@@ -1,0 +1,19 @@
+name: Porridge
+category: brunch
+portion: 65 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 1490 g per 100 g of finished dish (14.9 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  apple: 600 g
+  oat-milk: 500 ml
+  oats-fine: 300 g
+  raisins: 50 g
+  sunflower-seeds: 20 g
+  dark-chocolate-couverture: 10 g
+  nut-mix: 10 g
+method: |
+  Option 1:
+  Mix oats and Milk with sugar cinnamon and apples and let sit over night
+  Option 2:
+  Cook oats and Milk with sugar cinnamon and apples in the morning

@@ -1,0 +1,15 @@
+name: Spaghetti with tomatosauce
+category: main
+portion: 450 g
+source: Old Excel sheet
+per_100g:
+  pasta: 100 g
+  tinned-tomatoes: 88.8889 g
+  onions: 33.3333 g
+  olive-oil: 13.3333 ml
+  tomato-paste: 2.2222 g
+  basil: 2 g
+  garlic: 1.6667 g
+  salt: 1.1111 g
+  pepper: 0.4444 g
+  sugar: 0.3333 g

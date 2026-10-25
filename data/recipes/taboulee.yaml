@@ -1,0 +1,23 @@
+name: "Taboulée"
+category: brunch
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  tomatoes: 21 g
+  cucumber: 20 g
+  parsley: 17 g
+  spring-onions: 16 g
+  bulgur: 12.5 g
+  lemon-lime-juice: 5 ml
+  mint: 3 g
+  olive-oil: 2.5 ml
+  salt: 1 g
+  agave-syrup: 0.5 ml
+  pepper: 0.5 g
+method: |
+  Preparation:
+  1. Cook/soak the Bulgur according to package instructions and let it cool completely
+  2. Cut Vegetables and herbs very very very finely and mix them with the bulgur
+  3. Make the seasoning and add it to the salat
+  Tipps:
+  If the seasoning is too liquid, you can add a little bit of mustard to make a thicker dressing

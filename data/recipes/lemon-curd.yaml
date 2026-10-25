@@ -1,0 +1,15 @@
+name: Lemon Curd
+category: brunch
+portion: 20 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 780 g per 100 g of finished dish (7.8 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  oat-milk: 500 ml
+  sugar: 200 g
+  corn-starch: 70 g
+  lemon-lime-juice: 10 ml
+  lemon-organic: 2 pcs
+method: |
+  Mix 80% of the milk with the sugar lemon juice and lemon zest and bring to a boil
+  Take the rest of the milk and mix with the corn starch and add this to the boiling milk while siring

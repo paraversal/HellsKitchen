@@ -1,0 +1,23 @@
+name: Coleslaw
+category: brunch
+portion: 45 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 4650 g per 100 g of finished dish (46.5 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  garlic: 3000 g
+  red-cabbage: 500 g
+  white-cabbage: 500 g
+  carrots: 250 g
+  onions: 200 g
+  gherkins: 100 g
+  vegetable-oil: 100 ml
+method: |
+  Preparation:
+  1. Slice the cabbage as fine as possible
+  2. Cut the carrots into thin strips and the onions into slices
+  3. Mix oil, soy sauce, and Vinegar add spices and minced garlic to taste
+  4. Mix everything and leave it covert in the fridge for at least 4 hours
+  Tips:
+  • You can use a mandoline slicer to shave the cabbage resulting in skinny slices
+  • For the best flavor let the salat sit for 24 hours

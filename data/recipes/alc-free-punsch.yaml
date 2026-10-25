@@ -1,0 +1,16 @@
+name: Alc free punsch
+category: drink
+portion: 250 g
+source: Old Excel sheet
+per_100g:
+  apple-juice: 45 ml
+  red-grape-juice: 25 ml
+  orange-juice: 20 ml
+  apple: 10 g
+  brown-sugar: 10 g
+  oranges-organic: 10 g
+  cinnamon-sticks: 1.2 g
+  cloves: 0.06 g
+  lemon-organic: 0.011 pcs
+method: |
+  Mix all

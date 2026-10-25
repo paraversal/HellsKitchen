@@ -1,0 +1,905 @@
+# Every ingredient the recipes can use.
+# unit:  how amounts are counted in recipes: g, ml, pcs, pack or jar.
+# price: euros per kilogram (unit g), per litre (unit ml) or per piece (pcs, pack, jar). Optional.
+# pack:  the usual pack size, like 25 kg or 400 ml. Optional.
+
+11-herbs-tea:
+  name: 11 herbs Tea
+  unit: pack
+  store: supermarket
+  price: 4
+agave-syrup:
+  name: Agave syrup
+  unit: ml
+  store: supermarket
+  price: 11
+almond-aroma:
+  name: "Almond Aroma (1drop = 0,05ml)"
+  unit: ml
+  store: supermarket
+  price: 111
+almonds-ground:
+  name: Almonds – ground
+  unit: g
+  store: supermarket
+  price: 20
+amaretto:
+  name: Amaretto
+  unit: ml
+  store: supermarket
+  price: 25
+apple:
+  name: Apple
+  unit: g
+  store: supermarket
+  price: 3
+apple-cider-vinegar:
+  name: Apple cider vinegar
+  unit: ml
+  store: supermarket
+  price: 6
+apple-juice:
+  name: Apple juice
+  unit: ml
+  store: supermarket
+  price: 3
+aqua-faba:
+  name: Aqua faba
+  unit: ml
+  store: none
+aubergine:
+  name: Aubergine
+  unit: g
+  store: supermarket
+  price: 3.5
+avocado:
+  name: Avocado
+  unit: g
+  store: supermarket
+  price: 4
+baking-powder:
+  name: Baking powder
+  unit: g
+  store: supermarket
+  price: 6
+balsamic-vinegar:
+  name: Balsamic vinegar
+  unit: ml
+  store: supermarket
+  price: 12
+banana:
+  name: Banana
+  unit: g
+  store: supermarket
+  price: 2.5
+basil:
+  name: Basil (pot)
+  unit: g
+  store: online
+  price: 29
+bean-sprouts:
+  name: Bean sprouts
+  unit: g
+  store: asian-market
+  price: 5
+bell-pepper:
+  name: Bell pepper
+  unit: g
+  store: supermarket
+  price: 6
+black-beans:
+  name: Black beans
+  unit: g
+  store: asian-market
+  price: 5
+black-tea:
+  name: Black Tea
+  unit: pack
+  store: supermarket
+  price: 4
+bread-lebanese:
+  name: Bread – Lebanese
+  unit: g
+  store: asian-market
+broccoli:
+  name: Broccoli
+  unit: g
+  store: supermarket
+  price: 4
+brown-sugar:
+  name: Brown sugar
+  unit: g
+  store: supermarket
+  price: 2
+bulgur:
+  name: Bulgur
+  unit: g
+  store: asian-market
+  price: 4.25
+camimile-tea:
+  name: Camimile Tea
+  unit: pack
+  store: supermarket
+  price: 4
+canola-oil:
+  name: Canola oil
+  unit: ml
+  store: supermarket
+  price: 4
+cardamom:
+  name: Cardamom
+  unit: g
+  store: asian-market
+  price: 65
+carrots:
+  name: Carrots
+  unit: g
+  store: supermarket
+  price: 2
+cashew-nuts:
+  name: Cashew nuts
+  unit: g
+  store: online
+  price: 35
+cauliflower:
+  name: Cauliflower
+  unit: g
+  store: supermarket
+  price: 6
+celery-root:
+  name: Celery root
+  unit: g
+  store: supermarket
+  price: 3
+chickpea-flour:
+  name: Chickpea flour
+  unit: g
+  store: online
+  price: 2.5
+chickpeas-canned:
+  name: Chickpeas – canned (dry)
+  unit: g
+  store: asian-market
+  price: 5
+chickpeas-dried:
+  name: Chickpeas – dried
+  unit: g
+  store: asian-market
+  price: 4
+chives:
+  name: Chives (pot)
+  unit: g
+  store: supermarket
+  price: 50
+chocolate-chips:
+  name: Chocolate chips
+  unit: pack
+  store: supermarket
+  price: 5
+cinnamon-ground:
+  name: Cinnamon – ground
+  unit: g
+  store: asian-market
+  price: 11
+cinnamon-sticks:
+  name: Cinnamon sticks
+  unit: g
+  store: asian-market
+  price: 20
+cloves:
+  name: Cloves
+  unit: g
+  store: asian-market
+  price: 12
+cocoa-powder-baking:
+  name: Cocoa powder – baking
+  unit: g
+  store: supermarket
+  price: 10
+cocoa-powder-drinking:
+  name: Cocoa powder – drinking
+  unit: g
+  store: supermarket
+  price: 7
+coconut-cream:
+  name: Coconut cream (high fat)
+  unit: ml
+  store: asian-market
+  price: 8
+coconut-oil:
+  name: Coconut oil (solid)
+  unit: g
+  store: supermarket
+coffee:
+  name: Coffee
+  unit: g
+  store: supermarket
+  price: 12
+coriander:
+  name: Coriander
+  unit: g
+  store: online
+  price: 15
+corn:
+  name: Corn
+  unit: g
+  store: supermarket
+  price: 2.5
+corn-starch:
+  name: Corn starch
+  unit: g
+  store: supermarket
+  price: 3.5
+cornflakes:
+  name: Cornflakes
+  unit: g
+  store: supermarket
+courgette:
+  name: Courgette
+  unit: g
+  store: supermarket
+  price: 4
+couscous:
+  name: Couscous
+  unit: g
+  store: asian-market
+  price: 4.4
+crushed-oregano:
+  name: Crushed oregano
+  unit: g
+  store: supermarket
+  price: 16
+cucumber:
+  name: Cucumber
+  unit: g
+  store: supermarket
+curry-ketchup:
+  name: Curry ketchup
+  unit: g
+  store: supermarket
+curry-paste:
+  name: Curry paste
+  unit: g
+  store: asian-market
+  price: 12
+curry-powder:
+  name: Curry powder
+  unit: g
+  store: asian-market
+dark-chocolate-couverture:
+  name: Dark chocolate / couverture
+  unit: g
+  store: supermarket
+  price: 15
+desiccated-coconut:
+  name: Desiccated coconut
+  unit: g
+  store: supermarket
+  price: 6
+dinkel-knuspermusli:
+  name: Dinkel Knuspermüsli
+  unit: g
+  store: supermarket
+edamame-peeld:
+  name: Edamame Peeld
+  unit: g
+  store: asian-market
+  price: 3
+enokii-mushrooms:
+  name: Enokii Mushrooms
+  unit: g
+  store: asian-market
+  price: 8.5
+flavoured-vegan-milk:
+  name: Flavoured vegan milk
+  unit: ml
+  store: supermarket
+  price: 3
+fresh-chilli:
+  name: Fresh chilli
+  unit: pcs
+  store: supermarket
+  price: 9
+fried-onions:
+  name: Fried onions
+  unit: g
+  store: supermarket
+  price: 10
+frying-oil:
+  name: Frying Oil
+  unit: ml
+  store: supermarket
+  price: 7
+garam-masala:
+  name: Garam masala
+  unit: g
+  store: asian-market
+garlic:
+  name: Garlic
+  unit: g
+  store: supermarket
+  price: 8
+garlic-powder:
+  name: Garlic powder
+  unit: g
+  store: asian-market
+  price: 25
+gelling-sugar:
+  name: Gelling sugar
+  unit: g
+  store: supermarket
+  price: 3
+gherkins:
+  name: Gherkins
+  unit: g
+  store: supermarket
+ginger:
+  name: Ginger
+  unit: g
+  store: supermarket
+ginger-orange-tea:
+  name: Ginger orange Tea
+  unit: pack
+  store: supermarket
+  price: 4
+glass-noodles:
+  name: Glass noodles
+  unit: g
+  store: asian-market
+gochujang:
+  name: Gochujang
+  unit: g
+  store: asian-market
+  price: 7
+grapes:
+  name: Grapes
+  unit: g
+  store: supermarket
+  price: 5
+grean-ginger-orange-tea:
+  name: Grean-Ginger-Orange Tea
+  unit: pack
+  store: supermarket
+  price: 4
+green-tea:
+  name: Green Tea
+  unit: pack
+  store: supermarket
+  price: 4
+hafer-knuspermusli:
+  name: Hafer Knuspermüsli
+  unit: g
+  store: supermarket
+hazelnuts-ground:
+  name: Hazelnuts – ground
+  unit: g
+  store: supermarket
+  price: 20
+hearb-tea:
+  name: Hearb Tea
+  unit: pack
+  store: supermarket
+  price: 4
+herbs-of-provence:
+  name: Herbs of Provence
+  unit: g
+  store: online
+  price: 30
+hot-sauce:
+  name: Hot sauce
+  unit: g
+  store: supermarket
+iceberg-salad:
+  name: Iceberg Salad
+  unit: g
+  store: supermarket
+  price: 2.5
+icing-sugar:
+  name: Icing sugar
+  unit: g
+  store: supermarket
+  price: 2
+ketchup:
+  name: Ketchup
+  unit: g
+  store: supermarket
+  price: 3
+kidney-beans:
+  name: Kidney beans
+  unit: g
+  store: asian-market
+  price: 5
+lasagne-sheets:
+  name: Lasagne sheets
+  unit: g
+  store: supermarket
+  price: 8
+lemon-lime-juice:
+  name: Lemon/lime juice
+  unit: ml
+  store: supermarket
+  price: 8
+lemon-organic:
+  name: Lemon – organic
+  unit: pcs
+  store: supermarket
+  price: 5
+lime-organic:
+  name: Lime - organic
+  unit: pcs
+  store: supermarket
+  price: 8
+limonetea:
+  name: LimoneTea
+  unit: pack
+  store: supermarket
+  price: 4
+mandarin:
+  name: Mandarin
+  unit: g
+  store: supermarket
+  price: 4.5
+mapel-syrup:
+  name: Mapel Syrup
+  unit: ml
+  store: supermarket
+margarine:
+  name: Margarine
+  unit: g
+  store: supermarket
+  price: 4
+marmelade-apricot:
+  name: Marmelade apricot
+  unit: jar
+  store: supermarket
+  price: 4
+marmelade-black-curd-berry:
+  name: Marmelade black curd berry
+  unit: jar
+  store: supermarket
+  price: 4
+marmelade-cherry:
+  name: Marmelade Cherry
+  unit: jar
+  store: supermarket
+  price: 4
+marmelade-strawberry-mango:
+  name: Marmelade strawberry-mango
+  unit: jar
+  store: supermarket
+  price: 4
+marmelade-wild-berry:
+  name: Marmelade wild berry
+  unit: jar
+  store: supermarket
+  price: 4
+mint:
+  name: Mint
+  unit: g
+  store: online
+  price: 25
+miso-paste:
+  name: Miso paste
+  unit: g
+  store: asian-market
+  price: 20
+msg:
+  name: MSG
+  unit: g
+  store: asian-market
+  price: 6
+mulled-wine:
+  name: Mulled Wine
+  unit: g
+  store: supermarket
+  price: 10
+mushrooms-shiitake:
+  name: Mushrooms – shiitake (dry)
+  unit: g
+  store: online
+  price: 60
+mustard:
+  name: Mustard
+  unit: g
+  store: supermarket
+  price: 8
+nachos:
+  name: Nachos
+  unit: g
+  store: supermarket
+  price: 5
+nougatbits:
+  name: Nougatbits
+  unit: g
+  store: supermarket
+nut-mix:
+  name: Nut mix
+  unit: g
+  store: online
+  price: 20
+nutmeg:
+  name: Nutmeg
+  unit: g
+  store: asian-market
+  price: 40
+nutritional-yeast-flakes:
+  name: Nutritional yeast flakes
+  unit: g
+  store: drugstore
+oat-milk:
+  name: Oat milk
+  unit: ml
+  store: supermarket
+  price: 2.5
+oats-coarse:
+  name: Oats – coarse
+  unit: g
+  store: supermarket
+oats-fine:
+  name: Oats – fine
+  unit: g
+  store: supermarket
+olive-oil:
+  name: Olive Oil
+  unit: ml
+  store: supermarket
+  price: 15
+olives:
+  name: Olives
+  unit: g
+  store: asian-market
+  price: 8
+onions:
+  name: Onions
+  unit: g
+  store: supermarket
+  price: 2.5
+orange-juice:
+  name: Orange juice
+  unit: ml
+  store: supermarket
+  price: 4
+oranges-organic:
+  name: Oranges organic
+  unit: g
+  store: supermarket
+  price: 4
+pak-choi:
+  name: Pak choi
+  unit: g
+  store: asian-market
+  price: 3
+paprika-powder:
+  name: Paprika powder
+  unit: g
+  store: asian-market
+  price: 12
+parsley:
+  name: Parsley
+  unit: g
+  store: online
+  price: 6
+pasta:
+  name: Pasta
+  unit: g
+  store: supermarket
+  price: 4
+peanut-butter:
+  name: Peanut butter
+  unit: g
+  store: asian-market
+  price: 10
+pear:
+  name: Pear
+  unit: g
+  store: supermarket
+  price: 3
+pepper:
+  name: Pepper
+  unit: g
+  store: asian-market
+  price: 20
+peppermint-tea:
+  name: Peppermint Tea
+  unit: pack
+  store: supermarket
+  price: 4
+pointet-pepper:
+  name: Pointet Pepper
+  unit: g
+  store: supermarket
+  price: 11
+potatoes:
+  name: Potatoes
+  unit: g
+  store: supermarket
+  price: 1.5
+pumpkin-hokkaido-butternut:
+  name: Pumpkin – Hokkaido / Butternut
+  unit: g
+  store: supermarket
+  price: 4
+radish:
+  name: Radish
+  unit: g
+  store: supermarket
+  price: 3
+raisins:
+  name: Raisins
+  unit: g
+  store: supermarket
+  price: 15
+red-cabbage:
+  name: Red cabbage
+  unit: g
+  store: supermarket
+  price: 3
+red-grape-juice:
+  name: Red Grape Juice
+  unit: ml
+  store: supermarket
+red-lentils:
+  name: Red lentils (dry)
+  unit: g
+  store: supermarket
+  price: 5
+red-onion:
+  name: Red onion
+  unit: g
+  store: supermarket
+  price: 5
+red-wine:
+  name: Red wine
+  unit: ml
+  store: supermarket
+  price: 10
+rice:
+  name: Rice
+  unit: g
+  store: asian-market
+  price: 3
+rice-milk:
+  name: Rice milk
+  unit: ml
+  store: supermarket
+  price: 2.5
+rice-vinegar:
+  name: Rice vinegar (mirin)
+  unit: ml
+  store: asian-market
+  price: 6
+rice-waffeln:
+  name: Rice waffeln
+  unit: g
+  store: supermarket
+  price: 15
+rooibos-tea:
+  name: Rooibos Tea
+  unit: pack
+  store: supermarket
+rum-aroma:
+  name: "Rum Aroma (1drop = 0,05ml)"
+  unit: ml
+  store: supermarket
+  price: 111
+rum-dark:
+  name: Rum – dark
+  unit: ml
+  store: supermarket
+  price: 30
+rye-bread:
+  name: Rye Bread
+  unit: g
+  store: supermarket
+rye-flour:
+  name: Rye flour
+  unit: g
+  store: supermarket
+  price: 1
+salt:
+  name: Salt
+  unit: g
+  store: supermarket
+  price: 1.5
+seawheet-sheets:
+  name: Seawheet sheets
+  unit: g
+  store: asian-market
+  price: 120
+sesame-seeds:
+  name: Sesame Seeds
+  unit: g
+  store: supermarket
+shallots:
+  name: Shallots
+  unit: g
+  store: supermarket
+  price: 4
+soy-cubes:
+  name: Soy cubes
+  unit: g
+  store: asian-market
+  price: 10
+soya-milk:
+  name: Soya milk
+  unit: ml
+  store: supermarket
+  price: 2.5
+speculoos-biscuits:
+  name: Speculoos biscuits
+  unit: g
+  store: supermarket
+  price: 8
+spekulatios-spice:
+  name: Spekulatios Spice
+  unit: g
+  store: supermarket
+  price: 80
+spring-onions:
+  name: Spring onions
+  unit: g
+  store: supermarket
+  price: 4
+star-anise:
+  name: Star anise
+  unit: g
+  store: asian-market
+  price: 28
+sugar:
+  name: Sugar
+  unit: g
+  store: supermarket
+  price: 1.5
+sugarcane-syrup:
+  name: Sugarcane syrup
+  unit: g
+  store: supermarket
+  price: 8
+sun-dried-tomatoes-in-oil:
+  name: Sun-dried tomatoes in oil
+  unit: g
+  store: drugstore
+  price: 30
+sunflower-oil:
+  name: Sunflower Oil
+  unit: ml
+  store: supermarket
+  price: 4
+sunflower-seeds:
+  name: Sunflower seeds
+  unit: g
+  store: asian-market
+  price: 4
+sweet-hungarian-paprika:
+  name: Sweet Hungarian paprika
+  unit: g
+  store: supermarket
+  price: 14
+sweet-potatoes:
+  name: Sweet potatoes
+  unit: g
+  store: supermarket
+  price: 6
+tahini:
+  name: Tahini
+  unit: g
+  store: asian-market
+  price: 10
+tamari-gluten-free-soy-sauce:
+  name: Tamari – gluten-free soy sauce
+  unit: ml
+  store: online
+  price: 7
+tinned-tomatoes:
+  name: Tinned tomatoes
+  unit: g
+  store: supermarket
+  price: 3
+tofu:
+  name: Tofu
+  unit: g
+  store: supermarket
+  price: 6
+tomato-paste:
+  name: Tomato paste (concentrate)
+  unit: g
+  store: asian-market
+  price: 5
+tomatoes:
+  name: Tomatoes
+  unit: g
+  store: supermarket
+  price: 4
+tomatoes-sieved:
+  name: Tomatoes – sieved
+  unit: g
+  store: supermarket
+  price: 3
+udon-noodles:
+  name: Udon noodles
+  unit: g
+  store: asian-market
+  price: 7
+vanilla-sugar:
+  name: Vanilla sugar
+  unit: g
+  store: supermarket
+  price: 7
+vegan-cream:
+  name: Vegan cream (soya cuisine)
+  unit: ml
+  store: supermarket
+  price: 4
+vegan-mushroom-stir-fry-sauce:
+  name: Vegan Mushroom stir Fry Sauce
+  unit: ml
+  store: asian-market
+  price: 6
+vegetable-oil:
+  name: Vegetable Oil
+  unit: ml
+  store: supermarket
+  price: 7
+vegetable-stock:
+  name: Vegetable stock
+  unit: g
+  store: supermarket
+walnuts:
+  name: Walnuts
+  unit: g
+  store: online
+  price: 20
+water:
+  name: Water
+  unit: ml
+  store: none
+wheat-flour:
+  name: Wheat Flour
+  unit: g
+  store: supermarket
+  price: 1
+white-cabbage:
+  name: White cabbage
+  unit: g
+  store: supermarket
+  price: 2.5
+whole-caraway-seeds:
+  name: Whole Caraway seeds
+  unit: g
+  store: supermarket
+  price: 13
+wholemeal-flour:
+  name: Wholemeal flour
+  unit: g
+  store: supermarket
+  price: 2
+winter-tea:
+  name: "Winter? Tea"
+  unit: pack
+  store: supermarket
+worcestershire-sauce:
+  name: Worcestershire sauce
+  unit: ml
+  store: asian-market
+  price: 20
+yeast:
+  name: Yeast
+  unit: g
+  store: supermarket
+yoghurt-natur-oat:
+  name: Yoghurt – natur - Oat
+  unit: g
+  store: supermarket
+yoghurt-natur-soy:
+  name: Yoghurt – natur - Soy
+  unit: g
+  store: supermarket
+  price: 6
+yoghurt-vanille-oat:
+  name: Yoghurt – vanille - Oat
+  unit: g
+  store: supermarket
+yoghurt-vanille-soy:
+  name: Yoghurt – vanille - Soy
+  unit: g
+  store: supermarket

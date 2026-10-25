@@ -1,0 +1,16 @@
+name: Tzatziki
+category: brunch
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  yoghurt-natur-soy: 58.8235 g
+  cucumber: 41.1765 g
+  lemon-lime-juice: 5.8824 ml
+  garlic: 1.7647 g
+  salt: 0.3529 g
+  pepper: 0.1176 g
+method: |
+  (1) Grate the unpeeled cucumber. Sprinkle with salt...
+  (2) Squeeze liquid out
+  (3) Add vegan yogurt, garlic, lemon juice, olive oil, pepper, and herbs
+  (4) Let rest for 1–2 hours

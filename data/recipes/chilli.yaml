@@ -1,0 +1,29 @@
+name: Chilli
+category: main
+portion: 500 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 6370 g per 100 g of finished dish (63.7 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  garlic: 2000 g
+  tinned-tomatoes: 800 g
+  bell-pepper: 600 g
+  coriander: 500 g
+  onions: 400 g
+  black-beans: 350 g
+  kidney-beans: 350 g
+  chickpeas-canned: 300 g
+  corn: 300 g
+  celery-root: 250 g
+  tomato-paste: 200 g
+  tomatoes: 150 g
+  carrots: 100 g
+  vegetable-oil: 70 ml
+method: |
+  Preparation:
+  1. Take a can opener open all canes and get liquid out
+  2. Cut vegetables
+  3. Fry vegetables
+  4. Add beans and fry
+  5. Add tomatoes and spices
+  6. Cook till beans are soft

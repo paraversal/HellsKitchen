@@ -1,0 +1,41 @@
+name: Curry
+category: main
+portion: 450 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 381 g per 100 g of finished dish (3.8 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  bread-lebanese: 183.8235 g
+  bell-pepper: 73.53 g
+  garlic: 36.7647 g
+  rice: 18.5 g
+  coconut-cream: 11.03 ml
+  onions: 11.03 g
+  chickpeas-canned: 9.1912 g
+  carrots: 7.3529 g
+  sweet-potatoes: 7.35 g
+  celery-root: 3.68 g
+  broccoli: 3.6765 g
+  potatoes: 3.6765 g
+  spring-onions: 1.84 g
+  cashew-nuts: 1.8382 g
+  curry-paste: 1.8382 g
+  ginger: 1.2868 g
+  lemon-lime-juice: 0.92 ml
+  red-cabbage: 0.9191 g
+  white-cabbage: 0.9191 g
+  peanut-butter: 0.7353 g
+  coconut-oil: 0.5515 g
+  msg: 0.37 g
+  salt: 0.14 g
+  pepper: 0.03 g
+  fresh-chilli: 0.005515 pcs
+method: |
+  Preparation:
+  1. Cut all vegetables and precook them, except for needed in 2, in the oven
+  2. Add onions a pot and let them get translucent, add garlic ginger
+  3. Now add chickpeas to the pot and let then cook 3-5 minutes
+  4. Add curry past and cook till fragrant
+  5. Add the rest of the vegetables and liquid
+  6. Spice to your liking
+  7. Garnish with spring onions and peanuts if so desired

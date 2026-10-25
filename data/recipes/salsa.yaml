@@ -1,0 +1,14 @@
+name: Salsa
+category: brunch
+portion: 65 g
+source: Old Excel sheet
+per_100g:
+  tomatoes: 80 g
+  garlic: 3 g
+  red-onion: 2.381 g
+  lemon-lime-juice: 0.4762 ml
+  fresh-chilli: 0.002 pcs
+method: |
+  Cut the Tomatoes into chunks, and the onions into small cubes
+  mice garlic and chili and juice the lime
+  mix everything and add salt and pepper to taste

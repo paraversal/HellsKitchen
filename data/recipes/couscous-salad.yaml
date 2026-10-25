@@ -1,0 +1,21 @@
+name: Couscous Salad
+category: brunch
+portion: 100 g
+source: Old Excel sheet
+per_100g:
+  cucumber: 33.33 g
+  corn: 22.22 g
+  couscous: 22.22 g
+  bell-pepper: 16.66 g
+  onions: 8.322 g
+  lemon-lime-juice: 5.52 ml
+  parsley: 4.16 g
+  tomato-paste: 3.88 g
+  olive-oil: 2.22 ml
+  salt: 1.11 g
+method: |
+  Preparation:
+  1. Soake the couscous according to the package instructions
+  2. Cut the vegetables
+  3. Mix the dressing
+  4. Mix everything together and garnish with parsley

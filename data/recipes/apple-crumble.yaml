@@ -1,0 +1,15 @@
+name: Apple Crumble
+category: helper-snack
+portion: 150 g
+source: Old Excel sheet
+per_100g:
+  apple: 52 g
+  wheat-flour: 31.25 g
+  margarine: 20.83 g
+  sugar: 15.625 g
+  vanilla-sugar: 0.8333 g
+  cinnamon-ground: 0.104 g
+method: |
+  (1) Mix Everything except for the apples till a crubly texture
+  (2) cut the apples and put them in a backing pan then cover them with the Streusel
+  (3) Back for 40 minuts on 180

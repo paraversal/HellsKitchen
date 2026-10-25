@@ -1,0 +1,20 @@
+name: Baba Ganoush
+category: brunch
+portion: 40 g
+source: Old Excel sheet
+per_100g:
+  aubergine: 154.42 g
+  tahini: 14.707 g
+  lemon-lime-juice: 6.127 ml
+  olive-oil: 4.9 ml
+  salt: 0.998 g
+method: |
+  Preparation:
+  1. Roast eggplant in the oven
+  2. Separate meat and skin
+  3. Mix meat with other ingredients
+  4. Add spices
+  Tipps:
+  • You can fry the skins and eat them as a chef’s snack
+  • Use a spoon to scoop out the flesh after roasting
+  • Forget the coriander

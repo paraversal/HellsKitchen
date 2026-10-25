@@ -1,0 +1,22 @@
+name: Hazelnut-spread
+category: brunch
+portion: 50 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 8373 g per 100 g of finished dish (83.7 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  hazelnuts-ground: 2500 g
+  vegan-cream: 2000 ml
+  cocoa-powder-baking: 1500 g
+  margarine: 1250 g
+  brown-sugar: 1000 g
+  vanilla-sugar: 123 g
+method: |
+  Preparation:
+  1. Roast hazelnuts carefully
+  2. Mix heavy cream and sugar in a pot
+  3. Mix the roasted Hazelnuts with the Kakao
+  4. Puree heavy cream and Hazelnuts together
+  5. Add Margarine for Texture
+  Tipps:
+  • If you don’t want to use vegan heavy cram you can substitute it with 80% vegan milk a more margarine

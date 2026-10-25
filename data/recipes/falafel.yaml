@@ -1,0 +1,24 @@
+name: Falafel
+category: main
+portion: 300 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 15417 g per 100 g of finished dish (154.2 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  bread-lebanese: 10000 g
+  garlic: 3000 g
+  parsley: 700 g
+  chickpeas-dried: 500 g
+  frying-oil: 500 ml
+  chickpea-flour: 300 g
+  coriander: 200 g
+  onions: 200 g
+  baking-powder: 16.5 g
+method: |
+  1. Soake the chickpeas in cold water and add the backing powder (This takes around 24 hours)
+  2. Cook potatoes and let cool completely
+  3. Dice the onions and herbs really small
+  4. Add chickpeas, potatoes, onions and herbs to a food processor
+  5. Add flour or water till you get a grumbly texture
+  6. Form the dough to balls
+  7. Fry or pan sear them

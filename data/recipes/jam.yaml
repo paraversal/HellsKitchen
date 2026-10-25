@@ -1,0 +1,10 @@
+name: Jam
+category: misc
+portion: 200 g
+source: Old Excel sheet
+per_100g:
+  marmelade-apricot: 0.02 jar
+  marmelade-black-curd-berry: 0.02 jar
+  marmelade-cherry: 0.02 jar
+  marmelade-strawberry-mango: 0.02 jar
+  marmelade-wild-berry: 0.02 jar

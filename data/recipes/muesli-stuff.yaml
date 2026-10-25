@@ -1,0 +1,11 @@
+name: Muesli stuff
+category: misc
+portion: 250 g
+source: Old Excel sheet
+per_100g:
+  cornflakes: 20 g
+  dinkel-knuspermusli: 20 g
+  hafer-knuspermusli: 20 g
+  nut-mix: 20 g
+  oats-coarse: 10 g
+  oats-fine: 10 g

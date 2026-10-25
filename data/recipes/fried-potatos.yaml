@@ -1,0 +1,26 @@
+name: Fried Potatos
+category: main
+portion: 450 g
+source: Old Excel sheet
+per_100g:
+  potatoes: 53.3333 g
+  broccoli: 33.2 g
+  canola-oil: 20 ml
+  onions: 20 g
+  courgette: 13.3333 g
+  tofu: 13.3333 g
+  bell-pepper: 10 g
+  parsley: 3.3333 g
+  garlic: 0.3333 g
+  spring-onions: 0 g
+method: |
+  Preparation:
+  1. Marinate the tofu at least 1 hour before
+  2. Cook the potatoes and let them cool completely
+  3. Blanche the brokenly
+  4. Cut the vegetables
+  5. Start Frying the vegetables (Onions-> Zucchini, bell peppers -> brokenly -> garlic)
+  6. Take the veggies out of the pan and fry the tofu
+  7. Take the tofu out of the pan and fry the potatoes till they are crunchy then add the rest into the pan again
+  Tipps:
+  • You can also do all of this in the oven, just add all the ingredients and let them cook for ~ 1 hour

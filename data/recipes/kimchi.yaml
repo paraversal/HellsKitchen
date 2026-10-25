@@ -1,0 +1,22 @@
+name: Kimchi
+category: brunch
+portion: 20 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 1150 g per 100 g of finished dish (11.5 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  red-cabbage: 350 g
+  white-cabbage: 350 g
+  carrots: 150 g
+  radish: 150 g
+  spring-onions: 150 g
+method: |
+  Cut everything and mix with:
+  3 TL Gochugaru (koreanisches chili pulver)
+  1 TL Reismehl
+  1 TL Zucker
+  1TL Sojasauce
+  1/2tl ingwer
+  1/2tl knoblauch
+  Seasam (optional)
+  let sit 1 week

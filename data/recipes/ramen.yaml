@@ -1,0 +1,21 @@
+name: Ramen
+category: main
+portion: 500 g
+source: Old Excel sheet
+status: needs-review
+review_note: "Ingredients add up to 2199 g per 100 g of finished dish (22 times). Probably entered per batch or in the wrong unit. Check amounts and units."
+per_100g:
+  spring-onions: 1000 g
+  garlic: 800 g
+  pak-choi: 100 g
+  tofu: 100 g
+  udon-noodles: 75 g
+  mushrooms-shiitake: 50 g
+  vegetable-stock: 40 g
+  onions: 20 g
+  ginger: 7 g
+  miso-paste: 7 g
+  fresh-chilli: 0.25 pcs
+method: |
+  1. Wrap 350 g firm tofu with kitchen paper and place it on a heatproof plate. Microwave for 2 minutes...
+  (Recipe with tofu frying, mirin, soy sauce — ramen topping)

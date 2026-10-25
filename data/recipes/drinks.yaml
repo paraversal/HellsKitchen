@@ -1,0 +1,12 @@
+name: Drinks (Milk, juice and powder)
+category: misc
+portion: 1000 g
+source: Old Excel sheet
+per_100g:
+  oat-milk: 16.6667 ml
+  orange-juice: 16.6667 ml
+  rice-milk: 16.6667 ml
+  soya-milk: 16.6667 ml
+  apple-juice: 12.5 ml
+  flavoured-vegan-milk: 12.5 ml
+  cocoa-powder-drinking: 4.166 g
