@@ -52,6 +52,7 @@
 		<div class="columns">
 			<section class="ingredients">
 				<Stepper name="portions" bind:value={portions} {step} min={1} label="Portions" size="medium" />
+				<p class="hint">Just for trying out this recipe. It does not use or change your plan.</p>
 				<div class="heading">
 					<h2>Ingredients</h2>
 					<span class="soft note">{recipe.portion} g per portion</span>
@@ -120,11 +121,16 @@
 		gap: var(--space-7);
 		padding: 14px var(--space-5) 0;
 	}
+	.hint {
+		margin: var(--space-3) 0 0;
+		color: var(--color-ink-soft);
+		font-size: var(--text-note);
+	}
 	.heading {
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
-		margin-top: var(--space-6);
+		margin-top: var(--space-5);
 	}
 	h2 {
 		margin: 0;
