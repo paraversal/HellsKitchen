@@ -2,8 +2,8 @@
 
 What the data files look like, field by field, in plain words. Written for people who add and fix recipes, not only for programmers.
 
-Status: draft (roadmap step 7). The first data came from the old Excel sheet by an import script, see [scripts/import-excel](../scripts/import-excel/README.md).
-The validator (roadmap step 8) will enforce everything listed under "What gets checked".
+Status: the first data came from the old Excel sheet by an import script, see [scripts/import-excel](../scripts/import-excel/README.md).
+The validator enforces everything listed under "What gets checked".
 
 ## Where things live
 
@@ -120,18 +120,27 @@ A complete example with comments is in [examples/plan.example.yaml](examples/pla
 
 ## What gets checked
 
-The validator (step 8) will refuse:
+Run `npm run validate` to check everything in `data/` and the example plans. It runs on every pull request too, and a pull request with errors cannot be merged.
+Every message says which file and which line of the recipe is wrong, and how to fix it. Where it can, it suggests the likely spelling ("Did you mean ...?").
 
-- an id that is not lower case letters, digits and hyphens, or two entries with the same id;
-- an ingredient with a store that does not exist, or with no store;
-- a recipe line that names an unknown ingredient, or uses a unit that does not fit the ingredient;
-- an amount that is not a positive number;
-- a recipe without `portion`, or with an unknown category;
-- a plan that mentions an unknown recipe, or a meal whose `for` is neither `everyone` nor `organisers`.
+**Errors** (these stop a merge):
 
-It will warn about:
+| Code | What it catches |
+|---|---|
+| `yaml-syntax` | A file that is not valid YAML, including the same name used twice. |
+| `bad-id` | An id that is not lower case letters, digits and single hyphens. |
+| `missing-field`, `unknown-field`, `wrong-type`, `not-allowed` | A required field is missing, a field name is mistyped, a value has the wrong kind (text where a number belongs), or a value is not one of the allowed ones (category, unit, meal type). |
+| `unknown-store`, `missing-none-store` | An ingredient names a store that does not exist, or the special store `none` is missing. |
+| `unknown-ingredient` | A recipe line names an ingredient that does not exist. |
+| `bad-quantity` | An amount that is not a number with a unit, uses a comma, or is zero. |
+| `unit-mismatch` | An amount in the wrong kind of unit for its ingredient, such as litres of flour. |
+| `portion-unit`, `pack-not-allowed` | A portion that is not in grams, or a pack size on something counted in pieces, packs or jars. |
+| `no-ingredients` | A recipe with no ingredients. |
+| `unknown-recipe`, `bad-date` | In a plan: a recipe that does not exist, or a date that is not real. |
 
-- a recipe whose ingredients weigh more than three times the finished dish;
-- an ingredient used by no recipe;
-- an ingredient without a price (counted in the cost estimate's coverage figure);
-- a recipe without a method.
+**Warnings** (shown, but do not stop a merge): `heavy-recipe` (ingredients weigh more than three times the finished dish), `light-recipe` (less than half),
+`unused-ingredient`, `no-price`, `no-method`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `plan-uses-needs-review`.
+
+**Notes**: `needs-review` (a recipe marked as needing a second look, with its reason) and `no-pack` (an ingredient without a pack size).
+
+Warnings and notes are grouped and shortened. Add `--all` to list every one: `npm run validate -- --all`.

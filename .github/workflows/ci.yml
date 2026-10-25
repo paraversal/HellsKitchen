@@ -18,5 +18,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Check the data files
+        run: npm run validate
       - run: npm test
       - run: npm run build

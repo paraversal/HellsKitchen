@@ -35,3 +35,18 @@ That is expected and is the reason the app will remind people to back up a plan.
 On a computer, with the server switched off after the first visit: the home page and the other page opened from the offline cache,
 the data file and font loaded, and a note saved while offline was still there after navigating away and back.
 The site was also built and served under a sub-path (`/HellsKitchen/`), as on GitHub Pages.
+
+## Results
+
+### iPhone, 2026-10-25
+
+Passed: install to the home screen, opening in airplane mode, layout and font offline, the second page.
+
+One difference: after restarting the phone and opening the app in airplane mode, the saved note was missing. It came back as soon as
+the phone was on wifi. We accept this edge case, because the data is not lost. It does give the app a rule, which is noted in
+roadmap step 12: the app must never treat "the storage could not be read yet" as "there are no plans", and must not save over a plan
+until the read has worked.
+
+### Android
+
+Not tested yet.

@@ -12,11 +12,14 @@
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && tsc --noEmit -p src/service-worker",
-		"test": "vitest run"
+		"test": "vitest run",
+		"validate": "node --disable-warning=ExperimentalWarning scripts/validate-data.ts"
 	},
 	"dependencies": {
 		"@fontsource-variable/bricolage-grotesque": "^5.3.0",
-		"idb-keyval": "^6.3.0"
+		"idb-keyval": "^6.3.0",
+		"yaml": "^2.9.1",
+		"zod": "^4.6.7"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^4.0.0",

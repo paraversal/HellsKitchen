@@ -26,6 +26,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Check the data files
+        run: npm run validate
       - run: npm test
       # Tells us the address the site will live at, for example /HellsKitchen
       - uses: actions/configure-pages@v6

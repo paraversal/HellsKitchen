@@ -123,8 +123,9 @@ data/
   stores.yaml         the shops
   ingredients.yaml    every ingredient
   recipes/            one YAML file per recipe, named after the recipe id
-scripts/              checks the data and builds the data file
+scripts/              checks the data (validate-data.ts) and, later, builds the data file
 src/
+  lib/data/           the data rules (Zod schemas) and the checks between files
   lib/kitchen-engine/ the calculation: pure code, no screens, fully tested, with its own SPEC.md
   lib/data/           the Zod schemas
   lib/...             components, storage, sharing

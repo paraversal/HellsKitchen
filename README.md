@@ -23,6 +23,7 @@ You need Node 24 (see `.nvmrc`).
 npm ci            # install what the project needs
 npm run dev       # start it locally
 npm run check     # types
+npm run validate  # check the data files (recipes, ingredients, stores)
 npm test          # tests
 npm run build     # build the site into build/
 ```
@@ -32,7 +33,9 @@ npm run build     # build the site into build/
 ```
 data/                  recipes, ingredients, stores (YAML)
 docs/                  decisions, formats, stack, deployment
+scripts/validate-data.ts  checks the data files
 scripts/import-excel/  the one-off import from the old Excel sheet
+src/lib/data/          the rules for the data files, and the checks
 src/lib/kitchen-engine/  the calculation, with its own spec
 src/routes/            the screens
 src/service-worker/    makes the app work offline

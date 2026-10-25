@@ -28,7 +28,7 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 
 - [x] **4. Tech stack.** Confirmed in [docs/STACK.md](docs/STACK.md).
 
-- [ ] **5. Walking skeleton.** An empty app on GitHub Pages that installs on a phone and opens offline, with CI running. Built and tested on a computer (offline from the cache, under the Pages sub-path, a note saved offline); the workflows are written but not run yet. What is left is on you: publish it and run the phone test in [docs/DEPLOY.md](docs/DEPLOY.md).
+- [ ] **5. Walking skeleton.** An empty app on GitHub Pages that installs on a phone and opens offline, with CI running. Built, published and tested: on a computer, and on an iPhone (see the results in [docs/DEPLOY.md](docs/DEPLOY.md)). The Android test is still to do.
   *Done when:* the live URL works on one iPhone and one Android phone in airplane mode.
 
 - [x] **6. Kitchen engine spec.** Finish `src/lib/kitchen-engine/SPEC.md`: every rule numbered, with status and a worked example. Written before any engine code.
@@ -37,7 +37,7 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 - [x] **7. YAML schemas and Excel import.** Ingredients (name, unit, exactly one store, default pack size, optional price), recipes (category, source, planned grams per person, ingredient lines per 100 g, steps), and the meal-based plan format, each documented in plain words with one example file. A one-off import script turns the Excel's recipes into YAML. Recipes that fail the plausibility check are imported but marked `needs-review` and kept out of the app until cleaned. Done so far: formats in [docs/DATA.md](docs/DATA.md), the importer in `scripts/import-excel/` (60 recipes, 186 ingredients, 472 amounts checked against the Excel with no differences), an example plan.
   *Done when:* the Excel's usable recipes exist as YAML and read naturally.
 
-- [ ] **8. Validator.** One validation script, shared by CI and the app.
+- [x] **8. Validator.** One validation script, shared by CI and the app. Built: `npm run validate` and the same code in `src/lib/data/` (41 tests), wired into CI. The app will use the same code to check imported plans.
   *Done when:* a deliberately broken recipe fails with an error a non-programmer can understand.
 
 - [ ] **9. Kitchen engine code and tests.** The rules from the spec, one small file each, with tests named by rule id and the spec's worked examples run as tests.
@@ -50,6 +50,7 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 
 - [ ] **12. Plan and Shopping screens.** Days, meals and headcounts; live shopping list with store tabs; saved on the device.
   *Done when:* a full realistic plan can be built on a phone in under 15 minutes.
+  Safety rule from the iPhone test: after a restart without a connection, saved data can look missing until the phone is back online. The app must tell "could not read the storage yet" apart from "no plans", and never save over a plan before a read has worked.
 
 - [ ] **13. Prices and cost estimate.** Show a cost estimate for the plan and per store, and how complete it is.
   *Done when:* a plan with a few missing prices still shows an estimate, clearly marked as partial.

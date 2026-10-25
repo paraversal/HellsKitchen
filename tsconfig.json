@@ -5,10 +5,12 @@
 		"types": [
 			"$app/types",
 			"node"
-		]
+		],
+		"erasableSyntaxOnly": true
 	},
 	"include": [
 		"src",
+		"scripts/*.ts",
 		"vite.config.ts"
 	],
 	"exclude": [
