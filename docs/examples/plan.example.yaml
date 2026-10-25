@@ -1,0 +1,53 @@
+# An example plan, written as YAML so it is easy to read. In the app, plans are saved on the device and shared as links.
+# Every recipe name below is a real recipe from data/recipes/.
+
+format: 1                      # version of this plan format
+rules_version: 0               # version of the kitchen engine rules it was calculated with
+name: Example event
+event:
+  everyone: 200                # the headcount
+  organisers: 32               # the people arriving on Thursday, a good estimate of the helpers
+  appetite_factor: 1.3         # applied to main dishes in meals that switch it on
+
+days:
+  - date: 2027-07-08           # Thursday
+    meals:
+      - type: snack
+        time: "18:00"
+        for: organisers            # this meal uses the organiser count
+        dishes:
+          - recipe: apple-crumble
+
+  - date: 2027-07-09           # Friday
+    meals:
+      - type: dinner
+        time: "19:00"
+        appetite: true         # the appetite factor applies to the main dishes of this meal
+        dishes:
+          - recipe: curried-lentil-tomato-and-coconut-soup    # a main dish: share defaults to 1 / (number of mains) = 1/2
+          - recipe: spaghetti-with-tomatosauce                # the second main dish: 1/2
+          - recipe: normal-bread                              # not a main dish: share 1
+
+  - date: 2027-07-10           # Saturday
+    meals:
+      - type: breakfast
+        time: "09:00"
+        dishes:
+          - recipe: hummus-neutral
+          - recipe: hummus-green
+            portion: 70 g      # overrides the recipe's usual amount per person
+          - recipe: tzatziki
+          - recipe: coffee
+      - type: lunch
+        time: "13:00"
+        dishes:
+          - recipe: couscous-salad
+      - type: dinner
+        time: "19:30"
+        dishes:
+          - recipe: spaghetti-with-tomatosauce
+            share: 1       # overrides the default: this is the only main dish, so everyone gets it
+          - recipe: alc-free-punsch
+
+shopping:
+  checked: [coffee, salt]      # ingredients ticked off the shopping list
