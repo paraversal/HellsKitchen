@@ -58,6 +58,13 @@ No ingredient has a pack size, because the Excel has none.
 
 - Almond Aroma (1drop = 0,05ml)|L|SM2
 
+## Zero amounts left out (4)
+
+- Fried Potatos: Spring onions
+- Chilli con sweetpotato: Olive Oil
+- Chilli con sweetpotato: Pepper
+- Chilli con sweetpotato: Lemon/lime juice
+
 ## Recipes without a method (23)
 
 - Brownies

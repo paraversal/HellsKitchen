@@ -22,7 +22,7 @@ python -m venv .venv
 
 The workbook is not part of the repository. It contains personal names in cell comments and a password in its macros.
 
-The second command recomputes every ingredient amount from the YAML and compares it with the number Excel itself calculated. Last run: 472 cells checked, 0 differences.
+The second command recomputes every ingredient amount from the YAML and compares it with the number Excel itself calculated. Last run: 468 cells checked, 0 differences (the 4 zero amounts are left out).
 
 ## What the importer decided
 
@@ -40,6 +40,7 @@ The second command recomputes every ingredient amount from the YAML and compares
 | Rows named "Misc Placehodler" | Skipped, they have no ingredients |
 | Recipe whose ingredients weigh more than 3 times the finished dish, and recipes called "test" | `status: needs-review` with a `review_note` |
 | Canned placeholder text in the method column | No `method` |
+| Cells that hold a zero amount | Left out |
 | Selection numbers 0 to 3, hunger modifier, headcounts | Not imported. They belong to the plan, not to recipes |
 | Cell comments | Not imported (many hold outdated values and one personal name) |
 

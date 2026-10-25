@@ -161,6 +161,9 @@ def main(path):
             m = pat.match(f) if isinstance(f, str) else None
             factor = Decimal(m.group(1)) if m else Decimal(str(f))
             iid, mult, unit = col_to_id[c]
+            if factor == 0:  # a cell that says "0 * ..." means nothing
+                report["Zero amounts left out"].append(f"{name}: {ingredients[iid]['name']}")
+                continue
             lines.append((iid, factor * mult, unit))
         if not lines:
             report["Skipped recipes (no ingredients)"].append(f"{name} (row {r})")
@@ -244,7 +247,7 @@ def main(path):
              "No ingredient has a pack size, because the Excel has none.", ""]
     for title in ["Recipes marked needs-review", "Skipped recipes (no ingredients)", "Skipped ingredients (marked obsolete in the Excel and unused)",
                   "Obsolete marker kept because a recipe uses it", "Renamed ingredients", "Unknown store code treated as supermarket",
-                  "Recipes without a method", "Ingredients no recipe uses (kept)", "Ingredients without a price"]:
+                  "Zero amounts left out", "Recipes without a method", "Ingredients no recipe uses (kept)", "Ingredients without a price"]:
         items = report.get(title, [])
         lines += [f"## {title} ({len(items)})", ""] + [f"- {i}" for i in items] + [""]
     (HERE / "REPORT.md").write_text("\n".join(lines))
