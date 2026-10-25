@@ -37,6 +37,7 @@ scripts/validate-data.ts  checks the data files
 scripts/import-excel/  the one-off import from the old Excel sheet
 src/lib/data/          the rules for the data files, and the checks
 src/lib/kitchen-engine/  the calculation, with its own spec
+src/lib/integration/   tests that compare the engine with the old Excel
 src/routes/            the screens
 src/service-worker/    makes the app work offline
 static/                icons and the web manifest

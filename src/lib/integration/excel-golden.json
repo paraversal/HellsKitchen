@@ -1,0 +1,604 @@
+{
+ "source": "Calculated by the old Excel sheet itself (cached values). Written by scripts/import-excel/import_excel.py.",
+ "units": "Amounts are in the Excel's own units: kg for g, L for ml, and plain counts for pcs, pack and jar.",
+ "event": {
+  "everyone": 200,
+  "organisers": 32,
+  "appetiteFactor": 1.3
+ },
+ "perPerson": {
+  "alc-free-punsch": {
+   "category": "drink",
+   "portion": 250,
+   "lines": {
+    "apple": 0.025,
+    "cloves": 0.00015,
+    "oranges-organic": 0.025,
+    "apple-juice": 0.1125,
+    "orange-juice": 0.05,
+    "cinnamon-sticks": 0.003,
+    "lemon-organic": 0.0275,
+    "brown-sugar": 0.025,
+    "red-grape-juice": 0.0625
+   }
+  },
+  "apple-crumble": {
+   "category": "helper-snack",
+   "portion": 150,
+   "lines": {
+    "apple": 0.078,
+    "margarine": 0.031245,
+    "wheat-flour": 0.046875,
+    "cinnamon-ground": 0.000156,
+    "sugar": 0.0234375,
+    "vanilla-sugar": 0.00124995
+   }
+  },
+  "baba-ganoush": {
+   "category": "brunch",
+   "portion": 40,
+   "lines": {
+    "aubergine": 0.061768,
+    "olive-oil": 0.00196,
+    "salt": 0.0003992,
+    "tahini": 0.0058828,
+    "lemon-lime-juice": 0.0024508
+   }
+  },
+  "beanballs-for-spaghetti": {
+   "category": "main",
+   "portion": 150,
+   "lines": {
+    "black-beans": 0.08333333,
+    "oats-fine": 0.01666667,
+    "cocoa-powder-baking": 0.00083333,
+    "garlic": 0.00333333,
+    "frying-oil": 0.05,
+    "salt": 0.00166667,
+    "tomato-paste": 0.00166667,
+    "onions": 0.05
+   }
+  },
+  "chilli-con-sweetpotato": {
+   "category": "main",
+   "portion": 450,
+   "lines": {
+    "kidney-beans": 0.063100962,
+    "black-beans": 0.063100962,
+    "garlic-powder": 0.000180288,
+    "corn": 0.072115385,
+    "oat-milk": 0.007211538,
+    "salt": 0.001802885,
+    "sweet-potatoes": 0.126201923,
+    "tinned-tomatoes": 0.288461538,
+    "tomato-paste": 0.005408654,
+    "onions": 0.032451923,
+    "water": 0.061298077,
+    "pointet-pepper": 0.050480769,
+    "whole-caraway-seeds": 0.000216346,
+    "crushed-oregano": 0.000216346,
+    "sweet-hungarian-paprika": 0.001442308
+   }
+  },
+  "coffee": {
+   "category": "misc",
+   "portion": 100,
+   "lines": {
+    "coffee": 0.1
+   }
+  },
+  "couscous-salad": {
+   "category": "brunch",
+   "portion": 100,
+   "lines": {
+    "couscous": 0.02222,
+    "cucumber": 0.03333,
+    "corn": 0.02222,
+    "olive-oil": 0.00222,
+    "bell-pepper": 0.01666,
+    "parsley": 0.00416,
+    "salt": 0.00111,
+    "tomato-paste": 0.00388,
+    "lemon-lime-juice": 0.00552,
+    "onions": 0.008322
+   }
+  },
+  "curried-lentil-tomato-and-coconut-soup": {
+   "category": "main",
+   "portion": 500,
+   "lines": {
+    "coconut-oil": 0.01111,
+    "curry-powder": 0.00185,
+    "ginger": 0.0633,
+    "garlic": 0.0034,
+    "coconut-cream": 0.12345,
+    "msg": 0.000463,
+    "pepper": 0.000465,
+    "salt": 0.001,
+    "tinned-tomatoes": 0.12345,
+    "lemon-lime-juice": 0.0013,
+    "onions": 0.0633,
+    "red-lentils": 0.0463,
+    "water": 0.185
+   }
+  },
+  "drinks": {
+   "category": "misc",
+   "portion": 1000,
+   "lines": {
+    "cocoa-powder-drinking": 0.04166,
+    "soya-milk": 0.1666667,
+    "rice-milk": 0.1666667,
+    "oat-milk": 0.1666667,
+    "flavoured-vegan-milk": 0.125,
+    "apple-juice": 0.125,
+    "orange-juice": 0.1666667
+   }
+  },
+  "fried-potatos": {
+   "category": "main",
+   "portion": 450,
+   "lines": {
+    "broccoli": 0.1494,
+    "potatoes": 0.24,
+    "garlic": 0.001499994,
+    "bell-pepper": 0.045,
+    "parsley": 0.014999994,
+    "tofu": 0.059999994,
+    "courgette": 0.059999994,
+    "onions": 0.09,
+    "canola-oil": 0.09
+   }
+  },
+  "fruits-for-everyone": {
+   "category": "misc",
+   "portion": 500,
+   "lines": {
+    "apple": 0.08333,
+    "banana": 0.08333,
+    "pear": 0.08333,
+    "mandarin": 0.08333,
+    "oranges-organic": 0.08333,
+    "grapes": 0.08333
+   }
+  },
+  "glasnudlesalad": {
+   "category": "brunch",
+   "portion": 100,
+   "lines": {
+    "cashew-nuts": 0.007142855,
+    "fresh-chilli": 0.001,
+    "glass-noodles": 0.0214285,
+    "cucumber": 0.028571,
+    "ginger": 0.001,
+    "carrots": 0.0178571,
+    "vegetable-oil": 0.00142857,
+    "bean-sprouts": 0.014285715,
+    "tamari-gluten-free-soy-sauce": 0.00357143,
+    "lemon-lime-juice": 0.002857145,
+    "spring-onions": 0.00357143
+   }
+  },
+  "herbbutter": {
+   "category": "brunch",
+   "portion": 65,
+   "lines": {
+    "basil": 0.002329752,
+    "garlic": 0.001741697,
+    "margarine": 0.05805644,
+    "pepper": 0.001161138,
+    "parsley": 0.002329752,
+    "salt": 0.002786702,
+    "lemon-lime-juice": 0.002322255,
+    "chives": 0.002329752
+   }
+  },
+  "hummus-green": {
+   "category": "brunch",
+   "portion": 70,
+   "lines": {
+    "basil": 0.002625,
+    "chickpeas-canned": 0.05108075,
+    "garlic": 0.002080925,
+    "olive-oil": 0.004729725,
+    "parsley": 0.016554055,
+    "salt": 0.000756752,
+    "tahini": 0.00945945,
+    "lemon-lime-juice": 0.00189189,
+    "water": 0.004729725
+   }
+  },
+  "hummus-neutral": {
+   "category": "brunch",
+   "portion": 120,
+   "lines": {
+    "chickpeas-canned": 0.087567,
+    "garlic": 0.0035673,
+    "olive-oil": 0.0081081,
+    "salt": 0.00129729,
+    "tahini": 0.0162162,
+    "lemon-lime-juice": 0.00324324,
+    "water": 0.01621623
+   }
+  },
+  "hummus-red": {
+   "category": "brunch",
+   "portion": 70,
+   "lines": {
+    "chickpeas-canned": 0.05108075,
+    "garlic": 0.002080925,
+    "olive-oil": 0.004729725,
+    "salt": 0.000756752,
+    "tahini": 0.00945945,
+    "sun-dried-tomatoes-in-oil": 0.008277027,
+    "lemon-lime-juice": 0.00189189,
+    "water": 0.004729725
+   }
+  },
+  "jam": {
+   "category": "misc",
+   "portion": 200,
+   "lines": {
+    "marmelade-wild-berry": 0.04,
+    "marmelade-black-curd-berry": 0.04,
+    "marmelade-cherry": 0.04,
+    "marmelade-apricot": 0.04,
+    "marmelade-strawberry-mango": 0.04
+   }
+  },
+  "lebanase-bread": {
+   "category": "misc",
+   "portion": 250,
+   "lines": {
+    "bread-lebanese": 0.25
+   }
+  },
+  "muesli-stuff": {
+   "category": "misc",
+   "portion": 250,
+   "lines": {
+    "oats-coarse": 0.025,
+    "oats-fine": 0.025,
+    "cornflakes": 0.05,
+    "hafer-knuspermusli": 0.05,
+    "dinkel-knuspermusli": 0.05,
+    "nut-mix": 0.05
+   }
+  },
+  "mulled-wine": {
+   "category": "drink",
+   "portion": 250,
+   "lines": {
+    "amaretto": 0.015,
+    "cloves": 0.00015,
+    "oranges-organic": 0.045,
+    "red-wine": 0.1875,
+    "star-anise": 0.0015,
+    "cinnamon-sticks": 0.003,
+    "mapel-syrup": 0.0075
+   }
+  },
+  "normal-bread": {
+   "category": "misc",
+   "portion": 250,
+   "lines": {
+    "rye-bread": 0.25
+   }
+  },
+  "nudelsalad": {
+   "category": "brunch",
+   "portion": 100,
+   "lines": {
+    "balsamic-vinegar": 0.00133,
+    "basil": 0.00222,
+    "cucumber": 0.02222,
+    "pasta": 0.01333,
+    "pepper": 0.00022,
+    "tofu": 0.00444,
+    "salt": 0.00111,
+    "tomatoes": 0.02667,
+    "sun-dried-tomatoes-in-oil": 0.00444,
+    "tomato-paste": 0.00111,
+    "lemon-lime-juice": 0.00222,
+    "onions": 0.00667
+   }
+  },
+  "nugatbits": {
+   "category": "misc",
+   "portion": 250,
+   "lines": {
+    "nougatbits": 0.25
+   }
+  },
+  "pancakes": {
+   "category": "brunch",
+   "portion": 100,
+   "lines": {
+    "baking-powder": 0.00166667,
+    "wheat-flour": 0.04166667,
+    "oat-milk": 0.04666667,
+    "apple-juice": 0.015,
+    "salt": 0.00016667,
+    "sugar": 0.009,
+    "canola-oil": 0.005
+   }
+  },
+  "pesto-rosso": {
+   "category": "brunch",
+   "portion": 65,
+   "lines": {
+    "basil": 0.000817143,
+    "garlic": 0.003176689,
+    "olive-oil": 0.007330143,
+    "sun-dried-tomatoes-in-oil": 0.016287143,
+    "tomato-paste": 0.018144286,
+    "walnuts": 0.016290671
+   }
+  },
+  "punsch": {
+   "category": "drink",
+   "portion": 250,
+   "lines": {
+    "amaretto": 0.015,
+    "apple": 0.01,
+    "ginger": 0.0045,
+    "almonds-ground": 0.0075,
+    "cloves": 0.00015,
+    "oranges-organic": 0.025,
+    "raisins": 0.01,
+    "rum-dark": 0.03,
+    "red-wine": 0.17,
+    "star-anise": 0.0015,
+    "cinnamon-sticks": 0.0075,
+    "lemon-organic": 0.0125,
+    "brown-sugar": 0.015,
+    "vanilla-sugar": 0.0075
+   }
+  },
+  "salsa": {
+   "category": "brunch",
+   "portion": 65,
+   "lines": {
+    "fresh-chilli": 0.0013,
+    "garlic": 0.00195,
+    "tomatoes": 0.052,
+    "lemon-lime-juice": 0.00030953,
+    "red-onion": 0.001547618
+   }
+  },
+  "sauce-for-beanballs": {
+   "category": "main",
+   "portion": 100,
+   "lines": {
+    "basil": 0.002,
+    "garlic": 0.001666667,
+    "olive-oil": 0.013333333,
+    "pepper": 0.000444447,
+    "salt": 0.001111113,
+    "tinned-tomatoes": 0.088888887,
+    "tomato-paste": 0.00222222,
+    "sugar": 0.000333333,
+    "onions": 0.033333333
+   }
+  },
+  "sauce-for-everyone": {
+   "category": "misc",
+   "portion": 200,
+   "lines": {
+    "curry-ketchup": 0.04,
+    "hot-sauce": 0.04,
+    "ketchup": 0.04,
+    "mustard": 0.04,
+    "worcestershire-sauce": 0.04
+   }
+  },
+  "spaghetti": {
+   "category": "main",
+   "portion": 125,
+   "lines": {
+    "pasta": 0.125
+   }
+  },
+  "spaghetti-with-tomatosauce": {
+   "category": "main",
+   "portion": 450,
+   "lines": {
+    "basil": 0.009,
+    "garlic": 0.0075,
+    "pasta": 0.45,
+    "olive-oil": 0.06,
+    "pepper": 0.00200001,
+    "salt": 0.00500001,
+    "tinned-tomatoes": 0.39999999,
+    "tomato-paste": 0.00999999,
+    "sugar": 0.0015,
+    "onions": 0.15
+   }
+  },
+  "spekulatius-spread": {
+   "category": "brunch",
+   "portion": 25,
+   "lines": {
+    "amaretto": 0.00117969,
+    "margarine": 0.003067195,
+    "rum-dark": 0.002359381,
+    "speculoos-biscuits": 0.014156285,
+    "sugarcane-syrup": 0.001533598,
+    "spekulatios-spice": 0.000520833
+   }
+  },
+  "taboulee": {
+   "category": "brunch",
+   "portion": 100,
+   "lines": {
+    "agave-syrup": 0.0005,
+    "bulgur": 0.0125,
+    "cucumber": 0.02,
+    "mint": 0.003,
+    "olive-oil": 0.0025,
+    "pepper": 0.0005,
+    "parsley": 0.017,
+    "salt": 0.001,
+    "tomatoes": 0.021,
+    "lemon-lime-juice": 0.005,
+    "spring-onions": 0.016
+   }
+  },
+  "tea-time": {
+   "category": "misc",
+   "portion": 200,
+   "lines": {
+    "camimile-tea": 0.018181818,
+    "peppermint-tea": 0.018181818,
+    "black-tea": 0.018181818,
+    "ginger-orange-tea": 0.018181818,
+    "green-tea": 0.018181818,
+    "grean-ginger-orange-tea": 0.018181818,
+    "hearb-tea": 0.018181818,
+    "limonetea": 0.018181818,
+    "11-herbs-tea": 0.018181818,
+    "winter-tea": 0.018181818,
+    "rooibos-tea": 0.018181818
+   }
+  },
+  "tomato-butter": {
+   "category": "brunch",
+   "portion": 65,
+   "lines": {
+    "garlic": 0.001857148,
+    "margarine": 0.046428574,
+    "pepper": 0.000928574,
+    "salt": 0.002228574,
+    "tomato-paste": 0.0185705,
+    "lemon-lime-juice": 0.001857148
+   }
+  },
+  "tzatziki": {
+   "category": "brunch",
+   "portion": 100,
+   "lines": {
+    "cucumber": 0.041176471,
+    "yoghurt-natur-soy": 0.058823529,
+    "garlic": 0.001764706,
+    "pepper": 0.000117647,
+    "salt": 0.000352941,
+    "lemon-lime-juice": 0.005882353
+   }
+  },
+  "vege-don": {
+   "category": "main",
+   "portion": 500,
+   "lines": {
+    "broccoli": 0.041666667,
+    "ginger": 0.013016667,
+    "carrots": 0.034666667,
+    "garlic": 0.025,
+    "msg": 0.0026,
+    "corn-starch": 0.008333333,
+    "olive-oil": 0.0225,
+    "pepper": 0.000416667,
+    "mushrooms-shiitake": 0.025,
+    "rice": 0.083333333,
+    "rice-vinegar": 0.013016667,
+    "bell-pepper": 0.041666667,
+    "tofu": 0.069333333,
+    "bean-sprouts": 0.037,
+    "tamari-gluten-free-soy-sauce": 0.052083333,
+    "lemon-lime-juice": 0.013,
+    "brown-sugar": 0.013016667,
+    "spring-onions": 0.006933333,
+    "onions": 0.0625,
+    "water": 0.057283333,
+    "canola-oil": 0.041666667,
+    "enokii-mushrooms": 0.066666667,
+    "vegan-mushroom-stir-fry-sauce": 0.013016667,
+    "edamame-peeld": 0.055,
+    "seawheet-sheets": 0.002291667,
+    "sesame-seeds": 0.002416667
+   }
+  },
+  "veggi-for-everyone": {
+   "category": "misc",
+   "portion": 500,
+   "lines": {
+    "cucumber": 0.1665,
+    "carrots": 0.083333,
+    "bell-pepper": 0.166665,
+    "iceberg-salad": 0.08333333
+   }
+  },
+  "yoghurt-for-everyone": {
+   "category": "misc",
+   "portion": 500,
+   "lines": {
+    "yoghurt-natur-soy": 0.125,
+    "yoghurt-natur-oat": 0.125,
+    "yoghurt-vanille-oat": 0.125,
+    "yoghurt-vanille-soy": 0.125
+   }
+  }
+ },
+ "state": {
+  "selected": {
+   "baba-ganoush": 1,
+   "couscous-salad": 1,
+   "herbbutter": 1,
+   "hummus-green": 1,
+   "hummus-neutral": 1,
+   "hummus-red": 1,
+   "pancakes": 1,
+   "spekulatius-spread": 1,
+   "taboulee": 1,
+   "test-2-spekulatius-spread": 1,
+   "test-coconut-almond": 1,
+   "tomato-butter": 1,
+   "tzatziki": 1
+  },
+  "needed": {
+   "agave-syrup": 0.05,
+   "almond-aroma": 0.016666667,
+   "almonds-ground": 0.415,
+   "amaretto": 0.326302545,
+   "apple-juice": 2.302189583,
+   "aubergine": 6.1768,
+   "baking-powder": 0.166667,
+   "basil": 0.495475167,
+   "bell-pepper": 1.666,
+   "brown-sugar": 0.625,
+   "bulgur": 1.25,
+   "canola-oil": 0.5,
+   "chickpeas-canned": 18.97285,
+   "chives": 0.232975167,
+   "coconut-cream": 0.8333335,
+   "corn": 2.222,
+   "couscous": 2.222,
+   "cucumber": 9.450647059,
+   "desiccated-coconut": 0.415,
+   "garlic": 1.309270005,
+   "lemon-lime-juice": 3.172624044,
+   "margarine": 11.061940409,
+   "mint": 0.3,
+   "oat-milk": 4.666667,
+   "olive-oil": 2.424755,
+   "onions": 0.8322,
+   "parsley": 4.004380667,
+   "pepper": 0.270735914,
+   "rum-aroma": 0.00625,
+   "rum-dark": 0.47187618,
+   "salt": 1.085488159,
+   "speculoos-biscuits": 2.831257078,
+   "spekulatios-spice": 0.104166667,
+   "spring-onions": 1.6,
+   "sugar": 0.9,
+   "sugarcane-syrup": 0.306719517,
+   "sun-dried-tomatoes-in-oil": 0.82770275,
+   "tahini": 4.10179,
+   "tomato-paste": 2.24505,
+   "tomatoes": 2.1,
+   "vanilla-sugar": 0.05,
+   "water": 2.567568,
+   "wheat-flour": 4.166667,
+   "yoghurt-natur-soy": 5.882352941
+  }
+ }
+}

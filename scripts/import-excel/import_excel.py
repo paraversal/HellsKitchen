@@ -113,6 +113,7 @@ def main(path):
 
     ingredients = {}  # id -> dict
     col_to_id = {}
+    header_to_id = {}
     for c in range(5, ncol):
         header = rf.cell(1, c).value
         raw_name, raw_unit, raw_store = [p.strip() for p in header.split("|")]
@@ -140,12 +141,14 @@ def main(path):
                 report["Ingredients without a price"].append(name)
         ingredients[iid] = entry
         col_to_id[c] = (iid, mult, unit)
+        header_to_id[header] = iid
         if not used[c]:
             report["Ingredients no recipe uses (kept)"].append(name)
 
     # --- recipes ---------------------------------------------------------------------------------
     pat = re.compile(r"^=\s*(-?[0-9.]+(?:[eE][-+]?\d+)?)\s*\*")
     recipes = {}
+    name_to_rid = {}
     for r in range(2, nrow + 1):
         name = rv.cell(r, 1).value
         if not name or not str(name).strip():
@@ -154,6 +157,7 @@ def main(path):
         rtype = (rv.cell(r, 2).value or "").strip().lower()
         grams = rv.cell(r, 3).value or 0
         lines = []
+        per_person = {}  # what Excel itself calculated for one person, in its own units (kg, L, count)
         for c in range(5, ncol):
             f = rf.cell(r, c).value
             if f is None or c not in col_to_id:
@@ -165,6 +169,7 @@ def main(path):
                 report["Zero amounts left out"].append(f"{name}: {ingredients[iid]['name']}")
                 continue
             lines.append((iid, factor * mult, unit))
+            per_person[iid] = rv.cell(r, c).value
         if not lines:
             report["Skipped recipes (no ingredients)"].append(f"{name} (row {r})")
             continue
@@ -184,7 +189,8 @@ def main(path):
             method = ""  # "no recipe", or the sheet's canned placeholder text
         lines.sort(key=lambda l: (-l[1] if l[2] in ("g", "ml") else Decimal(0), l[0]))
         recipes[rid] = {"name": name, "category": CATEGORIES[rtype], "portion": grams, "lines": lines,
-                        "method": method, "note": note, "row": r}
+                        "method": method, "note": note, "row": r, "pp": per_person}
+        name_to_rid[name] = rid
         if note:
             report["Recipes marked needs-review"].append(f"{name}: {note}")
         if not method:
@@ -236,6 +242,36 @@ def main(path):
             out.append("method: |")
             out += ["  " + line if line else "" for line in text.split("\n")]
         (DATA / "recipes" / f"{rid}.yaml").write_text("\n".join(out) + "\n")
+
+
+    # --- Excel's own numbers, for the tests that compare the engine with the Excel ---------------------
+    main = wv["Main"]
+    selected, flags = [], {}
+    for name_col, flag_col in [("E", "G"), ("I", "K"), ("M", "O"), ("Q", "S"), ("U", "W")]:
+        for r in range(11, 101):
+            n, flag = main[f"{name_col}{r}"].value, main[f"{flag_col}{r}"].value
+            if n and flag and cap(str(n)) in name_to_rid:
+                selected.append(name_to_rid[cap(str(n))])
+                flags[name_to_rid[cap(str(n))]] = flag
+    needed = {}
+    for r in range(2, ia.max_row + 1):
+        key, value = ia.cell(r, 1).value, ia.cell(r, 8).value
+        if key in header_to_id and isinstance(value, (int, float)) and value > 0:
+            needed[header_to_id[key]] = round(value, 9)
+    golden = {
+        "source": "Calculated by the old Excel sheet itself (cached values). Written by scripts/import-excel/import_excel.py.",
+        "units": "Amounts are in the Excel's own units: kg for g, L for ml, and plain counts for pcs, pack and jar.",
+        "event": {"everyone": main["B2"].value, "organisers": main["B3"].value, "appetiteFactor": main["B5"].value},
+        "perPerson": {
+            rid: {"category": rc["category"], "portion": rc["portion"], "lines": {k: round(v, 9) for k, v in rc["pp"].items()}}
+            for rid, rc in sorted(recipes.items())
+            if not rc["note"]
+        },
+        "state": {"selected": {rid: flags[rid] for rid in sorted(set(selected))}, "needed": dict(sorted(needed.items()))},
+    }
+    out = ROOT / "src" / "lib" / "integration"
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "excel-golden.json").write_text(json.dumps(golden, indent=1, ensure_ascii=False) + "\n")
 
     # --- report ----------------------------------------------------------------------------------
     lines = ["# Excel import report", "",

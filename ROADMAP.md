@@ -40,7 +40,7 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 - [x] **8. Validator.** One validation script, shared by CI and the app. Built: `npm run validate` and the same code in `src/lib/data/` (41 tests), wired into CI. The app will use the same code to check imported plans.
   *Done when:* a deliberately broken recipe fails with an error a non-programmer can understand.
 
-- [ ] **9. Kitchen engine code and tests.** The rules from the spec, one small file each, with tests named by rule id and the spec's worked examples run as tests.
+- [x] **9. Kitchen engine code and tests.** The rules from the spec, one small file each, with tests named by rule id and the spec's worked examples run as tests. A test keeps the spec and the code in step. The engine's totals are compared with the Excel's own numbers for every recipe the Excel got right, and for the Excel workbook as it was saved.
   *Done when:* the spec's examples pass, and the engine's totals match the Excel for every recipe the Excel got right (the known differences are tested too).
 
 - [ ] **10. Design tokens in code.** Export colors and type from `UI.fig` as CSS variables; build the shared components (buttons, chips, meal row, store tabs).

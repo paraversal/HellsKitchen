@@ -6,6 +6,7 @@ A one-off script that turned the old planning workbook into our YAML data files.
 
 - Reads the `Recepies` sheet (one row per recipe, one column per ingredient) and the price column of `Ingredient ALL`.
 - Writes `data/stores.yaml`, `data/ingredients.yaml` and `data/recipes/<id>.yaml`.
+- Writes `src/lib/integration/excel-golden.json`: the numbers Excel itself calculated, which the tests compare the engine with.
 - Writes [REPORT.md](REPORT.md) listing every guess and every recipe that needs a second look.
 - Only reads the workbook. It never runs the macros and never lets Excel calculate anything.
 
