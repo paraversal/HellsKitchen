@@ -5,7 +5,7 @@
 <main>
 	<h1>Another page</h1>
 	<p>Reaching this page proves that links work under the GitHub Pages sub-path, also offline.</p>
-	<p><a href={resolve('/')}>Back</a></p>
+	<p><a href={resolve('/status')}>Back</a></p>
 </main>
 
 <style>

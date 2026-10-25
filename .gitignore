@@ -4,6 +4,9 @@ node_modules
 /.svelte-kit
 /build
 
+# Made from data/ by npm run build:data
+/src/lib/generated
+
 # Python helper for the one-off Excel import
 .venv
 __pycache__

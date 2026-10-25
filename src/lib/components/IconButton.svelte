@@ -2,20 +2,27 @@
 	import type { Component } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
-	// A round button with only an icon. `label` is what a screen reader says, so it is required.
+	// A round button with only an icon. `label` is what a screen reader says, so it is required. With `href` it is a link.
 	type Props = {
 		icon: Component<{ size?: number }>;
 		label: string;
 		variant?: 'light' | 'dark';
 		size?: number;
+		href?: string;
 	} & Omit<HTMLButtonAttributes, 'aria-label'>;
 
-	let { icon: Icon, label, variant = 'light', size = 44, ...rest }: Props = $props();
+	let { icon: Icon, label, variant = 'light', size = 44, href, ...rest }: Props = $props();
 </script>
 
-<button class="icon-button {variant}" style:width="{size}px" style:height="{size}px" aria-label={label} {...rest}>
-	<Icon size={Math.round(size * 0.46)} />
-</button>
+{#if href}
+	<a class="icon-button {variant}" style:width="{size}px" style:height="{size}px" aria-label={label} {href}>
+		<Icon size={Math.round(size * 0.46)} />
+	</a>
+{:else}
+	<button class="icon-button {variant}" style:width="{size}px" style:height="{size}px" aria-label={label} {...rest}>
+		<Icon size={Math.round(size * 0.46)} />
+	</button>
+{/if}
 
 <style>
 	.icon-button {
@@ -26,6 +33,11 @@
 		padding: 0;
 		border-radius: var(--radius-pill);
 		cursor: pointer;
+		text-decoration: none;
+	}
+	.icon-button:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
 	}
 	.light {
 		background: var(--color-sheet);

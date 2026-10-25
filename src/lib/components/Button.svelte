@@ -28,6 +28,10 @@
 		border: 0;
 		font-weight: var(--weight-bold);
 	}
+	.button:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
 	.primary {
 		height: 52px;
 		padding: 0 var(--space-6);

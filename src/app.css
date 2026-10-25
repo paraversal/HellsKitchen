@@ -25,3 +25,29 @@ button {
 	font: inherit;
 	color: inherit;
 }
+
+h1 {
+	margin: 0;
+	font-size: var(--text-title);
+	font-weight: var(--weight-heavy);
+	line-height: 1.2;
+}
+
+.soft {
+	color: var(--color-ink-soft);
+}
+
+/* A screen with a title and content, on a phone or a desktop. */
+.screen {
+	max-width: 1100px;
+	padding: var(--space-6) var(--space-5);
+}
+
+@media (min-width: 900px) {
+	h1 {
+		font-size: var(--text-display);
+	}
+	.screen {
+		padding: var(--space-8);
+	}
+}

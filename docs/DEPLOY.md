@@ -16,14 +16,14 @@ If the first deploy ran before step 3, run it again: Actions, Deploy, Run workfl
 
 Do this on one iPhone (Safari) and one Android phone (Chrome). The site must pass all five.
 
-1. Open the address on the phone. The page shows a list of checks. "Works offline" should become a tick.
+1. Open `<address>/status/` on the phone (the app itself opens at the address without `/status/`). The page shows a list of checks. "Works offline" should become a tick.
 2. **Install it:**
    - iPhone: Share, Add to Home Screen.
    - Android: menu, Install app (or Add to Home screen).
 3. Open the app from the home screen. The page says "opened from the home screen".
 4. Type a note, press Save. The page shows it as saved.
 5. Close the app. Turn on **airplane mode**. Open the app again.
-   - The page opens, the font and layout look the same, and "Open another page" works.
+   - The page opens, the font and layout look the same, and "Open another page" works. The recipes (the home of the app) open too, also ones you never looked at.
    - The note you saved is still there.
 6. Restart the phone, leave airplane mode on, and open the app once more. The note must still be there.
 

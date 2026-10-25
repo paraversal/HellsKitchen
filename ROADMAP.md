@@ -46,7 +46,8 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 - [x] **10. Design tokens in code.** Colors exported from `UI.fig`, the other tokens written from the design, and 15 shared components (buttons, chips, meal row, store tabs, shopping row, cost block and more), all described in [docs/DESIGN.md](docs/DESIGN.md). A style sheet page at `/styleguide/` shows them.
   *Done when:* a style-sheet page matches the design board. Built and compared in the browser at desktop and phone width.
 
-- [ ] **11. Recipes screens.** List with search and filters; recipe detail with the portions stepper.
+- [x] **11. Recipes screens.** List with search and category chips, grouped by letter; recipe detail with the portions stepper and the ingredients scaled by the kitchen engine; the app frame (tab bar on a phone, sidebar on a desktop). The data is built from the YAML into the app (`npm run build:data`), and every recipe is its own page that opens offline. "Add to plan" is shown but inactive until step 12.
+  *Done when:* you can find a recipe by name or ingredient on a phone and a desktop, and read it for any number of portions, also in airplane mode. Checked in the browser at both sizes and offline on a computer; the phone test is still to do.
 
 - [ ] **12. Plan and Shopping screens.** Days, meals and headcounts; live shopping list with store tabs; saved on the device.
   *Done when:* a full realistic plan can be built on a phone in under 15 minutes.

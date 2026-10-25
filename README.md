@@ -24,6 +24,7 @@ npm ci            # install what the project needs
 npm run dev       # start it locally
 npm run check     # types
 npm run validate  # check the data files (recipes, ingredients, stores)
+npm run build:data  # turn the data files into what the app ships with (runs by itself before dev, build and check)
 npm test          # tests
 npm run build     # build the site into build/
 ```
@@ -36,6 +37,7 @@ docs/                  decisions, formats, stack, deployment
 scripts/validate-data.ts  checks the data files
 scripts/import-excel/  the one-off import from the old Excel sheet
 src/lib/components/    the shared building blocks of the screens
+src/lib/screens/       the bigger parts of screens that use data
 src/lib/styles/        the design tokens: colors, type, spacing
 src/lib/data/          the rules for the data files, and the checks
 src/lib/kitchen-engine/  the calculation, with its own spec

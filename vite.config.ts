@@ -23,6 +23,8 @@ export default defineConfig({
 			version: { name: process.env.GITHUB_SHA?.slice(0, 7) ?? Date.now().toString(36) }
 		})
 	],
+	// The icon library is made of Svelte components. Vite must not bundle it separately in development, or it ends up with a second copy of Svelte.
+	optimizeDeps: { exclude: ['@lucide/svelte'] },
 	test: {
 		include: ['src/**/*.test.ts']
 	}

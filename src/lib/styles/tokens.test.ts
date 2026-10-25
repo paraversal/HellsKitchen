@@ -29,7 +29,7 @@ describe('design tokens', () => {
 	it('every color name used to build a color in code is a color token', () => {
 		const names = new Set<string>();
 		for (const match of read('lib/components/meal-types.ts').matchAll(/(?:color|tint): '([\w-]+)'/g)) names.add(match[1]);
-		const plates = read('lib/components/Plate.svelte').match(/const PLATES[\s\S]*?\];\n/)?.[0] ?? '';
+		const plates = read('lib/components/plate.ts').match(/const PLATES[\s\S]*?\];\n/)?.[0] ?? '';
 		for (const match of plates.matchAll(/'([\w-]+)'/g)) names.add(match[1]);
 		expect(names.size).toBeGreaterThan(8);
 		expect([...names].filter((name) => !defined.has(`--color-${name}`))).toEqual([]);

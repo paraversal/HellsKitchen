@@ -42,7 +42,10 @@ self.addEventListener('fetch', (event) => {
 					if (fresh.ok) cache.put(request, fresh.clone());
 					return fresh;
 				} catch {
-					const stored = await cache.match(request, { ignoreSearch: true });
+					const stored =
+						(await cache.match(request, { ignoreSearch: true })) ??
+						// A page is stored with a slash at the end, but someone may have typed the address without one.
+						(await cache.match(new URL(`${new URL(request.url).pathname.replace(/\/$/, '')}/`, request.url), { ignoreSearch: true }));
 					if (stored) return stored;
 					throw new Error('offline and not stored');
 				}

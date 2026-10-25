@@ -67,10 +67,15 @@ In `src/lib/components/`, one small Svelte file each. They take plain props, con
 | `CostBlock` | The estimated cost with the share of the food that has a price. |
 | `NoPricePill` | How many ingredients of a store have no price. |
 | `ShopRow` | One line of the shopping list. |
-| `SearchField` | The search box. |
+| `SearchField` | The search box, with its own clear button. |
+| `RecipeRow` | One recipe in the list: plate, name, kind, and the plus that adds it to the plan. |
+| `TabBar` | The bar at the bottom of a phone screen, with the three places. |
+| `Sidebar` | The red bar on the left of a desktop screen. |
 | `meal-types.ts` | How each kind of meal looks: name, icon, tint. |
 
-Not built yet, because they belong to the screens: the bottom tab bar, the desktop sidebar, the bottom sheet, the QR code. They come with roadmap steps 11 to 14.
+Not built yet, because they belong to later screens: the bottom sheet and the QR code (roadmap step 14).
+
+The screens switch between the phone and the desktop layout at **900 px** wide.
 
 ## Adding or changing a component
 
