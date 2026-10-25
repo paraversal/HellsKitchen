@@ -7,6 +7,7 @@
 	import Share2 from '@lucide/svelte/icons/share-2';
 	import SlidersHorizontal from '@lucide/svelte/icons/sliders-horizontal';
 	import { resolve } from '$app/paths';
+	import ActionRow from '#lib/components/ActionRow.svelte';
 	import AddRow from '#lib/components/AddRow.svelte';
 	import Badge from '#lib/components/Badge.svelte';
 	import Button from '#lib/components/Button.svelte';
@@ -19,6 +20,7 @@
 	import { MEAL_TYPES } from '#lib/components/meal-types.ts';
 	import NoPricePill from '#lib/components/NoPricePill.svelte';
 	import Plate from '#lib/components/Plate.svelte';
+	import QrCode from '#lib/components/QrCode.svelte';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import ShopRow from '#lib/components/ShopRow.svelte';
 	import Stepper from '#lib/components/Stepper.svelte';
@@ -176,6 +178,14 @@
 					<ShopRow name="Basmati rice" buy="4 × 10 kg" need="36 kg needed" checked />
 					<ShopRow name="Curry powder" buy="1 kg" need="720 g needed" unpriced />
 				</div>
+			</div>
+			<div class="row">
+				<span class="soft small label">Share</span>
+				<div class="narrow">
+					<ActionRow icon={Share2} label="Copy the link" hint="The whole plan is inside the link" />
+					<ActionRow icon={Printer} label="Print the shopping list" />
+				</div>
+				<QrCode text="https://example.org/plan/#plan=styleguide" label="A QR code, as an example" size={140} />
 			</div>
 			<div class="row">
 				<span class="soft small label">Search</span>

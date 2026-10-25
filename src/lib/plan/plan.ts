@@ -204,3 +204,8 @@ export function listMeals(plan: PlanFile): { day: number; meal: number; label: s
 export function peopleIn(plan: PlanFile, meal: Meal): number {
 	return meal.for === 'organisers' ? plan.event.organisers : plan.event.everyone;
 }
+
+/** How big a plan is, for telling two plans apart: "3 days, 12 meals". */
+export function planCounts(plan: PlanFile): { days: number; meals: number } {
+	return { days: plan.days.length, meals: plan.days.reduce((total, day) => total + day.meals.length, 0) };
+}

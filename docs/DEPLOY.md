@@ -47,6 +47,15 @@ On the phone, also try this. It should take a few minutes, not fifteen.
 5. Close the app completely and open it again: the plan and the ticks must still be there.
 6. Switch on airplane mode, restart the phone, and open the app once more. If the plan is not there yet, the app must say so and offer "Try again", and it must not show an empty new plan. Turn the connection back on, press "Try again", and the plan returns.
 
+## Share, backup and print (step 14)
+
+1. On a computer, build a plan, press the share button (next to the settings button) and scan the QR code with the phone. The phone's browser opens the app with the plan: it shows the plan that arrived, next to the one on the phone. Choose "Keep both".
+2. Install the app on the phone first if it is not yet, and open a link again from a chat message. The link must open the installed app or the browser, not an error page.
+3. On the phone, "Send the link" opens the phone's own share window. Send it to someone and open it there.
+4. "Save the plan as a file" gives a `.json` file. Delete the plan on the phone (in the event settings, with a second plan next to it), then open the file with "Open a plan file". It must come back, ticks included.
+5. Make about fifteen changes: the reminder to save a copy must show above the plan.
+6. Print the shopping list for one store and the recipe sheets. Look at the preview: one store per page, one dish per page, nothing cut off, black on white.
+
 ## Results
 
 ### iPhone, 2026-10-25

@@ -5,8 +5,12 @@
 	import TabBar from '#lib/components/TabBar.svelte';
 	import Toasts from '#lib/components/Toasts.svelte';
 	import { planStore } from '#lib/plan/browser.ts';
+	import { backup } from '#lib/plan/backup.svelte.ts';
 	import { current } from '#lib/plan/current.svelte.ts';
+	import { takeLinkFromAddress } from '#lib/plan/transfer.svelte.ts';
 	import AddToPlanSheet from '#lib/screens/AddToPlanSheet.svelte';
+	import ImportSheet from '#lib/screens/ImportSheet.svelte';
+	import ShareSheet from '#lib/screens/ShareSheet.svelte';
 	import type { NavId } from '#lib/nav.ts';
 
 	// The frame around the three places of the app: a bar at the bottom on a phone (below 900 px), a bar on the left on a desktop.
@@ -18,8 +22,13 @@
 	const reading = $derived(page.route.id === '/(app)/recipes/[id]');
 
 	// Read the saved plans when the app opens, and save for good when the page is hidden.
+	// A plan in the address (a link that was shared) is offered, now and whenever the address changes to one.
 	onMount(() => {
 		void planStore.load();
+		backup.start();
+		planStore.onchange = (before, after) => backup.changed(before, after);
+		takeLinkFromAddress();
+		addEventListener('hashchange', takeLinkFromAddress);
 		const save = () => void planStore.flush();
 		const hidden = () => document.visibilityState === 'hidden' && save();
 		document.addEventListener('visibilitychange', hidden);
@@ -27,6 +36,7 @@
 		return () => {
 			document.removeEventListener('visibilitychange', hidden);
 			removeEventListener('pagehide', save);
+			removeEventListener('hashchange', takeLinkFromAddress);
 		};
 	});
 </script>
@@ -38,6 +48,8 @@
 </div>
 
 <AddToPlanSheet />
+<ShareSheet />
+<ImportSheet />
 <Toasts />
 
 <style>

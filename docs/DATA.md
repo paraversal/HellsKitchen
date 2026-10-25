@@ -156,3 +156,34 @@ The app keeps its plans in the browser (IndexedDB), as one "library": the plans,
 One rule above all: **saved data is never overwritten unless it has been read successfully first.** After a restart without a connection, a phone can report "nothing saved" when there is something.
 So the app also keeps a small mark that this device has saved before. If the library cannot be read, or looks empty although the mark is there, the app says so and offers "Try again". It starts a new plan only when the person confirms it.
 A library in a form this version does not know is left untouched.
+
+Several plans can be saved side by side (the event settings list them, and open, add or delete them). The last plan cannot be deleted: there is always one to open.
+
+## Sharing a plan
+
+A plan leaves the device in two ways. Neither needs a server or an account.
+
+**A link.** The plan is packed into the part of the address after the `#` (`.../plan/#plan=...`). A browser never sends that part to a server, so the plan stays private.
+The text after `plan=` is this JSON, compressed with deflate and written in base64url:
+
+```
+{ "v": 1, "updatedAt": "2027-07-09T10:00:00.000Z", "plan": { ...a plan, without "shopping"... } }
+```
+
+The shopping ticks are left out: they are one person's progress. A big plan (three days, twelve meals, about fifty dishes) comes out under 2 000 characters, so it fits in a chat message and in a QR code.
+The app reads a link only up to 64 000 characters and 1 MB unpacked, checks it like any other plan, and says so in words when it is cut off or damaged.
+
+When a link is opened, the app does not change anything by itself. It shows the plan that arrived next to the one on the device, each with its name, size and when it was last changed, and asks: keep both, replace the plan on this device, or cancel.
+A plan that is identical to the one on the device is recognised ("You already have this plan"). Replacing keeps the shopping ticks that are on the device.
+
+**A file.** "Save the plan as a file" writes the whole plan, with the ticks, as readable JSON. This is also the backup. Opening a file asks the same question as a link.
+
+```
+{ "app": "hells-kitchen-plan", "version": 1, "exportedAt": "...", "updatedAt": "...", "plan": { ...a plan... } }
+```
+
+The app counts the changes made since the last copy (a file saved, a link sent or copied). After 15 it offers to save a file, with "Later" to ask again after another 15. Ticking things off in the shopping list does not count.
+
+**Paper.** The shopping list (all stores, or one) and the recipe sheets open as pages made for printing. The browser's print window also saves them as a PDF.
+A recipe sheet is made for every dish in the plan, scaled to its meal with the same rules as the shopping list: the people of the meal, the share of the dish, the appetite factor, grams per person.
+

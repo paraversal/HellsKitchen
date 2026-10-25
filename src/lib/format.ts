@@ -8,3 +8,11 @@ export function formatAmount(amount: number, unit: Unit): string {
 	const shown = displayAmount(amount, unit);
 	return `${number.format(shown.value)} ${shown.unit}`;
 }
+
+const when = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+/** A time stamp as people read it: "Jul 9, 10:00 AM". */
+export function whenText(iso: string): string {
+	const date = new Date(iso);
+	return Number.isNaN(date.getTime()) ? 'unknown time' : when.format(date);
+}

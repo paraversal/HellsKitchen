@@ -1,6 +1,8 @@
 <script lang="ts">
+	import Printer from '@lucide/svelte/icons/printer';
 	import { resolve } from '$app/paths';
 	import EmptyNote from '#lib/components/EmptyNote.svelte';
+	import IconButton from '#lib/components/IconButton.svelte';
 	import NoPricePill from '#lib/components/NoPricePill.svelte';
 	import ShopRow from '#lib/components/ShopRow.svelte';
 	import StoreTabs from '#lib/components/StoreTabs.svelte';
@@ -23,7 +25,10 @@
 
 		<div class="summary">
 			<span class="cost"><strong>{euro(store.cost)}</strong> <span class="soft">estimated</span></span>
-			{#if store.unpriced}<NoPricePill count={store.unpriced} />{/if}
+			<span class="end">
+				{#if store.unpriced}<NoPricePill count={store.unpriced} />{/if}
+				<IconButton icon={Printer} label="Print the list for {store.name}" size={36} href="{resolve('/print/shopping')}?store={store.id}" />
+			</span>
 		</div>
 
 		<div class="progress">
@@ -65,6 +70,11 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-3);
+	}
+	.end {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
 	}
 	.cost strong {
 		font-size: 20px;

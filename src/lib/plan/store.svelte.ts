@@ -2,7 +2,8 @@
 // unless it has been read successfully first. After a restart without a connection, a phone may report "nothing saved"
 // when there is something. The app must not take that for an empty library and save a new one over it (see docs/DEPLOY.md).
 import type { PlanFile } from '../data/schema.ts';
-import { newLibrary, parseLibrary, type Library, type PlanRecord } from './library.ts';
+import { addPlan, newLibrary, parseLibrary, removePlan, replacePlan, switchPlan, type Library, type PlanRecord } from './library.ts';
+import { newPlan } from './plan.ts';
 
 export const KEY = 'hk:library';
 
@@ -23,6 +24,8 @@ export class PlanStore {
 	/** Set when saving failed. The changes are still here, but only in this window. */
 	saveProblem = $state<string | undefined>();
 	library = $state<Library | undefined>();
+	/** Called after every change to a plan, for the reminder to keep a copy. A change that is not an edit of one plan has no plans to hand over. */
+	onchange: ((before?: PlanFile, after?: PlanFile) => void) | undefined;
 
 	#storage: KeyValue;
 	#mark: Mark;
@@ -82,9 +85,53 @@ export class PlanStore {
 	change(edit: (plan: PlanFile) => PlanFile): void {
 		const record = this.record;
 		if (this.status !== 'ready' || !this.library || !record) return;
-		const plan = edit($state.snapshot(record.plan) as PlanFile);
+		const before = $state.snapshot(record.plan) as PlanFile;
+		const plan = edit(structuredClone(before));
 		if (plan === undefined) return;
 		this.library.plans[record.id] = { id: record.id, updatedAt: this.#clock().toISOString(), plan };
+		this.#saveSoon();
+		this.onchange?.(before, plan);
+	}
+
+	/** Adds a plan that came from outside, opens it, and says which place it has. */
+	addPlan(plan: PlanFile): string | undefined {
+		let id: string | undefined;
+		this.#update((library) => {
+			const added = addPlan(library, plan, this.#clock().toISOString());
+			id = added.id;
+			return added.library;
+		});
+		this.onchange?.();
+		return id;
+	}
+
+	/** Puts a plan that came from outside in the place of the open one. */
+	replaceOpen(plan: PlanFile): void {
+		this.#update((library) => replacePlan(library, library.current, plan, this.#clock().toISOString()));
+		this.onchange?.();
+	}
+
+	/** Starts an empty plan next to the others and opens it. */
+	startPlan(): void {
+		const now = this.#clock();
+		this.addPlan(newPlan(now.toLocaleDateString('en-CA')));
+	}
+
+	switchTo(id: string): void {
+		this.#update((library) => switchPlan(library, id));
+	}
+
+	deletePlan(id: string): void {
+		this.#update((library) => removePlan(library, id));
+	}
+
+	#update(edit: (library: Library) => Library): void {
+		if (this.status !== 'ready' || !this.library) return;
+		this.library = edit($state.snapshot(this.library) as Library);
+		this.#saveSoon();
+	}
+
+	#saveSoon(): void {
 		clearTimeout(this.#timer);
 		this.#timer = setTimeout(() => void this.flush(), SAVE_AFTER_MS);
 	}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Ellipsis from '@lucide/svelte/icons/ellipsis';
 	import Settings2 from '@lucide/svelte/icons/settings-2';
+	import Share2 from '@lucide/svelte/icons/share-2';
 	import AddRow from '#lib/components/AddRow.svelte';
 	import CostBlock from '#lib/components/CostBlock.svelte';
 	import DayLabel from '#lib/components/DayLabel.svelte';
@@ -12,6 +13,7 @@
 	import { current } from '#lib/plan/current.svelte.ts';
 	import { addDay, addMeal, dayLabel, peopleIn, setEvent } from '#lib/plan/plan.ts';
 	import { euro } from '#lib/plan/shopping.ts';
+	import { transfer } from '#lib/plan/transfer.svelte.ts';
 	import DaySheet from './DaySheet.svelte';
 	import EventSheet from './EventSheet.svelte';
 	import MealSheet from './MealSheet.svelte';
@@ -41,7 +43,10 @@
 		<header>
 			<div class="title">
 				<h1>{plan.name}</h1>
-				<IconButton icon={Settings2} label="Event settings" onclick={() => (event = true)} />
+				<div class="tools">
+					<IconButton icon={Share2} label="Share and print" onclick={() => (transfer.sharing = true)} />
+					<IconButton icon={Settings2} label="Event settings" onclick={() => (event = true)} />
+				</div>
 			</div>
 			<Stepper
 				name="people"
@@ -102,6 +107,10 @@
 	}
 	h1 {
 		overflow-wrap: anywhere;
+	}
+	.tools {
+		display: flex;
+		gap: var(--space-2);
 	}
 	.days {
 		display: flex;

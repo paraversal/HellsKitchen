@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { planSchema } from '../data/schema.ts';
 import { newLibrary } from './library.ts';
-import { addMeal, rename } from './plan.ts';
+import { addMeal, newPlan, rename } from './plan.ts';
 import { KEY, PlanStore, type KeyValue, type Mark } from './store.svelte.ts';
 
 const clock = () => new Date('2027-07-09T10:00:00Z');
@@ -160,5 +160,64 @@ describe('changing and saving', () => {
 		log.failWrite = false;
 		await store.flush();
 		expect(store.saveProblem).toBeUndefined();
+	});
+});
+
+describe('several plans', () => {
+	it('adds a plan from outside, opens it, and saves both', async () => {
+		const { storage, data } = memory(saved());
+		const store = new PlanStore(storage, mark().m, clock);
+		await store.load();
+		const id = store.addPlan(rename(newPlan('2027-08-01'), 'From a friend'));
+		await store.flush();
+		expect(id).toBe('plan-2');
+		expect(store.plan?.name).toBe('From a friend');
+		expect(Object.keys((data.get(KEY) as { plans: object }).plans)).toEqual(['plan-1', 'plan-2']);
+	});
+
+	it('replaces the open plan', async () => {
+		const store = new PlanStore(memory(saved()).storage, mark().m, clock);
+		await store.load();
+		store.replaceOpen(rename(newPlan('2027-08-01'), 'Replaced'));
+		expect(store.plan?.name).toBe('Replaced');
+		expect(store.library?.current).toBe('plan-1');
+	});
+
+	it('starts an empty plan, switches back and deletes it', async () => {
+		const store = new PlanStore(memory(saved()).storage, mark().m, clock);
+		await store.load();
+		store.startPlan();
+		expect(store.library?.current).toBe('plan-2');
+		store.switchTo('plan-1');
+		expect(store.library?.current).toBe('plan-1');
+		store.deletePlan('plan-2');
+		expect(Object.keys(store.library?.plans ?? {})).toEqual(['plan-1']);
+		store.deletePlan('plan-1');
+		expect(Object.keys(store.library?.plans ?? {})).toEqual(['plan-1']);
+	});
+
+	it('tells the reminder about changes', async () => {
+		const store = new PlanStore(memory(saved()).storage, mark().m, clock);
+		await store.load();
+		let changes = 0;
+		store.onchange = () => changes++;
+		store.change((p) => rename(p, 'A'));
+		store.addPlan(newPlan('2027-08-01'));
+		store.replaceOpen(newPlan('2027-08-01'));
+		store.switchTo('plan-1');
+		expect(changes).toBe(3);
+	});
+
+	it('does nothing to plans before the saved ones have been read, and never saves over unreadable ones', async () => {
+		const { storage, log } = memory(saved());
+		log.failRead = true;
+		const store = new PlanStore(storage, mark(true).m, clock);
+		await store.load();
+		expect(store.addPlan(newPlan('2027-08-01'))).toBeUndefined();
+		store.replaceOpen(newPlan('2027-08-01'));
+		store.startPlan();
+		store.deletePlan('plan-1');
+		await store.flush();
+		expect(log.sets).toBe(0);
 	});
 });

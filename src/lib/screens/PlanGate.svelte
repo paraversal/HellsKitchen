@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import Button from '#lib/components/Button.svelte';
+	import { backup } from '#lib/plan/backup.svelte.ts';
 	import { planStore } from '#lib/plan/browser.ts';
+	import { saveFile, transfer } from '#lib/plan/transfer.svelte.ts';
 
 	// Shows its content once the saved plans have been read. If they could not be read, it says so, and offers to try again.
 	// It never offers an empty plan in that case, because saving one could cover the real one.
@@ -12,6 +14,16 @@
 
 {#if planStore.status === 'ready'}
 	{#if planStore.saveProblem}<p class="warning" role="alert">{planStore.saveProblem}</p>{/if}
+	{#if backup.due && planStore.record}
+		<div class="warning reminder">
+			<span>Your plan only lives on this device. Keep a copy?</span>
+			<span class="buttons">
+				<Button variant="secondary" onclick={() => saveFile(planStore.record!.plan, planStore.record!.updatedAt)}>Save a file</Button>
+				<Button variant="secondary" onclick={() => (transfer.sharing = true)}>Share</Button>
+				<Button variant="secondary" onclick={() => backup.reset()}>Later</Button>
+			</span>
+		</div>
+	{/if}
 	{@render children()}
 {:else if planStore.status === 'unreadable'}
 	<div class="problem" class:padded role="alert">
@@ -36,6 +48,16 @@
 		border-radius: var(--radius-m);
 		background: var(--color-mustard-tint);
 		font-size: var(--text-small);
+	}
+	.reminder {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+	.buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
 	}
 	.padded {
 		padding: var(--space-6) var(--space-5);

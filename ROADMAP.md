@@ -56,8 +56,8 @@ of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 - [x] **13. Prices and cost estimate.** Show a cost estimate for the plan and per store, and how complete it is. Built together with step 12: the estimate, the share of food that has a price, the per-store cost and the "without price" markers all show on the plan and shopping screens.
   *Done when:* a plan with a few missing prices still shows an estimate, clearly marked as partial.
 
-- [ ] **14. Share, export, print.** Share link, QR code, JSON backup, PDF for shopping list and recipe sheets.
-  *Done when:* a plan moves from laptop to phone by link and prints to a readable PDF.
+- [x] **14. Share, export, print.** Share link, QR code, JSON backup, PDF for shopping list and recipe sheets. Built: the share sheet (link, QR code, copy or send, file), opening a link or file next to the plan on the device ("keep both" or "replace"), several plans on one device, the reminder to save a copy, and print pages for the shopping list (per store) and for recipe sheets scaled to each meal. Formats are in [docs/DATA.md](docs/DATA.md).
+  *Done when:* a plan moves from laptop to phone by link and prints to a readable PDF. Checked in the browser (link and file round trips, damaged links, print pages); the phone test in [docs/DEPLOY.md](docs/DEPLOY.md) is still to do.
 
 - [ ] **15. Clean slate.** We now have a working product. Go through every `inferred` rule in the spec, settle it with the cooks, and clean the recipe data (the `needs-review` recipes first). Record each change in the engine's CHANGELOG.
   *Done when:* no rule in the spec is still marked `inferred`.
