@@ -58,10 +58,10 @@
 			background: color-mix(in srgb, var(--color-paper) 18%, var(--color-ink));
 		}
 	}
-	.light:not(:disabled):active {
+	.light:not(:disabled):global([data-pressed]) {
 		background: var(--color-mustard);
 	}
-	.dark:not(:disabled):active {
+	.dark:not(:disabled):global([data-pressed]) {
 		background: color-mix(in srgb, var(--color-paper) 30%, var(--color-ink));
 	}
 </style>

@@ -6,8 +6,8 @@
 
 	// The estimated cost of the plan, and how much of the food that estimate is based on.
 	// B6. Given a `value` and a `format`, the amount counts up or down to its new value instead of jumping.
-	type Props = { amount?: string; value?: number; format?: (value: number) => string; coverage: number | null };
-	let { amount, value, format, coverage }: Props = $props();
+	type Props = { amount?: string; value?: number; format?: (value: number) => string; caption?: string; coverage: number | null };
+	let { amount, value, format, caption = 'Estimated cost', coverage }: Props = $props();
 	const counter = new Tween(untrack(() => value ?? 0), { duration: 600, easing: cubicOut });
 	$effect(() => {
 		if (value !== undefined) void counter.set(value, { duration: allows.flights() ? 600 : 0 });
@@ -18,7 +18,7 @@
 
 <div class="cost">
 	<div>
-		<div class="caption">Estimated cost</div>
+		<div class="caption">{caption}</div>
 		<div class="amount">{shown}</div>
 	</div>
 	{#if percent !== null}

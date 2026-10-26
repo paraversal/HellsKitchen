@@ -62,7 +62,7 @@
 				<span class="soft">People</span>
 			</div>
 			{#if current.shopping?.stores.length}
-				<CostBlock value={current.shopping.cost.total} format={euro} coverage={current.shopping.cost.coverage} />
+				<CostBlock value={current.shopping.cost.total / Math.max(1, plan.event.everyone)} format={euro} caption="Estimated cost per person" coverage={current.shopping.cost.coverage} />
 			{/if}
 		</header>
 

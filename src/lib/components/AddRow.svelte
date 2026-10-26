@@ -33,7 +33,7 @@
 			color: var(--color-ink);
 		}
 	}
-	.add-row:active {
+	.add-row:global([data-pressed]) {
 		background: var(--color-mustard-tint);
 	}
 	.ghost {
@@ -44,7 +44,7 @@
 		color: var(--color-tomato);
 		font-weight: var(--weight-bold);
 	}
-	.ghost:active {
+	.ghost:global([data-pressed]) {
 		background: var(--color-mustard-tint);
 	}
 	.day {

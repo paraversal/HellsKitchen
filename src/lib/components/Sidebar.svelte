@@ -159,7 +159,7 @@
 			background: color-mix(in srgb, var(--color-on-tomato) 16%, transparent);
 		}
 	}
-	nav a:not(.active):active {
+	nav a:not(.active):global([data-pressed]) {
 		background: color-mix(in srgb, var(--color-on-tomato) 28%, transparent);
 	}
 	nav .active {

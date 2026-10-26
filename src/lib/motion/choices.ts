@@ -9,7 +9,7 @@ const C = 'crazy';
 export const CHOICES = {
 	A1: [R, P],
 	A2: [R, C],
-	A3: [R, P],
+	A3: [R, R],
 	A4: [R, C],
 	A5: [R, P],
 	A6: [P, P],

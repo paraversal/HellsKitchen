@@ -35,7 +35,7 @@
 			background: var(--color-sheet);
 		}
 	}
-	.row:active {
+	.row:global([data-pressed]) {
 		background: var(--color-mustard-tint);
 	}
 	.selected {

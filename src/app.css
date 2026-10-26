@@ -63,7 +63,7 @@ html[data-input='keyboard'] :focus-visible {
 		opacity: 1;
 	}
 }
-.pressable:active::before {
+.pressable[data-pressed]::before {
 	background: var(--color-mustard-tint);
 	opacity: 1;
 }
@@ -108,7 +108,7 @@ h1 {
 .press-fx {
 	transition: transform var(--motion-quick) var(--spring-bouncy), background var(--motion-instant);
 }
-.press-fx:not(:disabled):active {
+.press-fx:not(:disabled)[data-pressed] {
 	transform: scale(0.97);
 	transition-duration: var(--motion-instant);
 }

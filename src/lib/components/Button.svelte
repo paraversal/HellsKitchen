@@ -57,10 +57,10 @@
 			background: var(--color-mustard-tint);
 		}
 	}
-	.primary:not(:disabled):active {
+	.primary:not(:disabled):global([data-pressed]) {
 		background: color-mix(in srgb, var(--color-ink) 24%, var(--color-tomato));
 	}
-	.secondary:not(:disabled):active {
+	.secondary:not(:disabled):global([data-pressed]) {
 		background: var(--color-mustard);
 	}
 	.block {

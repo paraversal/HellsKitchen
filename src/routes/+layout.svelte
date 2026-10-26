@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { onNavigate } from '$app/navigation';
 	import { startGlide } from '#lib/glide.ts';
+	import { startPressed } from '#lib/pressed.ts';
 	import { recipeNavigate } from '#lib/motion/recipeopen.svelte.ts';
 	import { startFun } from '#lib/motion/fun.svelte.ts';
 	import { motion, setMotion, startMotion } from '#lib/motion/mode.svelte.ts';
@@ -19,6 +20,7 @@
 		document.addEventListener('gesturestart', noZoom);
 		startFun();
 		const stopGlide = startGlide();
+		const stopPressed = startPressed();
 		const stopMotion = startMotion();
 		setMotion(motion.mode);
 		const set = (kind: 'keyboard' | 'pointer') => () => (document.documentElement.dataset.input = kind);
@@ -30,6 +32,7 @@
 			document.removeEventListener('gesturestart', noZoom);
 			stopMotion();
 			stopGlide();
+			stopPressed();
 			removeEventListener('keydown', key, true);
 			removeEventListener('pointerdown', pointer, true);
 		};

@@ -150,7 +150,7 @@
 			background: var(--color-mustard-tint);
 		}
 	}
-	a:not(.active):active .pill {
+	a:not(.active):global([data-pressed]) .pill {
 		background: var(--color-mustard-tint);
 	}
 	.active {

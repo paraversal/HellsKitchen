@@ -2,7 +2,6 @@
 	import X from '@lucide/svelte/icons/x';
 	import type { Snippet } from 'svelte';
 	import { easing } from '#lib/motion/easing.ts';
-	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { allows } from '#lib/motion/mode.svelte.ts';
 	import IconButton from './IconButton.svelte';
 
@@ -14,8 +13,6 @@
 
 	let dialog: HTMLDialogElement;
 	let panel: HTMLElement;
-	let body: HTMLElement;
-	let handle: HTMLElement;
 	let closing = false;
 	let pull = $state(0);
 	let pulling = $state(false);
@@ -52,16 +49,10 @@
 		} else if (!open && dialog.open && !closing) void leave();
 	});
 
-	/** A3. The panel comes in. Without fun it rises and settles; with fun it overshoots like a tray set down, its content follows one by one, and the grip wiggles. */
+	/** A3. The panel comes in: a short rise and fade, the same on a phone and a desktop. */
 	function arrive() {
 		if (!allows.flights()) return;
-		const fun = strength('A3') === 'playful';
-		const from = phone() ? 'translateY(100%)' : 'translateY(32px) scale(0.97)';
-		panel.animate([{ transform: from, opacity: phone() ? 1 : 0 }, { transform: 'none', opacity: 1 }], { duration: fun ? 520 : 380, easing: easing(fun ? 'spring-bouncy' : 'spring-soft') });
-		if (!fun) return;
-		const wrapper = body.children.length === 1 ? body.children[0].children : body.children;
-		[...wrapper].slice(0, 8).forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 320, delay: 120 + i * 60, easing: 'ease-out', fill: 'backwards' }));
-		handle.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-4deg)' }, { transform: 'rotate(3deg)' }, { transform: 'rotate(0)' }], { duration: 500, delay: 300 });
+		panel.animate([{ transform: 'translateY(24px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 180, easing: 'ease-out' });
 	}
 
 	/** The panel goes out, a little faster than it came, and then the dialog closes. */
@@ -123,13 +114,13 @@
 	<div class="panel" class:pulling bind:this={panel} style:transform={pull ? `translateY(${pull}px)` : undefined}>
 		<!-- Pulling the top edge down is a shortcut for touch screens. The close button and Escape do the same for everyone else. -->
 		<div class="grip" role="presentation" onpointerdown={down} onpointermove={move} onpointerup={up} onpointercancel={up}>
-			<div class="handle" bind:this={handle} aria-hidden="true"></div>
+			<div class="handle" aria-hidden="true"></div>
 			<header>
 				<h2>{title}</h2>
 				<IconButton icon={X} label="Close" size={36} onclick={() => (open = false)} />
 			</header>
 		</div>
-		<div class="body" bind:this={body}>{@render children()}</div>
+		<div class="body">{@render children()}</div>
 	</div>
 </dialog>
 

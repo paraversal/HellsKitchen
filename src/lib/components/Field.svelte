@@ -19,8 +19,10 @@
 		draft = value;
 	});
 
+	// A number box hands over a number, but whoever listens is promised text.
 	const commit = () => {
-		if (draft !== value) oncommit(draft);
+		const text = String(draft ?? '');
+		if (text !== value) oncommit(text);
 	};
 </script>
 

@@ -32,7 +32,7 @@
 			background: var(--color-mustard-tint);
 		}
 	}
-	.chip:not(.active):active {
+	.chip:not(.active):global([data-pressed]) {
 		background: var(--color-mustard);
 	}
 	.active {
