@@ -21,6 +21,8 @@
 	import NoPricePill from '#lib/components/NoPricePill.svelte';
 	import Plate from '#lib/components/Plate.svelte';
 	import QrCode from '#lib/components/QrCode.svelte';
+	import RecipeImage from '#lib/components/RecipeImage.svelte';
+	import { RECIPE_KINDS } from '#lib/components/recipe-kinds.ts';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import ShopRow from '#lib/components/ShopRow.svelte';
 	import Stepper from '#lib/components/Stepper.svelte';
@@ -159,6 +161,12 @@
 				<div class="inline">{#each plates as seed (seed)}<Plate {seed} size={52} />{/each}</div>
 			</div>
 			<div class="row">
+				<span class="soft small label">Recipe pictures</span>
+				<div class="inline">
+					{#each Object.keys(RECIPE_KINDS) as kind (kind)}<span class="kind"><RecipeImage id="none" category={kind as keyof typeof RECIPE_KINDS} size={64} /><span class="soft small">{kind}</span></span>{/each}
+				</div>
+			</div>
+			<div class="row">
 				<span class="soft small label">Day</span>
 				<div class="inline wide"><DayLabel name="Saturday" date="Jul 13" /><div class="add"><AddRow label="Add meal" /></div></div>
 			</div>
@@ -291,6 +299,12 @@
 	.label {
 		width: 96px;
 		flex: none;
+	}
+	.kind {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 6px;
 	}
 	.inline {
 		display: flex;

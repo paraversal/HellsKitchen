@@ -11,7 +11,7 @@
 	import Field from '#lib/components/Field.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import { MEAL_TYPES } from '#lib/components/meal-types.ts';
-	import Plate from '#lib/components/Plate.svelte';
+	import RecipeImage from '#lib/components/RecipeImage.svelte';
 	import SearchField from '#lib/components/SearchField.svelte';
 	import Sheet from '#lib/components/Sheet.svelte';
 	import Switch from '#lib/components/Switch.svelte';
@@ -128,7 +128,7 @@
 							{@const recipe = appData.recipes[dish.recipe]}
 							<li data-dish={dish.recipe}>
 								<div class="dish">
-									<Plate seed={dish.recipe} size={40} />
+									<RecipeImage id={dish.recipe} size={40} />
 									<div class="grow">
 										<strong>{recipe?.name ?? dish.recipe}</strong>
 										<span class="soft note">
@@ -173,7 +173,7 @@
 					{#each found as recipe (recipe.id)}
 						<li>
 							<button class="pick pressable" onclick={() => toggle(recipe.id)} aria-pressed={present.has(recipe.id)}>
-								<Plate seed={recipe.id} size={40} />
+								<RecipeImage id={recipe.id} size={40} />
 								<span class="grow"><strong>{recipe.name}</strong><span class="soft note">{categoryName(recipe.category)}</span></span>
 								<span class="mark" class:on={present.has(recipe.id)}>{#if present.has(recipe.id)}<Check size={16} />{:else}<Plus size={16} />{/if}</span>
 							</button>

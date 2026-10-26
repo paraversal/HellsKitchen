@@ -26,6 +26,17 @@ Ids use lower case letters, digits and hyphens. An id never changes once it is i
 Amounts are written with their unit, like `10 g`, `0.5 pack`. Units: `g`, `ml`, `pcs`, `pack`, `jar`.
 Kilograms and litres are also allowed (`2 kg`, `1.5 l`) and are converted. The unit must fit the ingredient: an ingredient counted in `g` takes `g` or `kg`, never `ml`.
 
+## Photos (`images/<recipe id>.jpg`)
+
+A recipe can have one photo. It lives in `data/images/` and is **named after the recipe's id**: `data/recipes/tzatziki.yaml` is shown with `data/images/tzatziki.jpg`. There is nothing to write in the recipe file.
+Formats: `jpg`, `jpeg`, `png`, `webp` or `avif`. A photo from an iPhone may be HEIC; export it as JPG.
+
+Any size works. When the data is built, the app makes its own copies from each photo: a small square one for lists (160 px) and a bigger one for the recipe page (640 px), as WebP, cropped to the middle with the most interesting part kept. They go to `src/lib/generated/images/` and are cached for offline use like everything else, so a big photo costs the repository but not the phone. About 1600 px on the long side is plenty.
+
+A recipe without a photo shows an icon for its kind on a small plate: a soup bowl for main dishes (all of them), a croissant for brunch, a slice of cake for helper snacks, a cup for drinks, an open box for misc. They are designed on the Design System sheet of `UI.fig`. Photos replace the icon; the ring around them keeps the color of the kind.
+
+The checks (`npm run validate`): a photo that matches no recipe is an error, with "Did you mean ...?" for a typo (`image-without-recipe`); so are a format that cannot be used (`image-format`) and two photos of one recipe (`image-twice`); a photo over 3 MB is a warning (`image-big`). The Meta screen of the app lists the recipes that have no photo yet.
+
 ## Stores (`stores.yaml`)
 
 ```yaml
@@ -140,7 +151,7 @@ Every message says which file and which line of the recipe is wrong, and how to 
 | `unknown-recipe`, `bad-date` | In a plan: a recipe that does not exist, or a date that is not real. |
 
 **Warnings** (shown, but do not stop a merge): `heavy-recipe` (ingredients weigh more than three times the finished dish), `light-recipe` (less than half),
-`unused-ingredient`, `no-price`, `no-method`, `method-without-cooking`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `empty-meal`, `plan-uses-needs-review`.
+`unused-ingredient`, `no-price`, `no-method`, `image-big`, `method-without-cooking`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `empty-meal`, `plan-uses-needs-review`.
 
 **Notes**: `needs-review` (a recipe marked as needing a second look, with its reason) and `no-pack` (an ingredient without a pack size).
 

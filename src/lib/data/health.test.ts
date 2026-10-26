@@ -42,6 +42,12 @@ describe('data health', () => {
 		expect(health.ingredients.noPack).toBe(2); // flour and saffron; water is not bought, tea is counted in packs
 	});
 
+	it('lists the recipes of the app without a photo', () => {
+		const withPhoto = dataHealth({ ...set, images: ['fine'] }, []);
+		expect(withPhoto.recipes.noPhoto.map((r) => r.id)).toEqual(['jam', 'plain']);
+		expect(health.recipes.noPhoto.map((r) => r.id)).toEqual(['fine', 'jam', 'plain']);
+	});
+
 	it('lists the ingredients no recipe uses', () => {
 		expect(health.ingredients.unused).toEqual([{ id: 'saffron', name: 'Saffron' }]);
 	});

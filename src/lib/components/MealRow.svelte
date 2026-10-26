@@ -4,7 +4,7 @@
 	import { MEAL_TYPES, type MealType } from './meal-types.ts';
 	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { mealScene } from '#lib/motion/arrive.ts';
-	import Plate from './Plate.svelte';
+	import RecipeImage from './RecipeImage.svelte';
 
 	// One meal of the plan: what kind, when, how many people, and its dishes. `compact` is the narrow version for the desktop day columns.
 	// With `onopen`, the whole row can be pressed, for example to edit the meal.
@@ -41,7 +41,7 @@
 		{#if dishes.length}
 			<ul>
 				{#each dishes as dish (dish.id)}
-					<li><Plate seed={dish.id} size={compact ? 24 : 22} />{dish.name}</li>
+					<li><RecipeImage id={dish.id} size={compact ? 24 : 22} />{dish.name}</li>
 				{/each}
 			</ul>
 		{/if}

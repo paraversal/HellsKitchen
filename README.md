@@ -34,7 +34,7 @@ npm run build     # build the site into build/
 ## Folders
 
 ```
-data/                  recipes, ingredients, stores (YAML)
+data/                  recipes, ingredients, stores (YAML); photos of recipes in data/images/
 docs/                  decisions, formats, stack, deployment
 scripts/validate-data.ts  checks the data files
 scripts/import-excel/  the one-off import from the old Excel sheet

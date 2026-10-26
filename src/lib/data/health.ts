@@ -14,6 +14,8 @@ export type DataHealth = {
 		noMethod: Named[];
 		/** Put out as they are, like jam. They need no method. */
 		noCooking: number;
+		/** The recipes of the app that have no photo, and so show the icon of their kind. */
+		noPhoto: Named[];
 	};
 	ingredients: {
 		total: number;
@@ -45,6 +47,7 @@ export function dataHealth(set: DataSet, issues: Issue[]): DataHealth {
 				.map(([id, recipe]) => ({ ...named(id, recipe.name), ...(recipe.reviewNote ? { note: recipe.reviewNote } : {}) }))
 				.sort(byName),
 			noCooking: recipes.filter(([, recipe]) => recipe.noCooking).length,
+			noPhoto: recipes.filter(([id, recipe]) => !recipe.needsReview && !(set.images ?? []).includes(id)).map(([id, recipe]) => named(id, recipe.name)).sort(byName),
 			noMethod: recipes.filter(([, recipe]) => !recipe.needsReview && !recipe.method && !recipe.noCooking).map(([id, recipe]) => named(id, recipe.name)).sort(byName)
 		},
 		ingredients: {

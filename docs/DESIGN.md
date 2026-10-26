@@ -63,6 +63,7 @@ In `src/lib/components/`, one small Svelte file each. They take plain props, con
 | `DayLabel` | The day name on a strip of mustard tape, with the date. |
 | `MealRow` | One meal: kind, time, people, dishes. `compact` is the narrow version for desktop columns. |
 | `AddRow` | The dashed row that adds something. |
+| `RecipeImage` | The picture of a recipe: its photo, or an icon for its kind (soup bowl for mains, croissant, cake slice, cup, open box) on a plate in the color of the kind. Used wherever a recipe is shown. |
 | `Plate` | A flat plate illustration. The look comes from the recipe's id, so no extra data is needed. |
 | `CostBlock` | The estimated cost with the share of the food that has a price. |
 | `NoPricePill` | How many ingredients of a store have no price. |

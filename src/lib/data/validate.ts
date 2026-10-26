@@ -4,6 +4,7 @@
 import type { z } from 'zod';
 import { CATEGORIES, FIELD_NAMES, ID_FORMAT, ingredientsSchema, planSchema, recipeSchema, storesSchema } from './schema.ts';
 import { parseQuantity, type DataUnit } from './quantity.ts';
+import { BIG_IMAGE_BYTES, IMAGE_EXTENSIONS, splitImageName, type ImageFile } from './images.ts';
 import { closest, type Issue, type Severity } from './issues.ts';
 
 export const FILES = {
@@ -36,6 +37,8 @@ export type DataSet = {
 	stores: Record<string, string>;
 	ingredients: Record<string, Ingredient>;
 	recipes: Record<string, Recipe>;
+	/** The recipes that have a photo (data/images/<id>.jpg and so on). */
+	images?: string[];
 };
 
 /**
@@ -47,6 +50,8 @@ export type RawData = {
 	ingredients: unknown;
 	/** One entry per file in data/recipes/, keyed by the file name without .yaml. */
 	recipes: Record<string, unknown>;
+	/** The files in data/images/. Left out when the folder is not looked at. */
+	images?: ImageFile[];
 };
 
 // --- turning zod's complaints into plain language -------------------------------------------------
@@ -291,6 +296,42 @@ export function validateData(raw: RawData): { issues: Issue[]; data: DataSet; br
 				reviewNote: r.review_note
 			};
 		} else broken.push(id);
+	}
+
+	// photos
+	if (raw.images) {
+		const recipeIds = Object.keys(raw.recipes);
+		const seen = new Set<string>();
+		const withPhoto: string[] = [];
+		for (const image of raw.images) {
+			const file = `data/images/${image.name}`;
+			const { id, extension } = splitImageName(image.name);
+			if (!(IMAGE_EXTENSIONS as readonly string[]).includes(extension)) {
+				report('error', 'image-format', file, `"${extension || 'no ending'}" is not a photo format the app can use`, {
+					fix: `Save the photo as ${IMAGE_EXTENSIONS.join(', ')}. A photo from an iPhone may be HEIC; export it as JPG.`
+				});
+				continue;
+			}
+			if (!recipeIds.includes(id)) {
+				const near = closest(id, recipeIds);
+				report('error', 'image-without-recipe', file, `there is no recipe "${id}" for this photo`, {
+					fix: near ? `Did you mean "${near}"? Rename the photo to ${near}.${extension}.` : 'The file name must be the id of a recipe, like tzatziki.jpg.'
+				});
+				continue;
+			}
+			if (seen.has(id)) {
+				report('error', 'image-twice', file, `the recipe "${id}" has two photos`, { fix: 'Keep one of them.' });
+				continue;
+			}
+			seen.add(id);
+			withPhoto.push(id);
+			if (image.bytes > BIG_IMAGE_BYTES) {
+				report('warning', 'image-big', file, `the photo is ${(image.bytes / 1024 / 1024).toFixed(1)} MB`, {
+					fix: 'The app makes small copies itself, but a photo of about 1600 pixels on its long side is enough, and keeps the repository small.'
+				});
+			}
+		}
+		data.images = withPhoto.sort();
 	}
 
 	// what is left over, and what is missing

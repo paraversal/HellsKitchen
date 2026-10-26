@@ -3,7 +3,7 @@
 	import Plus from '@lucide/svelte/icons/plus';
 	import { markOpen, opened } from '#lib/motion/recipeopen.svelte.ts';
 	import { adding } from '#lib/plan/current.svelte.ts';
-	import Plate from './Plate.svelte';
+	import RecipeImage from './RecipeImage.svelte';
 	import IconButton from './IconButton.svelte';
 
 	// One recipe in the list: plate, name, and what kind it is. The plus adds it to the plan.
@@ -13,7 +13,7 @@
 
 <div class="row" class:selected>
 	<a {href} aria-current={selected ? 'page' : undefined} onclick={(event) => markOpen(id, event.currentTarget.querySelector('.plate'))}>
-		<span class="plate" data-plate={id} style:view-transition-name={opened.id === id ? 'hk-plate' : undefined}><Plate seed={id} size={48} /></span>
+		<span class="plate" data-plate={id} style:view-transition-name={opened.id === id ? 'hk-plate' : undefined}><RecipeImage {id} size={48} /></span>
 		<span class="text">
 			<span class="name">{name}</span>
 			<span class="meta">{meta}</span>

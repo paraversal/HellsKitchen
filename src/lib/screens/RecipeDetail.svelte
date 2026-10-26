@@ -5,8 +5,8 @@
 	import Badge from '#lib/components/Badge.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
-	import Plate from '#lib/components/Plate.svelte';
-	import { plateLook } from '#lib/components/plate.ts';
+	import RecipeImage from '#lib/components/RecipeImage.svelte';
+	import { RECIPE_KINDS } from '#lib/components/recipe-kinds.ts';
 	import Stepper from '#lib/components/Stepper.svelte';
 	import { appData } from '#lib/app-data.ts';
 	import { categoryName } from '#lib/categories.ts';
@@ -43,13 +43,13 @@
 
 {#if recipe}
 	<article bind:this={page}>
-		<div class="hero" style:background="var(--color-{plateLook(id).rim})">
+		<div class="hero" style:background="var(--color-{RECIPE_KINDS[recipe.category].tint})">
 			<div class="back"><IconButton icon={ArrowLeft} label="Back to the recipes" href={resolve('/(app)/recipes')} /></div>
-			<span class="hero-plate" data-plate={id} style:view-transition-name="hk-plate"><Plate seed={id} size={168} /></span>
+			<span class="hero-plate" data-plate={id} style:view-transition-name="hk-plate"><RecipeImage {id} size={168} /></span>
 		</div>
 
 		<header>
-			<div class="plate" data-plate={id}><Plate seed={id} size={120} /></div>
+			<div class="plate" data-plate={id}><RecipeImage {id} size={120} /></div>
 			<div class="titles">
 				<h1>{recipe.name}</h1>
 				<div class="tags">

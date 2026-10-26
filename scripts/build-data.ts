@@ -7,6 +7,7 @@ import { toAppData } from '../src/lib/data/app-data.ts';
 import { dataHealth } from '../src/lib/data/health.ts';
 import { formatIssues } from '../src/lib/data/issues.ts';
 import { validateData } from '../src/lib/data/validate.ts';
+import { buildImages } from './build-images.ts';
 import { readDataFolder } from './read-data.ts';
 
 const root = join(import.meta.dirname, '..');
@@ -25,5 +26,6 @@ mkdirSync(join(root, 'src/lib/generated'), { recursive: true });
 const file = join(root, 'src/lib/generated/app-data.json');
 const json = JSON.stringify(app);
 if (!existsSync(file) || readFileSync(file, 'utf8') !== json) writeFileSync(file, json);
+const imagesMade = await buildImages(root, raw.images ?? [], data.images ?? []);
 const hidden = Object.keys(data.recipes).length - Object.keys(app.recipes).length;
-console.log(`App data ${version}: ${Object.keys(app.recipes).length} recipes (${hidden} left out as needs-review), ${Object.keys(app.ingredients).length} ingredients.`);
+console.log(`App data ${version}: ${Object.keys(app.recipes).length} recipes (${hidden} left out as needs-review), ${Object.keys(app.ingredients).length} ingredients, ${(data.images ?? []).length} photos${imagesMade ? ` (${imagesMade} pictures made)` : ''}.`);

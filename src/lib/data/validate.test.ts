@@ -251,6 +251,47 @@ describe('warnings and notes', () => {
 	});
 });
 
+describe('photos', () => {
+	const withPhotos = (...images: { name: string; bytes?: number }[]) =>
+		check((raw) => {
+			raw.images = images.map((i) => ({ name: i.name, bytes: i.bytes ?? 100_000 }));
+		});
+
+	it('a photo named after a recipe is accepted, in any of the usual formats', () => {
+		for (const name of ['dal.jpg', 'dal.jpeg', 'dal.png', 'dal.webp', 'dal.avif', 'dal.JPG']) {
+			const { issues, data } = withPhotos({ name });
+			expect(issues.filter((i) => i.code.startsWith('image')), name).toEqual([]);
+			expect(data.images).toEqual(['dal']);
+		}
+	});
+
+	it('image-without-recipe: a photo that fits no recipe is an error, with a hint for a typo', () => {
+		const { issues, data } = withPhotos({ name: 'dall.jpg' });
+		expect(find(issues, 'image-without-recipe')?.fix).toContain('"dal"');
+		expect(data.images).toEqual([]);
+	});
+
+	it('image-format: a format the app cannot use is an error', () => {
+		const { issues } = withPhotos({ name: 'dal.heic' });
+		expect(find(issues, 'image-format')?.fix).toContain('JPG');
+	});
+
+	it('image-twice: two photos of one recipe is an error', () => {
+		const { issues } = withPhotos({ name: 'dal.jpg' }, { name: 'dal.png' });
+		expect(find(issues, 'image-twice')).toBeDefined();
+	});
+
+	it('image-big: a huge photo is only a warning', () => {
+		const { issues } = withPhotos({ name: 'dal.jpg', bytes: 9_000_000 });
+		expect(find(issues, 'image-big')?.severity).toBe('warning');
+		expect(errors(issues)).toEqual([]);
+	});
+
+	it('does not look at photos when the folder was not read', () => {
+		expect(check().data.images).toBeUndefined();
+	});
+});
+
 describe('plans', () => {
 	const data = (): DataSet => check().data;
 	const plan = () => ({

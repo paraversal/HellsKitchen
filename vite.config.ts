@@ -25,6 +25,8 @@ export default defineConfig({
 	],
 	// The icon library is made of Svelte components. Vite must not bundle it separately in development, or it ends up with a second copy of Svelte.
 	optimizeDeps: { exclude: ['@lucide/svelte'] },
+	// Photos stay separate files, which the offline cache stores one by one, instead of text inside the code that every page loads.
+	build: { assetsInlineLimit: 0 },
 	test: {
 		include: ['src/**/*.test.ts']
 	}

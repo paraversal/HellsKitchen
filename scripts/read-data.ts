@@ -1,5 +1,5 @@
 // Reads the data files from disk and hands them to the validator. The only code that touches the files.
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse, YAMLParseError } from 'yaml';
 import type { Issue } from '../src/lib/data/issues.ts';
@@ -31,7 +31,8 @@ export function readDataFolder(root: string): { raw: RawData; problems: Issue[] 
 	const raw: RawData = {
 		stores: readYaml(root, 'data/stores.yaml', problems),
 		ingredients: readYaml(root, 'data/ingredients.yaml', problems),
-		recipes: {}
+		recipes: {},
+		images: []
 	};
 	const folder = join(root, 'data/recipes');
 	const names = existsSync(folder) ? readdirSync(folder).sort() : [];
@@ -48,6 +49,11 @@ export function readDataFolder(root: string): { raw: RawData; problems: Issue[] 
 		}
 		const content = readYaml(root, `data/recipes/${name}`, problems);
 		if (content !== undefined) raw.recipes[name.slice(0, -'.yaml'.length)] = content;
+	}
+	const photos = join(root, 'data/images');
+	for (const name of existsSync(photos) ? readdirSync(photos).sort() : []) {
+		if (name.startsWith('.') || name.toLowerCase() === 'readme.md') continue;
+		raw.images?.push({ name, bytes: statSync(join(photos, name)).size });
 	}
 	return { raw, problems };
 }

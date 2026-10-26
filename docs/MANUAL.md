@@ -74,6 +74,7 @@ The event settings list the plans on your device. Press one to open it, or **New
 
 - The list is sorted by letter. The search finds recipe names and ingredients; the chips narrow it to a kind of dish.
 - Press a recipe to read it. The **portions** control scales its ingredients, just for trying it out: it does not use or change your plan.
+- A recipe with a **photo** shows it as a round picture; a recipe without one shows an icon for its kind (a soup bowl for main dishes, a croissant for brunch, a slice of cake for helper snacks, a cup for drinks, an open box for the rest). Photos are added by the people who look after the recipes.
 - **No cooking** on a recipe means it is put out as it is (jam, fruit). It has no method.
 - **Add to plan** puts the recipe in a meal.
 

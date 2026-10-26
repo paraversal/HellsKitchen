@@ -55,6 +55,7 @@
 
 			{@render list('Recipes waiting for review', health.recipes.needsReview, 'They are left out of the app until someone has checked their amounts.')}
 			{@render list('Ingredients without a price', health.ingredients.noPrice, 'They count as free in the cost estimate, which is then marked as partial.')}
+			{@render list('Recipes without a photo', health.recipes.noPhoto, 'They show the icon of their kind. A photo goes in data/images/, named after the recipe.')}
 			{@render list('Recipes without a method', health.recipes.noMethod)}
 			{@render list('Ingredients no recipe uses', health.ingredients.unused)}
 			<div class="fine"><span>Recipes that need no cooking</span><b>{health.recipes.noCooking}</b></div>

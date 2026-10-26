@@ -21,7 +21,7 @@ export async function dishAdded(recipe: string): Promise<void> {
 	}
 	// The sheet that asked where to put the dish is still leaving, and it is above everything until it is gone.
 	await wait(240);
-	const source = visiblePlate(recipe)?.querySelector('svg');
+	const source = visiblePlate(recipe)?.firstElementChild;
 	const target = tabIcon('plan');
 	if (!source || !target) return;
 	await fly(source, target, {

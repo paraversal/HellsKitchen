@@ -18,8 +18,8 @@ let transitioned = false;
 /** Called when a recipe is pressed in the list: remembers its plate, as it looked and where it was. */
 export function markOpen(id: string, plate: Element | null | undefined): void {
 	opened.id = id;
-	const svg = plate?.querySelector('svg');
-	pending = svg ? { id, copy: svg.cloneNode(true) as Element, box: svg.getBoundingClientRect(), at: performance.now() } : null;
+	const picture = plate?.firstElementChild;
+	pending = picture ? { id, copy: picture.cloneNode(true) as Element, box: picture.getBoundingClientRect(), at: performance.now() } : null;
 }
 
 /** Called by SvelteKit before a navigation. Opening and closing a recipe on a phone is a view transition, unless fun has its own show. */

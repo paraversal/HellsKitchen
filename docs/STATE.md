@@ -45,6 +45,7 @@ Built beyond the roadmap: the Fun setting and the motion work, the Meta tab, the
 
 - A list grouped by letter, searchable by recipe name or ingredient, with chips for the kind of dish.
 - A recipe page shows its ingredients scaled to a number of portions (the portions are only for trying out a recipe and never touch the plan), and its method.
+- Every recipe has a round picture: its **photo** if there is one in `data/images/`, otherwise an icon for its kind. No photos have been added yet.
 - A recipe marked **no cooking** (jam, fruit, drinks: things put out as they are) has no method and shows a "No cooking" badge.
 - A recipe can be added to a plan from the list or from its page: the app asks which meal gets it.
 
@@ -65,7 +66,7 @@ Built beyond the roadmap: the Fun setting and the motion work, the Meta tab, the
 
 ### Meta
 
-The fourth tab holds the **Fun** setting, the **health of the data** (recipes waiting for review, ingredients without a price or a pack size, recipes without a method, ingredients no recipe uses, stores and how many ingredients each has, what the checks said), and facts about the app (version, data version, rules version, number of plans on this device, links to the style sheet and the motion trial page).
+The fourth tab holds the **Fun** setting, the **health of the data** (recipes waiting for review, recipes without a photo, ingredients without a price or a pack size, recipes without a method, ingredients no recipe uses, stores and how many ingredients each has, what the checks said), and facts about the app (version, data version, rules version, number of plans on this device, links to the style sheet and the motion trial page).
 
 ### Fun and motion
 
