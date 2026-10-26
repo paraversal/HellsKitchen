@@ -219,6 +219,32 @@ describe('warnings and notes', () => {
 		expect(find(issues, 'no-method')).toBeDefined();
 	});
 
+	it('no_cooking: something put out as it is needs no method and is not weighed', () => {
+		const { issues, data } = check((raw) => {
+			delete dal(raw).method;
+			dal(raw).no_cooking = true;
+			dal(raw).per_100g = { 'red-lentils': '500 g' };
+		});
+		expect(find(issues, 'no-method')).toBeUndefined();
+		expect(find(issues, 'heavy-recipe')).toBeUndefined();
+		expect(errors(issues)).toEqual([]);
+		expect(data.recipes.dal.noCooking).toBe(true);
+	});
+
+	it('method-without-cooking: a method and no_cooking do not go together', () => {
+		const { issues } = check((raw) => {
+			dal(raw).no_cooking = true;
+		});
+		expect(find(issues, 'method-without-cooking')).toBeDefined();
+	});
+
+	it('no_cooking can only be true', () => {
+		const { issues } = check((raw) => {
+			dal(raw).no_cooking = false;
+		});
+		expect(errors(issues).length).toBeGreaterThan(0);
+	});
+
 	it('an ingredient in the store none needs no price', () => {
 		const { issues } = check();
 		expect(issues.some((i) => i.code === 'no-price' && i.message.includes('water'))).toBe(false);

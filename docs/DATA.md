@@ -81,6 +81,7 @@ method: |
 | portion | yes | How much of the finished dish one guest is expected to eat, in grams. For drinks, 1 ml counts as 1 g. A meal can override it for one dish. |
 | per_100g | yes | The ingredients: how much of each goes into **100 g of the finished dish**. Each key is an ingredient id. |
 | method | no | The steps, as free text. |
+| no_cooking | no | `true` for something that is put out as it is, like jam or fruit. It needs no method, and the checks on how much the ingredients weigh do not apply. |
 | source | no | Where the recipe came from. Do not copy recipes from cookbooks or websites. |
 | status | no | `needs-review` means the numbers look wrong. Such recipes are kept out of the app until fixed. |
 | review_note | no | Why it needs review. |
@@ -139,7 +140,7 @@ Every message says which file and which line of the recipe is wrong, and how to 
 | `unknown-recipe`, `bad-date` | In a plan: a recipe that does not exist, or a date that is not real. |
 
 **Warnings** (shown, but do not stop a merge): `heavy-recipe` (ingredients weigh more than three times the finished dish), `light-recipe` (less than half),
-`unused-ingredient`, `no-price`, `no-method`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `empty-meal`, `plan-uses-needs-review`.
+`unused-ingredient`, `no-price`, `no-method`, `method-without-cooking`, `review-without-note`, `note-without-status`, `price-on-unbought`, `duplicate-dish`, `empty-meal`, `plan-uses-needs-review`.
 
 **Notes**: `needs-review` (a recipe marked as needing a second look, with its reason) and `no-pack` (an ingredient without a pack size).
 

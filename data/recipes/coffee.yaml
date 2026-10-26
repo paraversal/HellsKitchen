@@ -1,5 +1,6 @@
 name: Coffee
 category: misc
+no_cooking: true
 portion: 100 g
 source: Old Excel sheet
 per_100g:

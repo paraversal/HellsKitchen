@@ -7,11 +7,12 @@
 	import DayLabel from '#lib/components/DayLabel.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import MealRow from '#lib/components/MealRow.svelte';
-	import Stepper from '#lib/components/Stepper.svelte';
+	import InlineEdit from '#lib/components/InlineEdit.svelte';
+	import Odometer from '#lib/components/Odometer.svelte';
 	import { appData } from '#lib/app-data.ts';
 	import { planStore } from '#lib/plan/browser.ts';
 	import { current } from '#lib/plan/current.svelte.ts';
-	import { addDay, addMeal, dayLabel, peopleIn, setEvent } from '#lib/plan/plan.ts';
+	import { addDay, addMeal, dayLabel, peopleIn, rename, setEvent } from '#lib/plan/plan.ts';
 	import { euro } from '#lib/plan/shopping.ts';
 	import { dayIn, mealIn } from '#lib/motion/arrive.ts';
 	import { transfer } from '#lib/plan/transfer.svelte.ts';
@@ -25,8 +26,11 @@
 	let day = $state<number | null>(null);
 	let event = $state(false);
 
-	// Counting to 200 one by one takes long, so the steps get bigger.
-	const step = (n: number) => (n >= 100 ? 10 : n >= 20 ? 5 : 1);
+	/** The headcount is typed. Anything that is not a whole number of at least 1 is ignored. */
+	function people(text: string) {
+		const n = Number(text);
+		if (Number.isInteger(n) && n >= 1) planStore.change((p) => setEvent(p, { everyone: n }));
+	}
 
 	function newMeal(index: number) {
 		let created = 0;
@@ -43,19 +47,20 @@
 	<div class="plan">
 		<header>
 			<div class="title">
-				<h1>{plan.name}</h1>
+				<h1><InlineEdit label="Name of the plan" value={plan.name} oncommit={(value) => planStore.change((p) => rename(p, value.trim()))} /></h1>
 				<div class="tools">
 					<IconButton icon={Share2} label="Share and print" onclick={() => (transfer.sharing = true)} />
 					<IconButton icon={Settings2} label="Event settings" onclick={() => (event = true)} />
 				</div>
 			</div>
-			<Stepper
-				name="people"
-				label="People"
-				min={1}
-				step={step(plan.event.everyone)}
-				bind:value={() => plan.event.everyone, (value) => planStore.change((p) => setEvent(p, { everyone: value }))}
-			/>
+			<div class="people">
+				<span class="figure">
+					<InlineEdit label="People" type="number" min={1} value={String(plan.event.everyone)} oncommit={people}>
+						{#snippet display()}<Odometer text={String(plan.event.everyone)} />{/snippet}
+					</InlineEdit>
+				</span>
+				<span class="soft">People</span>
+			</div>
 			{#if current.shopping?.stores.length}
 				<CostBlock value={current.shopping.cost.total} format={euro} coverage={current.shopping.cost.coverage} />
 			{/if}
@@ -107,7 +112,19 @@
 		width: 100%;
 	}
 	h1 {
+		flex: 1;
+		min-width: 0;
 		overflow-wrap: anywhere;
+	}
+	.people {
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-3);
+	}
+	.figure {
+		font-size: var(--text-counter);
+		font-weight: var(--weight-heavy);
+		line-height: 1.1;
 	}
 	.tools {
 		display: flex;

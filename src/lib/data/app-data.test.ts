@@ -20,6 +20,12 @@ describe('toAppData', () => {
 		expect(toAppData(set, 'v1').recipes.fine).toEqual({ name: 'Fine', category: 'main', portion: 100, per100g: { apple: 10 }, method: 'Cook.' });
 	});
 
+	it('keeps the flag of a recipe that needs no cooking', () => {
+		const jam = { ...set.recipes.fine, noCooking: true };
+		expect(toAppData({ ...set, recipes: { jam } }, 'v1').recipes.jam.noCooking).toBe(true);
+		expect(toAppData(set, 'v1').recipes.fine.noCooking).toBeUndefined();
+	});
+
 	it('carries the version', () => {
 		expect(toAppData(set, 'abc').version).toBe('abc');
 	});

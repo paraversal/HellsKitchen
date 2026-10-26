@@ -30,7 +30,7 @@ Everything not chosen is kept: the full plan below stays as it is, and the trial
 | B5 | The people counter | Regular | Crazy |
 | B6 | The cost | Regular | Regular |
 | C1 | The recipe list | Regular | Regular |
-| C3 | Opening a recipe | Playful | Crazy |
+| C3 | Opening a recipe | Regular | Playful |
 | C4 | Portions | Regular | Regular |
 | C5 | Ingredients on first view | Regular | Playful |
 | D1 | Ticking an item | Regular | Crazy |
@@ -55,8 +55,8 @@ How a few of the choices turned out in the real screens, where the plan did not 
 - **B3 with fun.** The plate flies to the Plan tab, because the meal it was added to is not on the screen when it is added from a recipe.
 - **B4 and A4 with fun.** The thing that is deleted is crumpled and thrown as a copy laid over the screen. The plan changes at once and nothing waits for the show. While the question is open, the meal or day behind it shakes.
 - **E5 with fun.** The paper comes out of the printer icon on the share sheet's print rows and on the Print button of the print pages; the little printer button on the shopping list goes straight to the page.
-- **C3.** On a desktop the recipe list and the recipe are side by side, so the shared-plate transition is only used on a phone; with fun the plate flies on both.
-- **B5 with fun.** The number bounces on every step and the digits roll. The row of little people and the celebrations at round numbers (every 50, the 200) were taken out again as too much; the code for the celebrations is in the trial page (B5) if they come back. The ring thrown from a pressed button (A2) is half the size it was.
+- **C3.** The page fades in and rises. With fun, on a phone, the plate of the list grows into the plate of the page instead. On a desktop the list and the recipe are side by side, so there it is the fade in both cases. The flying version (Crazy) is kept in the code and on the trial page.
+- **B5.** The headcount of the plan is now typed (press the number), so B5 only shows on the portions of a recipe, where the plus and minus remain; see [SOMEDAY.md](SOMEDAY.md) for the buttons that were taken out. With fun the number bounces on every step and the digits roll. The row of little people and the celebrations at round numbers (every 50, the 200) were taken out again as too much; the code for the celebrations is in the trial page (B5) if they come back. The ring thrown from a pressed button (A2) is half the size it was.
 - **E4.** The reminder to keep a copy is switched off for now (`REMINDER_SHOWN` in `src/lib/plan/backup.svelte.ts`), so its animation is not seen. The counting goes on in the background.
 - **Calm.** If the device asks for less motion, the app uses the choices for "without fun" whatever the switch says, and never throws particles.
 

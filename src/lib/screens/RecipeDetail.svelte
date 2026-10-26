@@ -54,6 +54,7 @@
 				<h1>{recipe.name}</h1>
 				<div class="tags">
 					<Badge>{categoryName(recipe.category)}</Badge>
+					{#if recipe.noCooking}<Badge tone="leaf">No cooking</Badge>{/if}
 					{#if source}<span class="soft note">Source: {source}</span>{/if}
 				</div>
 			</div>

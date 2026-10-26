@@ -20,7 +20,7 @@ export const CHOICES = {
 	B5: [R, C],
 	B6: [R, R],
 	C1: [R, R],
-	C3: [P, C],
+	C3: [R, P],
 	C4: [R, R],
 	C5: [R, P],
 	D1: [R, C],

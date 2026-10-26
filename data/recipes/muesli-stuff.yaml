@@ -1,5 +1,6 @@
 name: Muesli stuff
 category: misc
+no_cooking: true
 portion: 250 g
 source: Old Excel sheet
 per_100g:

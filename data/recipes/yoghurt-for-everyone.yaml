@@ -1,5 +1,6 @@
 name: Yoghurt for everyone
 category: misc
+no_cooking: true
 portion: 500 g
 source: Old Excel sheet
 per_100g:

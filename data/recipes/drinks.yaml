@@ -1,5 +1,6 @@
 name: Drinks (Milk, juice and powder)
 category: misc
+no_cooking: true
 portion: 1000 g
 source: Old Excel sheet
 per_100g:

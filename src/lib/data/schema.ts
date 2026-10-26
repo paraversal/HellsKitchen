@@ -30,6 +30,7 @@ export const recipeSchema = z.strictObject({
 	portion: z.string(),
 	per_100g: z.record(z.string(), z.string()),
 	method: z.string().optional(),
+	no_cooking: z.literal(true).optional(),
 	source: z.string().optional(),
 	status: z.literal('needs-review').optional(),
 	review_note: z.string().optional()

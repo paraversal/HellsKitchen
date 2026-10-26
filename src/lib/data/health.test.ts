@@ -14,6 +14,7 @@ const set: DataSet = {
 	recipes: {
 		fine: { name: 'Fine', category: 'main', portion: 100, per100g: { apple: 10, flour: 5, water: 20 }, method: 'Cook.', needsReview: false },
 		plain: { name: 'Plain', category: 'main', portion: 100, per100g: { apple: 10, tea: 1 }, needsReview: false },
+		jam: { name: 'Jam', category: 'brunch', portion: 20, per100g: { apple: 100 }, noCooking: true, needsReview: false },
 		wrong: { name: 'Wrong', category: 'main', portion: 100, per100g: { apple: 9000 }, needsReview: true, reviewNote: 'Too much.' }
 	}
 };
@@ -26,10 +27,10 @@ describe('data health', () => {
 	]);
 
 	it('counts the recipes and lists the ones waiting for a second look, with the reason', () => {
-		expect(health.recipes).toMatchObject({ total: 3, inApp: 2, needsReview: [{ id: 'wrong', name: 'Wrong', note: 'Too much.' }] });
+		expect(health.recipes).toMatchObject({ total: 4, inApp: 3, noCooking: 1, needsReview: [{ id: 'wrong', name: 'Wrong', note: 'Too much.' }] });
 	});
 
-	it('lists the recipes without a method, leaving out the ones that wait for review', () => {
+	it('lists the recipes without a method, leaving out the ones that wait for review and the ones that need no cooking', () => {
 		expect(health.recipes.noMethod).toEqual([{ id: 'plain', name: 'Plain' }]);
 	});
 

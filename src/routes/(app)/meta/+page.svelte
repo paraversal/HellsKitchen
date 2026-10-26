@@ -57,6 +57,7 @@
 			{@render list('Ingredients without a price', health.ingredients.noPrice, 'They count as free in the cost estimate, which is then marked as partial.')}
 			{@render list('Recipes without a method', health.recipes.noMethod)}
 			{@render list('Ingredients no recipe uses', health.ingredients.unused)}
+			<div class="fine"><span>Recipes that need no cooking</span><b>{health.recipes.noCooking}</b></div>
 			<div class="fine"><span>Ingredients without a pack size</span><b>{health.ingredients.noPack}</b></div>
 			<div class="fine"><span>Notes from the checks</span><b>{count(health.checks.warnings, 'warning')}, {count(health.checks.notes, 'note')}</b></div>
 

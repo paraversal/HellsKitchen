@@ -4,7 +4,7 @@ import type { Data, Ingredient, Recipe } from '../kitchen-engine/types.ts';
 import type { DataHealth } from './health.ts';
 import type { DataSet } from './validate.ts';
 
-export type AppRecipe = Recipe & { method?: string; source?: string };
+export type AppRecipe = Recipe & { method?: string; noCooking?: true; source?: string };
 
 export type AppData = {
 	/** Changes whenever the data changes. */
@@ -26,6 +26,7 @@ export function toAppData(set: DataSet, version: string, health?: DataHealth): A
 			portion: recipe.portion,
 			per100g: recipe.per100g,
 			...(recipe.method ? { method: recipe.method } : {}),
+			...(recipe.noCooking ? { noCooking: true as const } : {}),
 			...(recipe.source ? { source: recipe.source } : {})
 		};
 	}

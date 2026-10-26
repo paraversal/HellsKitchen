@@ -6,6 +6,17 @@ const GLIDE_AFTER_SWIPE_MS = 4000;
 const SILENCE_MS = 120;
 const IGNORE_CLICK_MS = 450;
 const MOVED_PX = 10;
+const HOLD_MS = 350;
+
+/** Holds the scrolling thing still for a moment, on its own spot. A phone cannot carry on a glide in something that cannot scroll, and the position is set to where it is, so there is no glide left to carry on. */
+export function holdStill(scroller: EventTarget | null, ms = HOLD_MS): void {
+	const page = !(scroller instanceof HTMLElement);
+	const elements = page ? [document.documentElement, document.body] : [scroller];
+	for (const element of elements) element.style.setProperty('overflow', 'hidden');
+	if (page) scrollTo(scrollX, scrollY);
+	else scroller.scrollTop = scroller.scrollTop;
+	setTimeout(() => elements.forEach((element) => element.style.removeProperty('overflow')), ms);
+}
 
 export function startGlide(): () => void {
 	let touching = false;
@@ -18,14 +29,11 @@ export function startGlide(): () => void {
 	let killed = -Infinity;
 	let killedOnStart = false;
 
-	/** Holds the scrolling thing still for a moment. A phone drops what is left of the glide when it cannot scroll. */
-	function kill() {
-		const element = scroller instanceof HTMLElement ? scroller : document.documentElement;
-		element.style.setProperty('overflow', 'hidden');
-		setTimeout(() => element.style.removeProperty('overflow'), 80);
+	const kill = () => {
+		holdStill(scroller);
 		killed = performance.now();
 		gliding = false;
-	}
+	};
 
 	const scrolled = (event: Event) => {
 		if (touching || performance.now() - lastSwipe > GLIDE_AFTER_SWIPE_MS) return;

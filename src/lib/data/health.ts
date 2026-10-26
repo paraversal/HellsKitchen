@@ -12,6 +12,8 @@ export type DataHealth = {
 		inApp: number;
 		needsReview: (Named & { note?: string })[];
 		noMethod: Named[];
+		/** Put out as they are, like jam. They need no method. */
+		noCooking: number;
 	};
 	ingredients: {
 		total: number;
@@ -42,7 +44,8 @@ export function dataHealth(set: DataSet, issues: Issue[]): DataHealth {
 				.filter(([, recipe]) => recipe.needsReview)
 				.map(([id, recipe]) => ({ ...named(id, recipe.name), ...(recipe.reviewNote ? { note: recipe.reviewNote } : {}) }))
 				.sort(byName),
-			noMethod: recipes.filter(([, recipe]) => !recipe.needsReview && !recipe.method).map(([id, recipe]) => named(id, recipe.name)).sort(byName)
+			noCooking: recipes.filter(([, recipe]) => recipe.noCooking).length,
+			noMethod: recipes.filter(([, recipe]) => !recipe.needsReview && !recipe.method && !recipe.noCooking).map(([id, recipe]) => named(id, recipe.name)).sort(byName)
 		},
 		ingredients: {
 			total: ingredients.length,

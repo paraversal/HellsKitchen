@@ -35,3 +35,8 @@ warning when a price is old.
 ## Custom domain
 
 The app starts on a `github.io` address. A custom domain costs money every year and is one more thing to renew.
+
+## Plus and minus buttons on the headcount
+
+The headcount of the plan used to have a minus and a plus (holding one counted on, faster the longer it was held, and with fun the number bounced). They were taken out so the number can simply be pressed and typed, like the name of the plan.
+The `Stepper` component still exists and the recipe page uses it for portions. To bring the buttons back on the plan screen, put `Stepper` back in `PlanView.svelte` in place of the pressable number; the steps used to grow with the count (1 below 20, 5 below 100, 10 from there).

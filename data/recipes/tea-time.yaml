@@ -1,5 +1,6 @@
 name: "Tea time (100g -> 0,1 PCK)"
 category: misc
+no_cooking: true
 portion: 200 g
 source: Old Excel sheet
 per_100g:

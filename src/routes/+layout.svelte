@@ -14,6 +14,9 @@
 
 	// Says on the page whether the last thing the person did was with the keyboard or with a pointer, so only the keyboard gets a focus ring.
 	onMount(() => {
+		// iPhones zoom by pinching whatever the page says about it. Their own event for that can be stopped.
+		const noZoom = (event: Event) => event.preventDefault();
+		document.addEventListener('gesturestart', noZoom);
 		startFun();
 		const stopGlide = startGlide();
 		const stopMotion = startMotion();
@@ -24,6 +27,7 @@
 		addEventListener('keydown', key, true);
 		addEventListener('pointerdown', pointer, true);
 		return () => {
+			document.removeEventListener('gesturestart', noZoom);
 			stopMotion();
 			stopGlide();
 			removeEventListener('keydown', key, true);

@@ -27,6 +27,8 @@ export type Recipe = {
 	per100g: Record<string, number>;
 	method?: string;
 	source?: string;
+	/** Put out as it is, like jam on a breakfast table: it has no method, and the checks on how much it weighs do not apply. */
+	noCooking?: boolean;
 	needsReview: boolean;
 	reviewNote?: string;
 };
@@ -257,12 +259,12 @@ export function validateData(raw: RawData): { issues: Issue[]; data: DataSet; br
 		if (!Object.keys(r.per_100g).length) report('error', 'no-ingredients', file, 'a recipe needs at least one ingredient', { where: 'per_100g' });
 		const { amounts, weight } = checkLines(file, r.per_100g);
 
-		if (!r.status && weight > HEAVY_RECIPE) {
+		if (!r.status && !r.no_cooking && weight > HEAVY_RECIPE) {
 			report('warning', 'heavy-recipe', file, `the ingredients add up to ${Math.round(weight)} g per 100 g of finished dish (${(weight / 100).toFixed(1)} times)`, {
 				fix: 'Check the amounts and units. If it cannot be fixed now, add  status: needs-review  and a review_note.'
 			});
 		}
-		if (!r.status && weight > 0 && weight < LIGHT_RECIPE) {
+		if (!r.status && !r.no_cooking && weight > 0 && weight < LIGHT_RECIPE) {
 			report('warning', 'light-recipe', file, `the ingredients add up to only ${Math.round(weight)} g per 100 g of finished dish`, {
 				fix: 'Ingredients may be missing, such as water.'
 			});
@@ -273,7 +275,8 @@ export function validateData(raw: RawData): { issues: Issue[]; data: DataSet; br
 		} else if (r.review_note) {
 			report('warning', 'note-without-status', file, 'has a review_note but is not marked  status: needs-review');
 		}
-		if (!r.method) report('warning', 'no-method', file, 'has no method');
+		if (!r.method && !r.no_cooking) report('warning', 'no-method', file, 'has no method', { fix: 'Add a method. If nothing is cooked, because it is put out as it is, add  no_cooking: true  instead.' });
+		if (r.method && r.no_cooking) report('warning', 'method-without-cooking', file, 'is marked no_cooking but has a method', { fix: 'Remove  no_cooking: true , or remove the method.' });
 
 		if (issues.slice(before).every((i) => i.severity !== 'error')) {
 			data.recipes[id] = {
@@ -282,6 +285,7 @@ export function validateData(raw: RawData): { issues: Issue[]; data: DataSet; br
 				portion,
 				per100g: amounts,
 				method: r.method,
+				...(r.no_cooking ? { noCooking: true } : {}),
 				source: r.source,
 				needsReview: r.status === 'needs-review',
 				reviewNote: r.review_note
