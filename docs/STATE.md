@@ -66,7 +66,7 @@ Built beyond the roadmap: the Fun setting and the motion work, the Pantry tab, t
 
 ### Pantry and settings
 
-The fourth tab, **Pantry**, shows what the app has to cook with: how many recipes, ingredients and stores; how complete the data is (bars for ingredients with a price, recipes with a method, recipes with a photo, ingredients with a pack size, each opening the list of what is missing); the recipes waiting for review; one bar cut into the stores by how many ingredients each has; ingredients no recipe uses, and what the checks said.
+The fourth tab, **Pantry**, shows what the app has to cook with: how complete the data is (bars for ingredients with a price, recipes with a method, recipes with a photo, ingredients with a pack size, each opening the list of what is missing, under a line such as "28 without a price"); the recipes waiting for review; one bar cut into the stores by how many ingredients each has; ingredients no recipe uses, and what the checks said.
 
 The gear in its corner opens **Settings**: the **Fun** switch, and facts about the app (version, data version, rules version, number of plans on this device, links to the style sheet, the motion trial page and the offline check).
 

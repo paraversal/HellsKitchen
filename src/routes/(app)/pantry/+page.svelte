@@ -12,12 +12,12 @@
 
 	const count = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 
-	type Gap = { label: string; have: number; of: number; missing?: { id: string; name: string }[]; hint?: string };
+	type Gap = { label: string; have: number; of: number; missing?: { id: string; name: string }[]; without?: string; hint?: string };
 	const gaps: Gap[] = health
 		? [
-				{ label: 'Ingredients with a price', have: health.ingredients.bought - health.ingredients.noPrice.length, of: health.ingredients.bought, missing: health.ingredients.noPrice, hint: 'The ones without count as free, so a cost that uses them is marked as partial.' },
-				{ label: 'Recipes with a method', have: health.recipes.inApp - health.recipes.noCooking - health.recipes.noMethod.length, of: health.recipes.inApp - health.recipes.noCooking, missing: health.recipes.noMethod, hint: 'Recipes that need no cooking, like jam, are left out.' },
-				{ label: 'Recipes with a photo', have: health.recipes.inApp - health.recipes.noPhoto.length, of: health.recipes.inApp, missing: health.recipes.noPhoto, hint: 'The others show the icon of their kind. A photo goes in data/images/, named after the recipe.' },
+				{ label: 'Ingredients with a price', have: health.ingredients.bought - health.ingredients.noPrice.length, of: health.ingredients.bought, missing: health.ingredients.noPrice, without: 'without a price', hint: 'The ones without count as free, so a cost that uses them is marked as partial.' },
+				{ label: 'Recipes with a method', have: health.recipes.inApp - health.recipes.noCooking - health.recipes.noMethod.length, of: health.recipes.inApp - health.recipes.noCooking, missing: health.recipes.noMethod, without: 'without a method', hint: 'Recipes that need no cooking, like jam, are left out.' },
+				{ label: 'Recipes with a photo', have: health.recipes.inApp - health.recipes.noPhoto.length, of: health.recipes.inApp, missing: health.recipes.noPhoto, without: 'without a photo', hint: 'The others show the icon of their kind. A photo goes in data/images/, named after the recipe.' },
 				{ label: 'Ingredients with a pack size', have: health.ingredients.weighed - health.ingredients.noPack, of: health.ingredients.weighed, hint: 'Only for what is weighed. Without one, the shopping list shows the exact amount instead of whole packs.' }
 			]
 		: [];
@@ -37,12 +37,6 @@
 	{#if health}
 		<div class="pantry">
 			<div class="column">
-				<div class="figures">
-					<div><strong>{health.recipes.inApp}</strong><span>recipes</span></div>
-					<div><strong>{health.ingredients.total}</strong><span>ingredients</span></div>
-					<div><strong>{stores.length}</strong><span>stores</span></div>
-				</div>
-
 				<section>
 					<h2>How complete</h2>
 					{#each gaps as gap (gap.label)}
@@ -60,6 +54,7 @@
 							<details>
 								<summary>{@render line()}</summary>
 								{#if gap.hint}<p class="soft note">{gap.hint}</p>{/if}
+								<h3>{gap.missing.length} {gap.without}</h3>
 								<ul class="names">
 									{#each gap.missing as item (item.id)}<li>{item.name}</li>{/each}
 								</ul>
@@ -183,26 +178,6 @@
 		font-size: var(--text-small);
 	}
 
-	.figures {
-		display: flex;
-		gap: var(--space-7);
-	}
-	.figures div {
-		display: flex;
-		flex-direction: column;
-	}
-	.figures strong {
-		color: var(--color-tomato-ink);
-		font-size: var(--text-display);
-		font-weight: var(--weight-heavy);
-		line-height: 1.05;
-		font-variant-numeric: tabular-nums;
-	}
-	.figures span {
-		color: var(--color-ink-soft);
-		font-weight: var(--weight-bold);
-	}
-
 	details,
 	.gap,
 	.stores li {
@@ -244,7 +219,15 @@
 		transform: rotate(90deg);
 	}
 	details > .note {
-		padding-bottom: var(--space-2);
+		padding-bottom: var(--space-3);
+	}
+	/* What the list under it holds, so it does not read as part of the line above. */
+	details h3 {
+		margin: 0;
+		padding: var(--space-2) 0 var(--space-1) var(--space-3);
+		color: var(--color-ink-soft);
+		font-size: var(--text-small);
+		font-weight: var(--weight-heavy);
 	}
 
 	.meter {

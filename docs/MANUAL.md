@@ -124,8 +124,7 @@ Open the share sheet and choose **Print the shopping list** (every store on its 
 
 The **Pantry** shows what the app has to cook with:
 
-- How many recipes, ingredients and stores there are.
-- **How complete**: a bar each for ingredients with a price, recipes with a method, recipes with a photo and ingredients with a pack size. Press one to see what is missing.
+- **How complete**: a bar each for ingredients with a price, recipes with a method, recipes with a photo and ingredients with a pack size. Press one to see what is missing, for example the 28 ingredients without a price.
 - **Waiting for review**: recipes whose amounts look wrong. They are not shown in the app until someone has checked them.
 - **Stores**: one bar cut into the stores by how many ingredients each has.
 - Ingredients no recipe uses, and what the checks of the data said.
