@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Users from '@lucide/svelte/icons/users';
+	import { untrack } from 'svelte';
 	import { MEAL_TYPES, type MealType } from './meal-types.ts';
+	import { strength } from '#lib/motion/fun.svelte.ts';
+	import { mealScene } from '#lib/motion/arrive.ts';
 	import Plate from './Plate.svelte';
 
 	// One meal of the plan: what kind, when, how many people, and its dishes. `compact` is the narrow version for the desktop day columns.
@@ -8,10 +11,20 @@
 	type Props = { type: MealType; time?: string; people: number; dishes: { id: string; name: string }[]; compact?: boolean; onopen?: () => void };
 	let { type, time, people, dishes, compact = false, onopen }: Props = $props();
 	const meal = $derived(MEAL_TYPES[type]);
+
+	// B2. When the kind of a meal is changed, its icon plays the scene of the new kind (with fun).
+	let root = $state<HTMLElement>();
+	let shown = untrack(() => type);
+	$effect(() => {
+		const now = type;
+		if (now === shown) return;
+		shown = now;
+		if (strength('B2') === 'playful') mealScene(root?.querySelector<HTMLElement>('.icon'), now);
+	});
 </script>
 
 {#snippet badge(box: number, glyph: number)}
-	<span class="icon" style:width="{box}px" style:height="{box}px" style:background="var(--color-{meal.tint})" style:color="var(--color-{meal.color})">
+	<span class="icon" data-type={type} style:width="{box}px" style:height="{box}px" style:background="var(--color-{meal.tint})" style:color="var(--color-{meal.color})">
 		<meal.icon size={glyph} />
 	</span>
 {/snippet}
@@ -37,6 +50,7 @@
 
 {#if onopen}
 	<div
+		bind:this={root}
 		class="meal open pressable"
 		class:compact
 		role="button"

@@ -13,6 +13,7 @@
 	import { current } from '#lib/plan/current.svelte.ts';
 	import { addDay, addMeal, dayLabel, peopleIn, setEvent } from '#lib/plan/plan.ts';
 	import { euro } from '#lib/plan/shopping.ts';
+	import { dayIn, mealIn } from '#lib/motion/arrive.ts';
 	import { transfer } from '#lib/plan/transfer.svelte.ts';
 	import DaySheet from './DaySheet.svelte';
 	import EventSheet from './EventSheet.svelte';
@@ -56,20 +57,20 @@
 				bind:value={() => plan.event.everyone, (value) => planStore.change((p) => setEvent(p, { everyone: value }))}
 			/>
 			{#if current.shopping?.stores.length}
-				<CostBlock amount={euro(current.shopping.cost.total)} coverage={current.shopping.cost.coverage} />
+				<CostBlock value={current.shopping.cost.total} format={euro} coverage={current.shopping.cost.coverage} />
 			{/if}
 		</header>
 
 		<div class="days">
 			{#each plan.days as d, index (d.date)}
 				{@const label = dayLabel(d.date)}
-				<section class="day">
+				<section class="day" data-day={index} in:dayIn>
 					<div class="day-head">
 						<DayLabel name={label.name} date={label.date} />
 						<IconButton icon={Ellipsis} label="Edit {label.name}" size={36} onclick={() => (day = index)} />
 					</div>
 					{#each d.meals as m, mealIndex (mealIndex)}
-						<div class="meal">
+						<div class="meal" data-meal="{index}-{mealIndex}" in:mealIn>
 							<MealRow
 								type={m.type}
 								time={m.time}
@@ -79,10 +80,10 @@
 							/>
 						</div>
 					{/each}
-					<AddRow label="Add meal" onclick={() => newMeal(index)} />
+					<AddRow variant="ghost" label="Add meal" onclick={() => newMeal(index)} />
 				</section>
 			{/each}
-			<div class="add-day"><AddRow label="Add day" onclick={() => planStore.change((p) => addDay(p))} /></div>
+			<div class="add-day"><AddRow variant="day" label="Add day" onclick={() => planStore.change((p) => addDay(p))} /></div>
 		</div>
 	</div>
 
@@ -122,7 +123,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-bottom: var(--space-2);
+		padding-bottom: var(--space-3);
+	}
+	.day :global(.ghost) {
+		margin-top: var(--space-2);
 	}
 	.meal + .meal,
 	.day-head + .meal {
@@ -135,22 +139,13 @@
 	@media (min-width: 900px) {
 		.days {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-			gap: 0;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: var(--space-9) var(--space-8);
 			margin-top: var(--space-7);
 		}
-		.day {
-			padding: 0 var(--space-5);
-			border-left: var(--border);
-		}
-		.day:first-child {
-			padding-left: 0;
-			border-left: 0;
-		}
 		.add-day {
-			padding: 0 var(--space-5);
-			border-left: var(--border);
 			align-self: start;
+			padding-top: var(--space-2);
 		}
 	}
 </style>

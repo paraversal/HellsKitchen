@@ -13,6 +13,9 @@
 	import { planStore } from '#lib/plan/browser.ts';
 	import { adding } from '#lib/plan/current.svelte.ts';
 	import { formatAmount } from '#lib/format.ts';
+	import { strength } from '#lib/motion/fun.svelte.ts';
+	import { recipeOpened } from '#lib/motion/recipeopen.svelte.ts';
+	import Odometer from '#lib/components/Odometer.svelte';
 	import { scaledIngredients } from '#lib/recipes.ts';
 
 	// One recipe, for a number of portions. The amounts come from the kitchen engine.
@@ -27,18 +30,26 @@
 	const lines = $derived(scaledIngredients(appData, id, portions));
 	// Counting up to 200 one by one takes long, so the steps get bigger.
 	const step = $derived(portions >= 100 ? 10 : portions >= 20 ? 5 : 1);
+	let page = $state<HTMLElement>();
+	const visible = (el: Element) => (el as HTMLElement).offsetParent !== null;
+	// C3. When the page of a recipe appears, it makes its entrance (with fun).
+	$effect(() => {
+		const current = id;
+		if (!page) return;
+		void recipeOpened(current, [...document.querySelectorAll(`[data-plate="${current}"]`)].find((el) => page?.contains(el) && visible(el)), page);
+	});
 	const source = $derived(recipe?.source && recipe.source !== IMPORT_SOURCE ? recipe.source : undefined);
 </script>
 
 {#if recipe}
-	<article>
+	<article bind:this={page}>
 		<div class="hero" style:background="var(--color-{plateLook(id).rim})">
 			<div class="back"><IconButton icon={ArrowLeft} label="Back to the recipes" href={resolve('/(app)/recipes')} /></div>
-			<Plate seed={id} size={168} />
+			<span class="hero-plate" data-plate={id} style:view-transition-name="hk-plate"><Plate seed={id} size={168} /></span>
 		</div>
 
 		<header>
-			<div class="plate"><Plate seed={id} size={120} /></div>
+			<div class="plate" data-plate={id}><Plate seed={id} size={120} /></div>
 			<div class="titles">
 				<h1>{recipe.name}</h1>
 				<div class="tags">
@@ -58,8 +69,8 @@
 					<span class="soft note">{recipe.portion} g per portion</span>
 				</div>
 				<ul>
-					{#each lines as line (line.id)}
-						<li><span class="amount">{formatAmount(line.amount, line.unit)}</span><span>{line.name}</span></li>
+					{#each lines as line, i (line.id)}
+						<li class={strength('C5') === 'playful' ? 'drop' : 'fade'} style:--i={i}><span class="amount"><Odometer text={formatAmount(line.amount, line.unit)} /></span><span>{line.name}</span></li>
 					{/each}
 				</ul>
 			</section>
@@ -81,6 +92,30 @@
 		padding-bottom: 104px;
 	}
 	/* A phone: a tinted band with the plate, then the recipe. */
+	.hero-plate {
+		display: inline-flex;
+	}
+	/* C5. The ingredients arrive one after the other: they fade up, or with fun they drop in and settle. */
+	li.fade {
+		animation: arrive var(--motion-normal) var(--ease-out) backwards;
+		animation-delay: calc(var(--i) * 40ms);
+	}
+	li.drop {
+		animation: drop-in 550ms var(--spring-bouncy) backwards;
+		animation-delay: calc(var(--i) * 40ms);
+	}
+	@keyframes arrive {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+	}
+	@keyframes drop-in {
+		from {
+			opacity: 0;
+			transform: translateY(-22px);
+		}
+	}
 	.hero {
 		display: flex;
 		flex-direction: column;

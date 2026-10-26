@@ -3,6 +3,8 @@ import { forSharing } from './transfer.ts';
 import type { PlanFile } from '../data/schema.ts';
 
 const KEY = 'hk-edits-since-backup';
+/** Whether the reminder is shown at all. It was too much in the way, so it is off for now; the counting goes on, so turning it on again works at once. */
+export const REMINDER_SHOWN = false;
 /** How many changes to a plan before the reminder shows. */
 export const REMIND_AFTER = 15;
 
@@ -18,7 +20,7 @@ class Backup {
 	edits = $state(0);
 
 	get due(): boolean {
-		return this.edits >= REMIND_AFTER;
+		return REMINDER_SHOWN && this.edits >= REMIND_AFTER;
 	}
 
 	/** Reads the count of earlier visits. Called once, when the app opens. */

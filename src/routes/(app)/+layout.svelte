@@ -17,7 +17,7 @@
 	let { children } = $props();
 
 	const path = $derived(page.url.pathname);
-	const active: NavId = $derived(path.includes('/recipes') ? 'recipes' : path.includes('/shopping') ? 'shopping' : 'plan');
+	const active: NavId = $derived(path.includes('/recipes') ? 'recipes' : path.includes('/shopping') ? 'shopping' : path.includes('/meta') ? 'meta' : 'plan');
 	// A recipe on a phone has its own button at the bottom, which takes the place of the tab bar.
 	const reading = $derived(page.route.id === '/(app)/recipes/[id]');
 
@@ -44,7 +44,7 @@
 <div class="app" class:reading>
 	<div class="sidebar"><Sidebar {active} openItems={current.shopping?.open} planName={planStore.plan?.name} /></div>
 	<main>{@render children()}</main>
-	<div class="tabbar"><TabBar {active} /></div>
+	<div class="tabbar"><TabBar {active} openItems={current.shopping?.open} /></div>
 </div>
 
 <AddToPlanSheet />

@@ -27,13 +27,13 @@
 <Sheet bind:open={transfer.sharing} title="Share and print">
 	{#if record}
 		<div class="stack">
-			<div class="code"><QrCode text={link} label="QR code with the link to {record.plan.name}" /></div>
+			<div class="code">{#if transfer.sharing}<QrCode text={link} label="QR code with the link to {record.plan.name}" />{/if}</div>
 			<div class="actions">
 				{#if canSend()}
-					<ActionRow icon={Send} label="Send the link" hint="The whole plan is inside the link" onclick={() => sendLink(link, record.plan.name)} />
+					<ActionRow icon={Send} check label="Send the link" hint="The whole plan is inside the link" onclick={() => sendLink(link, record.plan.name)} />
 				{/if}
-				<ActionRow icon={Copy} label="Copy the link" hint={canSend() ? undefined : 'The whole plan is inside the link'} onclick={() => copyLink(link)} />
-				<ActionRow icon={FileDown} label="Save the plan as a file" hint="A copy to keep, with the shopping ticks" onclick={() => saveFile(record.plan, record.updatedAt)} />
+				<ActionRow icon={Copy} check label="Copy the link" hint={canSend() ? undefined : 'The whole plan is inside the link'} onclick={() => copyLink(link)} />
+				<ActionRow icon={FileDown} check label="Save the plan as a file" hint="A copy to keep, with the shopping ticks" onclick={() => saveFile(record.plan, record.updatedAt)} />
 				<ActionRow icon={FileUp} label="Open a plan file" onclick={() => picker?.click()} />
 				<ActionRow icon={Printer} label="Print the shopping list" href={resolve('/print/shopping')} />
 				<ActionRow icon={FileText} label="Print the recipe sheets" hint="Every dish, scaled to its meal" href={resolve('/print/recipes')} />

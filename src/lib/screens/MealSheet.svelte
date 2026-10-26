@@ -20,6 +20,8 @@
 	import type { Category } from '#lib/kitchen-engine/types.ts';
 	import { planStore } from '#lib/plan/browser.ts';
 	import { MEAL_ORDER, addDish, dayLabel, peopleIn, portionOverride, removeDish, removeMeal, setDish, updateMeal, type MealPatch } from '#lib/plan/plan.ts';
+	import { strength } from '#lib/motion/fun.svelte.ts';
+	import { vanish } from '#lib/motion/vanish.ts';
 	import { categoriesInUse, filterRecipes, summaries } from '#lib/recipes.ts';
 
 	// Everything about one meal: what kind, when, for whom, and its dishes. Changes apply at once.
@@ -66,6 +68,7 @@
 		if (!target || !meal) return;
 		const { day, meal: index } = target;
 		const present = meal.dishes.some((d) => d.recipe === recipe);
+		if (present) vanish(document.querySelector(`dialog[open] [data-dish="${recipe}"]`), strength('B4'));
 		planStore.change((p) => (present ? removeDish(p, day, index, recipe) : addDish(p, day, index, recipe)));
 	};
 
@@ -123,7 +126,7 @@
 					<ul>
 						{#each meal.dishes as dish (dish.recipe)}
 							{@const recipe = appData.recipes[dish.recipe]}
-							<li>
+							<li data-dish={dish.recipe}>
 								<div class="dish">
 									<Plate seed={dish.recipe} size={40} />
 									<div class="grow">
@@ -187,6 +190,7 @@
 
 <Confirm
 	bind:open={deleting}
+	behind={() => (target ? document.querySelector(`[data-meal="${target.day}-${target.meal}"]`) : null)}
 	title="Delete this meal?"
 	text={meal && target && plan ? `${dayLabel(plan.days[target.day].date).name} ${MEAL_TYPES[meal.type].label.toLowerCase()}${meal.dishes.length ? ` and its ${meal.dishes.length} ${meal.dishes.length === 1 ? 'dish' : 'dishes'}` : ''} will be taken out of the plan.` : undefined}
 	onconfirm={remove}

@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import Button from '#lib/components/Button.svelte';
+	import { paperThen } from '#lib/motion/paper.ts';
 	import { planStore } from '#lib/plan/browser.ts';
 
 	// The pages meant for paper. On a screen they show a bar with Back and Print; on paper they are just the page.
@@ -20,7 +21,7 @@
 
 <div class="bar">
 	<a href={resolve('/(app)/plan')}>Back to the plan</a>
-	<Button icon={Printer} disabled={planStore.status !== 'ready'} onclick={() => window.print()}>Print</Button>
+	<Button icon={Printer} disabled={planStore.status !== 'ready'} onclick={(event) => paperThen(event.currentTarget, () => window.print(), 0)}>Print</Button>
 </div>
 
 <main>

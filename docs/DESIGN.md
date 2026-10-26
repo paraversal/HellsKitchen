@@ -76,9 +76,13 @@ In `src/lib/components/`, one small Svelte file each. They take plain props, con
 | `EmptyNote` | What a screen says when there is nothing to show yet. |
 | `TabBar` | The bar at the bottom of a phone screen, with the three places. |
 | `Sidebar` | The red bar on the left of a desktop screen. |
+| `Odometer` | A number whose digits roll to their new value. Used for counts and amounts. |
+| `Confirm` | A small popup that asks before something is deleted. |
 | `ActionRow` | One thing to do in a list: an icon, what it does, a line that says more. The share sheet is made of them. |
 | `QrCode` | A QR code for a text, drawn as one sharp shape. Shows nothing when the text is too long to scan. |
 | `meal-types.ts` | How each kind of meal looks: name, icon, tint. |
+
+How things move is in [ANIMATIONS.md](ANIMATIONS.md): the event settings have a Fun switch, and `src/lib/motion/choices.ts` says which strength of each animation each setting uses.
 
 The pages for paper (`src/routes/print/`) are not part of the app's frame. On a screen they show a bar with Back and Print; on paper they are black on white, A4, with a page break between stores and between dishes.
 

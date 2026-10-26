@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { allows } from '#lib/motion/mode.svelte.ts';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
@@ -45,7 +47,8 @@
 
 		{#each groups as group (group.letter)}
 			<div class="letter"><span>{group.letter}</span></div>
-			{#each group.recipes as recipe (recipe.id)}
+			{#each group.recipes as recipe, i (recipe.id)}
+				<div class="item" style:--i={Math.min(i, 11)} animate:flip={{ duration: allows.flights() ? 300 : 0 }}>
 				<RecipeRow
 					id={recipe.id}
 					name={recipe.name}
@@ -55,6 +58,7 @@
 					canAdd={planStore.status === 'ready'}
 					onadd={() => (adding.recipe = recipe.id)}
 				/>
+				</div>
 			{/each}
 		{:else}
 			<p class="empty soft">No recipe matches.</p>
@@ -81,6 +85,17 @@
 		margin: 0 calc(-1 * var(--space-5));
 		padding: 0 var(--space-5);
 		scrollbar-width: none;
+	}
+	/* C1. The rows come in one after the other, and move into place when the list is filtered. */
+	.item {
+		animation: arrive var(--motion-normal) var(--ease-out) backwards;
+		animation-delay: calc(var(--i) * 45ms);
+	}
+	@keyframes arrive {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
 	}
 	.letter {
 		display: flex;

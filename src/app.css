@@ -98,3 +98,26 @@ h1 {
 		padding: var(--space-8);
 	}
 }
+
+/* Pressed buttons. Without fun they sink a little; with fun (src/lib/motion/press.ts) they squash and spring back. */
+.press-fx {
+	transition: transform var(--motion-quick) var(--spring-bouncy), background var(--motion-instant);
+}
+.press-fx:not(:disabled):active {
+	transform: scale(0.97);
+	transition-duration: var(--motion-instant);
+}
+.press-fx.squash {
+	transform: scale(1.07, 0.9);
+	transition-duration: var(--motion-instant);
+}
+
+/* The view transitions of the app (a recipe's plate growing into its page) are short, and everything around the plate only fades. */
+::view-transition-group(*) {
+	animation-duration: 420ms;
+	animation-timing-function: var(--ease-out);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 220ms;
+}

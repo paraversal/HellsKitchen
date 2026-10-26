@@ -18,30 +18,35 @@ export function shareLink(plan: PlanFile, updatedAt: string): string {
 	return `${location.origin}${path.endsWith('/') ? path : `${path}/`}#${encodeShare(plan, updatedAt)}`;
 }
 
-export async function copyLink(link: string): Promise<void> {
+/** Each of these answers whether it worked, so the button can show a check. */
+export async function copyLink(link: string): Promise<boolean> {
 	try {
 		await navigator.clipboard.writeText(link);
 		backup.reset();
 		showToast('Link copied');
+		return true;
 	} catch {
 		showToast('The link could not be copied');
+		return false;
 	}
 }
 
 export const canSend = () => typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 
-export async function sendLink(link: string, title: string): Promise<void> {
+export async function sendLink(link: string, title: string): Promise<boolean> {
 	try {
 		await navigator.share({ title, url: link });
 		backup.reset();
+		return true;
 	} catch (error) {
 		// Closing the share window is not a problem.
 		if (!(error instanceof DOMException && error.name === 'AbortError')) showToast('The link could not be sent');
+		return false;
 	}
 }
 
 /** Gives the browser the whole plan, ticks included, as a file to keep. */
-export function saveFile(plan: PlanFile, updatedAt: string): void {
+export function saveFile(plan: PlanFile, updatedAt: string): boolean {
 	const blob = new Blob([toFile(plan, updatedAt, new Date().toISOString())], { type: 'application/json' });
 	const url = URL.createObjectURL(blob);
 	const anchor = document.createElement('a');
@@ -53,6 +58,7 @@ export function saveFile(plan: PlanFile, updatedAt: string): void {
 	setTimeout(() => URL.revokeObjectURL(url), 10_000);
 	backup.reset();
 	showToast('Plan saved as a file');
+	return true;
 }
 
 export async function openFile(file: File): Promise<void> {

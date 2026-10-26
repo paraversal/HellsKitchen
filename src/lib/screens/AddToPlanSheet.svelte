@@ -5,6 +5,7 @@
 	import { MEAL_TYPES } from '#lib/components/meal-types.ts';
 	import Sheet from '#lib/components/Sheet.svelte';
 	import { appData } from '#lib/app-data.ts';
+	import { dishAdded } from '#lib/motion/addflight.ts';
 	import { adding } from '#lib/plan/current.svelte.ts';
 	import { planStore } from '#lib/plan/browser.ts';
 	import { addDish, addMeal, dayLabel } from '#lib/plan/plan.ts';
@@ -39,6 +40,7 @@
 		const kind = planStore.plan?.days[day].meals[index]?.type ?? 'meal';
 		showToast(already ? `Already in ${when} ${kind}` : `Added to ${when} ${kind}`);
 		adding.recipe = null;
+		if (!already) void dishAdded(id);
 	}
 </script>
 

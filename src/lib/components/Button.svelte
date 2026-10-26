@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Component, Snippet } from 'svelte';
+	import { press } from '#lib/motion/press.ts';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
 	// The main actions. `primary` is the red one, `secondary` the outlined one. `block` stretches it over the full width.
@@ -13,7 +14,7 @@
 	let { variant = 'primary', block = false, icon, children, ...rest }: Props = $props();
 </script>
 
-<button class="button {variant}" class:block {...rest}>
+<button class="button {variant}" class:block use:press={{ crumbs: variant === 'primary' }} {...rest}>
 	{#if icon}{@const Icon = icon}<Icon size={variant === 'primary' ? 20 : 18} />{/if}
 	{@render children()}
 </button>

@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { toAppData } from '../src/lib/data/app-data.ts';
+import { dataHealth } from '../src/lib/data/health.ts';
 import { formatIssues } from '../src/lib/data/issues.ts';
 import { validateData } from '../src/lib/data/validate.ts';
 import { readDataFolder } from './read-data.ts';
@@ -18,7 +19,7 @@ if (errors.length) {
 }
 
 const version = createHash('sha1').update(JSON.stringify(data)).digest('hex').slice(0, 8);
-const app = toAppData(data, version);
+const app = toAppData(data, version, dataHealth(data, [...problems, ...issues]));
 mkdirSync(join(root, 'src/lib/generated'), { recursive: true });
 // Only write when something changed. Rewriting an identical file would make a running dev server reload its modules for nothing.
 const file = join(root, 'src/lib/generated/app-data.json');

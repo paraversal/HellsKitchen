@@ -51,6 +51,7 @@
 
 <Confirm
 	bind:open={deleting}
+	behind={() => (day !== null ? document.querySelector(`[data-day="${day}"]`) : null)}
 	title="Delete this day?"
 	text={date ? `${dayLabel(date).name} ${dayLabel(date).date}${meals ? ` and its ${meals} ${meals === 1 ? 'meal' : 'meals'}` : ''} will be taken out of the plan.` : undefined}
 	onconfirm={remove}

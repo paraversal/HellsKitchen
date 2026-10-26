@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
+	import { press } from '#lib/motion/press.ts';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
 	// A round button with only an icon. `label` is what a screen reader says, so it is required. With `href` it is a link.
@@ -19,7 +20,7 @@
 		<Icon size={Math.round(size * 0.46)} />
 	</a>
 {:else}
-	<button class="icon-button {variant}" style:width="{size}px" style:height="{size}px" aria-label={label} {...rest}>
+	<button class="icon-button {variant}" style:width="{size}px" style:height="{size}px" aria-label={label} use:press {...rest}>
 		<Icon size={Math.round(size * 0.46)} />
 	</button>
 {/if}

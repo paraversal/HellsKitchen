@@ -56,6 +56,14 @@ On the phone, also try this. It should take a few minutes, not fifteen.
 5. Make about fifteen changes: the reminder to save a copy must show above the plan.
 6. Print the shopping list for one store and the recipe sheets. Look at the preview: one store per page, one dish per page, nothing cut off, black on white.
 
+## Touch, print and keyboard (after step 14)
+
+1. Flick the recipe list and tap a recipe while it is still gliding: the glide must stop for good and nothing must open. Flick again and tap a tab in the bottom bar: the glide stops and the tab opens.
+2. In Shopping, drag the store tabs sideways: they must not move up and down.
+3. In a meal, press "Add dish" and search: the sheet must stay above the keyboard, with the results visible.
+4. On a print page, press Print: the print window must open.
+5. Meta (the fourth tab): the Fun switch works, and the data health shows.
+
 ## Results
 
 ### iPhone, 2026-10-25

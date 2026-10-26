@@ -2,10 +2,12 @@
 	import CheckIcon from '@lucide/svelte/icons/check';
 
 	// The round tick box of the shopping list.
+	// D1. A tick that was just made draws itself. A tick that was already there when the list opened is simply there.
 	let { checked = $bindable(false), label }: { checked?: boolean; label: string } = $props();
+	let fresh = $state(false);
 </script>
 
-<button class="check" class:checked role="checkbox" aria-checked={checked} aria-label={label} onclick={() => (checked = !checked)}>
+<button class="check" class:checked class:fresh role="checkbox" aria-checked={checked} aria-label={label} onclick={() => { fresh = true; checked = !checked; }}>
 	{#if checked}<CheckIcon size={16} strokeWidth={3} />{/if}
 </button>
 
@@ -23,10 +25,21 @@
 		background: transparent;
 		color: var(--color-sheet);
 		cursor: pointer;
+		transition: background var(--motion-quick), border-color var(--motion-quick);
 	}
 	@media (hover: hover) {
 		.check:not(.checked):hover {
 			border-color: var(--color-ink);
+		}
+	}
+	.fresh.checked :global(path) {
+		stroke-dasharray: 26;
+		stroke-dashoffset: 26;
+		animation: tick var(--motion-quick) 60ms var(--ease-out) forwards;
+	}
+	@keyframes tick {
+		to {
+			stroke-dashoffset: 0;
 		}
 	}
 	.checked {

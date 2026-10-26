@@ -15,4 +15,4 @@ class CurrentPlan {
 export const current = new CurrentPlan();
 
 /** The recipe that is being put in a plan right now, if any. The sheet for choosing the meal opens when it is set. */
-export const adding = $state<{ recipe: string | null }>({ recipe: null });
+export const adding = $state<{ recipe: string | null; justAdded: string | null }>({ recipe: null, justAdded: null });

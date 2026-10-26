@@ -30,6 +30,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
 	const request = event.request;
 	if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
+	// While developing, files change under the same name, so a stored copy would show old code. The cache is only for the built app.
+	if (import.meta.env.DEV) return;
 
 	event.respondWith(
 		(async () => {

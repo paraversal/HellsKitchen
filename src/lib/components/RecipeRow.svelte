@@ -1,5 +1,8 @@
 <script lang="ts">
+	import Check from '@lucide/svelte/icons/check';
 	import Plus from '@lucide/svelte/icons/plus';
+	import { markOpen, opened } from '#lib/motion/recipeopen.svelte.ts';
+	import { adding } from '#lib/plan/current.svelte.ts';
 	import Plate from './Plate.svelte';
 	import IconButton from './IconButton.svelte';
 
@@ -9,14 +12,14 @@
 </script>
 
 <div class="row" class:selected>
-	<a {href} aria-current={selected ? 'page' : undefined}>
-		<Plate seed={id} size={48} />
+	<a {href} aria-current={selected ? 'page' : undefined} onclick={(event) => markOpen(id, event.currentTarget.querySelector('.plate'))}>
+		<span class="plate" data-plate={id} style:view-transition-name={opened.id === id ? 'hk-plate' : undefined}><Plate seed={id} size={48} /></span>
 		<span class="text">
 			<span class="name">{name}</span>
 			<span class="meta">{meta}</span>
 		</span>
 	</a>
-	<IconButton icon={Plus} label="Add {name} to the plan" size={34} disabled={!canAdd} onclick={onadd} />
+	<IconButton icon={adding.justAdded === id ? Check : Plus} label="Add {name} to the plan" size={34} disabled={!canAdd} onclick={onadd} />
 </div>
 
 <style>
@@ -46,6 +49,10 @@
 		min-width: 0;
 		color: inherit;
 		text-decoration: none;
+	}
+	.plate {
+		display: inline-flex;
+		flex: none;
 	}
 	.text {
 		display: flex;

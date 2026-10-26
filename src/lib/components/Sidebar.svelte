@@ -1,12 +1,52 @@
 <script lang="ts">
 	import Flame from '@lucide/svelte/icons/flame';
 	import { resolve } from '$app/paths';
+	import { strength } from '#lib/motion/fun.svelte.ts';
+	import { hop, movePill, setPill, type Spot } from '#lib/motion/pill.ts';
 	import { NAV, type NavId } from '#lib/nav.ts';
+	import Odometer from './Odometer.svelte';
 	import Plate from './Plate.svelte';
 
 	// The red bar on the left of a desktop screen: the name of the app, the three places, and the open plan.
 	type Props = { active: NavId; openItems?: number; planName?: string };
 	let { active, openItems, planName }: Props = $props();
+
+	// The white pill behind the place you are in slides to the next one.
+	let nav = $state<HTMLElement>();
+	let bg = $state<HTMLElement>();
+	const links: HTMLElement[] = [];
+	const icons: HTMLElement[] = [];
+	let placed: Spot | null = null;
+
+	function spot(index: number): Spot | undefined {
+		const box = nav?.getBoundingClientRect();
+		const link = links[index]?.getBoundingClientRect();
+		return box && link?.width ? { x: link.left - box.left, y: link.top - box.top, w: link.width, h: link.height } : undefined;
+	}
+
+	function place(animate: boolean) {
+		const index = NAV.findIndex((item) => item.id === active);
+		const to = spot(index);
+		if (!bg || !to) return;
+		if (animate && placed) {
+			const how = strength('A1');
+			movePill(bg, placed, to, 'y', how);
+			if (how === 'playful') hop(icons[index]);
+		} else setPill(bg, to);
+		placed = to;
+	}
+
+	$effect(() => {
+		void active;
+		if (nav && bg) place(true);
+	});
+
+	$effect(() => {
+		if (!nav) return;
+		const watch = new ResizeObserver(() => place(false));
+		watch.observe(nav);
+		return () => watch.disconnect();
+	});
 </script>
 
 <aside>
@@ -14,12 +54,13 @@
 		<span class="logo"><Flame size={18} /></span>
 		Hell's Kitchen
 	</a>
-	<nav aria-label="Main">
-		{#each NAV as item (item.id)}
-			<a href={resolve(item.path)} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined}>
-				<item.icon size={22} />
+	<nav aria-label="Main" bind:this={nav}>
+		<span class="slider" bind:this={bg} aria-hidden="true"></span>
+		{#each NAV as item, i (item.id)}
+			<a href={resolve(item.path)} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined} bind:this={links[i]}>
+				<span class="icon" data-tab-icon={item.id} bind:this={icons[i]}><item.icon size={22} /></span>
 				<span class="label">{item.label}</span>
-				{#if item.id === 'shopping' && openItems}<span class="badge">{openItems}</span>{/if}
+				{#if item.id === 'shopping' && openItems}<span class="badge"><Odometer text={String(openItems)} /></span>{/if}
 			</a>
 		{/each}
 	</nav>
@@ -62,6 +103,7 @@
 		color: var(--color-tomato);
 	}
 	nav {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
@@ -89,7 +131,19 @@
 		font-size: var(--text-small);
 		font-weight: var(--weight-bold);
 	}
+	.slider {
+		position: absolute;
+		left: 0;
+		top: 0;
+		border-radius: 14px;
+		background: var(--color-on-tomato);
+		pointer-events: none;
+	}
+	.icon {
+		display: inline-flex;
+	}
 	nav a {
+		position: relative;
 		display: flex;
 		align-items: center;
 		gap: var(--space-3);
@@ -109,7 +163,6 @@
 		background: color-mix(in srgb, var(--color-on-tomato) 28%, transparent);
 	}
 	nav .active {
-		background: var(--color-on-tomato);
 		color: var(--color-tomato);
 		font-weight: var(--weight-heavy);
 	}

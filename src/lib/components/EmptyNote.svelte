@@ -15,5 +15,12 @@
 		gap: var(--space-3);
 		padding: var(--space-6) 0;
 		color: var(--color-ink-soft);
+		animation: arrive var(--motion-normal) var(--ease-out);
+	}
+	@keyframes arrive {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
 	}
 </style>

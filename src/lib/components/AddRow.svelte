@@ -2,11 +2,11 @@
 	import Plus from '@lucide/svelte/icons/plus';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
-	// The dashed row that adds something, like a meal.
-	let { label, ...rest }: { label: string } & HTMLButtonAttributes = $props();
+	// The row that adds something. `dashed` is the plain one; `ghost` is quiet text for small additions (a meal in a day); `day` is a big one that is easy to find (a new day).
+	let { label, variant = 'dashed', ...rest }: { label: string; variant?: 'dashed' | 'ghost' | 'day' } & HTMLButtonAttributes = $props();
 </script>
 
-<button class="add-row" {...rest}>
+<button class="add-row {variant}" {...rest}>
 	<Plus size={16} />
 	{label}
 </button>
@@ -35,5 +35,22 @@
 	}
 	.add-row:active {
 		background: var(--color-mustard-tint);
+	}
+	.ghost {
+		justify-content: flex-start;
+		height: 40px;
+		padding: 0 var(--space-3);
+		border: 0;
+		color: var(--color-tomato);
+		font-weight: var(--weight-bold);
+	}
+	.ghost:active {
+		background: var(--color-mustard-tint);
+	}
+	.day {
+		height: 72px;
+		border-radius: var(--radius-l);
+		font-size: var(--text-compact);
+		font-weight: var(--weight-bold);
 	}
 </style>

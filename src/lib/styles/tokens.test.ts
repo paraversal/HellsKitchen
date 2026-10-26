@@ -19,7 +19,8 @@ describe('design tokens', () => {
 	for (const file of files) {
 		it(`${file} only uses tokens that exist`, () => {
 			const source = read(file);
-			const own = new Set([...source.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
+			// A property a component sets itself, in its own styles, with style:--name or with setProperty, is its own business.
+			const own = new Set([...source.matchAll(/(--[\w-]+)\s*:/g), ...source.matchAll(/style:(--[\w-]+)=/g), ...source.matchAll(/setProperty\('(--[\w-]+)'/g)].map((m) => m[1]));
 			// A name built in code, like var(--color-{tint}), is checked by the last test instead.
 			const used = [...source.matchAll(/var\((--[\w-]+)(?![{$\w-])/g)].map((m) => m[1]);
 			expect(used.filter((name) => !defined.has(name) && !own.has(name))).toEqual([]);

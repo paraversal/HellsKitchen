@@ -10,6 +10,56 @@ Each idea comes in up to three strengths:
 
 A dash means that strength does not make sense there. Inventing one would only make the app tiring.
 
+## What the app uses
+
+The event settings have a **Fun** switch. Each idea below has two strengths: the one used **without fun** and the one used **with fun**. The table is also in code, in `src/lib/motion/choices.ts`, and that file is what the app reads.
+Everything not chosen is kept: the full plan below stays as it is, and the trial page (`/styleguide/motion/`) still shows every strength of every idea, with the chosen ones marked. Nothing was deleted, so a decision can be revised by changing one line of `choices.ts`.
+
+| Id | Idea | Without fun | With fun |
+|---|---|---|---|
+| A1 | Moving between the places | Regular | Playful |
+| A2 | Pressing things | Regular | Crazy |
+| A3 | Sheets | Regular | Playful |
+| A4 | The confirm popup | Regular | Crazy |
+| A5 | Toasts | Regular | Playful |
+| A6 | Loading | Playful | Playful |
+| B1 | Adding a day | Regular | Playful |
+| B2 | Adding a meal | Regular | Playful |
+| B3 | Adding a dish | Regular | Crazy |
+| B4 | Removing | Regular | Crazy |
+| B5 | The people counter | Regular | Crazy |
+| B6 | The cost | Regular | Regular |
+| C1 | The recipe list | Regular | Regular |
+| C3 | Opening a recipe | Playful | Crazy |
+| C4 | Portions | Regular | Regular |
+| C5 | Ingredients on first view | Regular | Playful |
+| D1 | Ticking an item | Regular | Crazy |
+| D2 | Progress bar | Regular | Regular |
+| D3 | A store is done | Regular | Crazy |
+| D4 | Everything bought | Regular | Playful |
+| D5 | Store tabs | Regular | Regular |
+| E1 | The QR code | Regular | Playful |
+| E2 | Copy, send, save | Playful | Playful (the copy animation, the stamped check, on all three) |
+| E3 | A plan arrives | Regular | Playful |
+| E4 | The reminder banner | Regular | Playful |
+| E5 | Printing | Regular | Playful |
+| F2 | The sidebar | Regular | Regular |
+| G2 | Empty screens | Regular | Regular |
+| F1, G1, H1, H5 | Plans switching, plates, the logo egg, the buzz | Dropped for now. Their demos stay on the trial page. | |
+| B7, B8, C2, D6, E-sound, H2, H3, H4, H6 | | Not built. B7 and B8 are small and can follow; H2 (a party at 200) is part of B5 with fun. | |
+
+How a few of the choices turned out in the real screens, where the plan did not say exactly:
+
+- **D1 with fun.** A ticked item flies into the basket and leaves the list. Items that are bought wait under **Bought · n** at the bottom of the list (closed at first), where they can be ticked off again. Without fun a ticked item stays where it is.
+- **D3 with fun.** The wave of ticks is left out, because the ticked rows have already left the list. The confetti and the chef's-hat stamp stay.
+- **B3 with fun.** The plate flies to the Plan tab, because the meal it was added to is not on the screen when it is added from a recipe.
+- **B4 and A4 with fun.** The thing that is deleted is crumpled and thrown as a copy laid over the screen. The plan changes at once and nothing waits for the show. While the question is open, the meal or day behind it shakes.
+- **E5 with fun.** The paper comes out of the printer icon on the share sheet's print rows and on the Print button of the print pages; the little printer button on the shopping list goes straight to the page.
+- **C3.** On a desktop the recipe list and the recipe are side by side, so the shared-plate transition is only used on a phone; with fun the plate flies on both.
+- **B5 with fun.** The number bounces on every step and the digits roll. The row of little people and the celebrations at round numbers (every 50, the 200) were taken out again as too much; the code for the celebrations is in the trial page (B5) if they come back. The ring thrown from a pressed button (A2) is half the size it was.
+- **E4.** The reminder to keep a copy is switched off for now (`REMINDER_SHOWN` in `src/lib/plan/backup.svelte.ts`), so its animation is not seen. The counting goes on in the background.
+- **Calm.** If the device asks for less motion, the app uses the choices for "without fun" whatever the switch says, and never throws particles.
+
 ## The rules of motion
 
 These apply to every idea below, whatever strength is chosen.

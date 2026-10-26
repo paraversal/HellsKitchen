@@ -1,5 +1,11 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import Flame from '@lucide/svelte/icons/flame';
+	import Save from '@lucide/svelte/icons/save';
+	import { cubicOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
+	import { strength } from '#lib/motion/fun.svelte.ts';
+	import { allows } from '#lib/motion/mode.svelte.ts';
 	import Button from '#lib/components/Button.svelte';
 	import { backup } from '#lib/plan/backup.svelte.ts';
 	import { planStore } from '#lib/plan/browser.ts';
@@ -15,8 +21,12 @@
 {#if planStore.status === 'ready'}
 	{#if planStore.saveProblem}<p class="warning" role="alert">{planStore.saveProblem}</p>{/if}
 	{#if backup.due && planStore.record}
-		<div class="warning reminder">
-			<span>Your plan only lives on this device. Keep a copy?</span>
+		<div class="warning reminder" transition:slide={{ duration: allows.flights() ? 360 : 0, easing: cubicOut }}>
+			<span class="reminder-text">
+				<!-- E4. With fun the disk shakes once, as if it wanted attention. -->
+				{#if strength('E4') === 'playful'}<span class="disk"><Save size={18} /></span>{/if}
+				Your plan only lives on this device. Keep a copy?
+			</span>
 			<span class="buttons">
 				<Button variant="secondary" onclick={() => saveFile(planStore.record!.plan, planStore.record!.updatedAt)}>Save a file</Button>
 				<Button variant="secondary" onclick={() => (transfer.sharing = true)}>Share</Button>
@@ -25,6 +35,9 @@
 		</div>
 	{/if}
 	{@render children()}
+{:else if planStore.status === 'loading'}
+	<!-- A6. A flame that flickers while the plan is read. It shows only if reading takes longer than a moment. -->
+	<div class="loading" role="status" aria-label="Loading the plan"><span class="flame"><Flame size={44} /></span></div>
 {:else if planStore.status === 'unreadable'}
 	<div class="problem" class:padded role="alert">
 		<h2>Your plan is not available yet</h2>
@@ -48,6 +61,64 @@
 		border-radius: var(--radius-m);
 		background: var(--color-mustard-tint);
 		font-size: var(--text-small);
+	}
+	.loading {
+		display: grid;
+		place-items: center;
+		padding: var(--space-9) 0;
+		animation: appear 0.2s 0.25s backwards;
+	}
+	.flame {
+		display: inline-flex;
+		color: var(--color-tomato);
+		transform-origin: 50% 90%;
+		animation: flicker 0.9s ease-in-out infinite;
+	}
+	@keyframes appear {
+		from {
+			opacity: 0;
+		}
+	}
+	@keyframes flicker {
+		0%,
+		100% {
+			transform: scale(1, 1) rotate(0);
+		}
+		20% {
+			transform: scale(0.94, 1.1) rotate(-4deg);
+		}
+		45% {
+			transform: scale(1.06, 0.95) rotate(3deg);
+		}
+		70% {
+			transform: scale(0.97, 1.07) rotate(-2deg);
+		}
+	}
+	.reminder-text {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-2);
+	}
+	.disk {
+		display: inline-flex;
+		flex: none;
+		padding-top: 2px;
+		animation: shake 0.6s 0.4s ease-in-out;
+	}
+	@keyframes shake {
+		0%,
+		100% {
+			transform: rotate(0);
+		}
+		25% {
+			transform: rotate(-14deg);
+		}
+		50% {
+			transform: rotate(12deg);
+		}
+		75% {
+			transform: rotate(-8deg);
+		}
 	}
 	.reminder {
 		display: flex;

@@ -194,7 +194,7 @@
 		</div>
 	</section>
 
-	<p><a href={resolve('/')}>Back to the start</a></p>
+	<p><a href={resolve('/styleguide/motion')}>Motion trial page</a> · <a href={resolve('/')}>Back to the start</a></p>
 </main>
 
 <style>
