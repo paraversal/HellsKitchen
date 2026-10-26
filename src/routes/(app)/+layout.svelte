@@ -10,11 +10,25 @@
 	import { takeLinkFromAddress } from '#lib/plan/transfer.svelte.ts';
 	import AddToPlanSheet from '#lib/screens/AddToPlanSheet.svelte';
 	import ImportSheet from '#lib/screens/ImportSheet.svelte';
+	import PlansSheet from '#lib/screens/PlansSheet.svelte';
 	import ShareSheet from '#lib/screens/ShareSheet.svelte';
 	import type { NavId } from '#lib/nav.ts';
 
 	// The frame around the three places of the app: a bar at the bottom on a phone (below 900 px), a bar on the left on a desktop.
 	let { children } = $props();
+
+	// The footer of the sidebar: the event at a glance.
+	const facts = $derived.by(() => {
+		const plan = planStore.plan;
+		if (!plan) return [];
+		const { everyone, organisers, appetite_factor: appetite = 1 } = plan.event;
+		const days = plan.days.length;
+		return [
+			`${everyone} people${organisers ? ` · ${organisers} organisers` : ''}`,
+			`${days} ${days === 1 ? 'day' : 'days'}${appetite !== 1 ? ` · hungry ×${appetite}` : ''}`
+		];
+	});
+	let plansOpen = $state(false);
 
 	const path = $derived(page.url.pathname);
 	const active: NavId = $derived(path.includes('/recipes') ? 'recipes' : path.includes('/shopping') ? 'shopping' : path.includes('/meta') ? 'meta' : 'plan');
@@ -42,13 +56,14 @@
 </script>
 
 <div class="app" class:reading>
-	<div class="sidebar"><Sidebar {active} openItems={current.shopping?.open} planName={planStore.plan?.name} /></div>
+	<div class="sidebar"><Sidebar {active} openItems={current.shopping?.open} planName={planStore.plan?.name} planFacts={facts} onplans={() => (plansOpen = true)} /></div>
 	<main>{@render children()}</main>
 	<div class="tabbar"><TabBar {active} openItems={current.shopping?.open} /></div>
 </div>
 
 <AddToPlanSheet />
 <ShareSheet />
+<PlansSheet bind:open={plansOpen} />
 <ImportSheet />
 <Toasts />
 

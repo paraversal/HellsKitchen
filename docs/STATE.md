@@ -37,7 +37,7 @@ Built beyond the roadmap: the Fun setting and the motion work, the Meta tab, the
 - It has **days** (each with a date), and each day has **meals**: breakfast, lunch, coffee & cake, dinner or snack, with an optional time.
 - A meal is **for everyone** or **for organisers** (always 100 % of that number), and can be switched to **hungrier than usual**, which multiplies its main dishes by the appetite factor.
 - A meal holds **dishes**, which are recipes. Each dish can override its grams per person and its share of the guests. Main dishes share a meal between them by default (two mains: half each).
-- The name and the headcount are changed by pressing them. The other settings are in the event settings, behind the sliders button. More than one plan can be kept on a device: they are listed in the event settings, where they can be opened, created and deleted.
+- The name and the headcount are changed by pressing them. The other settings are in the event settings, behind the sliders button. More than one plan can be kept on a device: they are listed in the event settings, and on a computer also from the box at the bottom of the sidebar, which shows the event at a glance (name, headcount, organisers, days, hunger factor). They can be opened, created and deleted there.
 - The estimated **cost per person** is on top, with how much of the food has a price.
 - Deleting a meal or a day asks first.
 

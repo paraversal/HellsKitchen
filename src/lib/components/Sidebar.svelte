@@ -1,15 +1,16 @@
 <script lang="ts">
+	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 	import Flame from '@lucide/svelte/icons/flame';
 	import { resolve } from '$app/paths';
 	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { hop, movePill, setPill, type Spot } from '#lib/motion/pill.ts';
 	import { NAV, type NavId } from '#lib/nav.ts';
 	import Odometer from './Odometer.svelte';
-	import Plate from './Plate.svelte';
 
 	// The red bar on the left of a desktop screen: the name of the app, the three places, and the open plan.
-	type Props = { active: NavId; openItems?: number; planName?: string };
-	let { active, openItems, planName }: Props = $props();
+	// The footer is the event at a glance: its name and size. Pressing it opens the plans of the device, to switch between them.
+	type Props = { active: NavId; openItems?: number; planName?: string; planFacts?: string[]; onplans?: () => void };
+	let { active, openItems, planName, planFacts = [], onplans }: Props = $props();
 
 	// The white pill behind the place you are in slides to the next one.
 	let nav = $state<HTMLElement>();
@@ -65,10 +66,13 @@
 		{/each}
 	</nav>
 	{#if planName}
-		<div class="plan">
-			<Plate seed={planName} size={36} />
-			<span>{planName}</span>
-		</div>
+		<button class="plan" onclick={onplans} aria-label="Plans on this device. Open: {planName}">
+			<span class="plan-text">
+				<span class="plan-name">{planName}</span>
+				{#each planFacts as fact (fact)}<span class="plan-fact">{fact}</span>{/each}
+			</span>
+			<ChevronsUpDown size={18} />
+		</button>
 	{/if}
 </aside>
 
@@ -125,11 +129,46 @@
 	.plan {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: var(--space-2);
 		margin-top: auto;
-		padding: var(--space-2) 6px;
+		padding: 10px 12px;
+		border: 0;
+		border-radius: 14px;
+		background: color-mix(in srgb, var(--color-on-tomato) 12%, transparent);
+		color: inherit;
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
+	}
+	@media (hover: hover) {
+		.plan:hover {
+			background: color-mix(in srgb, var(--color-on-tomato) 20%, transparent);
+		}
+	}
+	.plan:global([data-pressed]) {
+		background: color-mix(in srgb, var(--color-on-tomato) 28%, transparent);
+	}
+	.plan-text {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		min-width: 0;
+		gap: 2px;
+	}
+	.plan-name {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 		font-size: var(--text-small);
-		font-weight: var(--weight-bold);
+		font-weight: var(--weight-heavy);
+		line-height: 1.25;
+	}
+	.plan-fact {
+		font-size: var(--text-caption);
+		opacity: 0.8;
+		line-height: 1.3;
 	}
 	.slider {
 		position: absolute;

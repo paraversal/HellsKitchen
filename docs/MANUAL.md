@@ -68,7 +68,7 @@ Under the headcount you see the **estimated cost per person** and how much of th
 
 ### Several plans
 
-The event settings list the plans on your device. Press one to open it, or **New plan** to start another. A plan can be deleted when it is not the only one.
+On a computer, the box at the bottom of the left bar shows the open plan (its name, headcount, organisers, number of days and hunger factor); press it to switch plans. On any device, the event settings list the plans on your device too. Press one to open it, or **New plan** to start another. A plan can be deleted when it is not the only one.
 
 ## Recipes
 
