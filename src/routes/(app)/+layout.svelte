@@ -32,7 +32,7 @@
 	let plansOpen = $state(false);
 
 	const path = $derived(page.url.pathname);
-	const active: NavId = $derived(path.includes('/recipes') ? 'recipes' : path.includes('/shopping') ? 'shopping' : path.includes('/meta') ? 'meta' : 'plan');
+	const active: NavId = $derived(path.includes('/recipes') ? 'recipes' : path.includes('/shopping') ? 'shopping' : path.includes('/pantry') ? 'pantry' : 'plan');
 	// A recipe on a phone has its own button at the bottom, which takes the place of the tab bar.
 	const reading = $derived(page.route.id === '/(app)/recipes/[id]');
 

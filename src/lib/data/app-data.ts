@@ -12,7 +12,7 @@ export type AppData = {
 	stores: Data['stores'];
 	ingredients: Record<string, Ingredient>;
 	recipes: Record<string, AppRecipe>;
-	/** How healthy the data is, for the Meta screen. Not needed for anything the engine does. */
+	/** How healthy the data is, for the Pantry screen. Not needed for anything the engine does. */
 	health?: DataHealth;
 };
 

@@ -63,7 +63,7 @@ On the phone, also try this. It should take a few minutes, not fifteen.
 3. In a meal, press "Add dish" and search: the sheet must stay above the keyboard, with the results visible.
 4. On a print page, press Print: the print window must open. In the app from the home screen of an iPhone there is no Print button but a PDF button: it must open the share sheet with a PDF, which the sheet can print. Check the PDF too: one store per page, every dish on a page.
 5. In the share sheet, "Paste a plan link": copy a plan link in Safari, open the app from the home screen, press it, and the plan that arrived must be offered.
-6. Meta (the fourth tab): the Fun switch works, and the data health shows.
+6. Pantry (the fourth tab): the data health shows, and its gear opens Settings, where the Fun switch works.
 
 ## Results
 

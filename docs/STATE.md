@@ -27,7 +27,7 @@ It is a static website that also works as an app on a phone's home screen. There
 | 16: contribution flow and docs | **Not started** |
 | 17: field test with a past event, offline, against the old Excel | **Not started** |
 
-Built beyond the roadmap: the Fun setting and the motion work, the Meta tab, the `no_cooking` flag for recipes, editing the plan name and headcount in place, several plans on one device, and PDF files for phones that cannot print.
+Built beyond the roadmap: the Fun setting and the motion work, the Pantry tab, the `no_cooking` flag for recipes, editing the plan name and headcount in place, several plans on one device, and PDF files for phones that cannot print.
 
 ## What the app does today
 
@@ -64,9 +64,11 @@ Built beyond the roadmap: the Fun setting and the motion work, the Meta tab, the
 - **Print pages** exist for the shopping list (all stores, or one) and for recipe sheets, one page per dish, scaled to the meal it is cooked for. A phone that cannot open the print window (an iPhone started from the home screen) gets a **PDF** button instead, which writes a plain PDF and hands it to the share sheet.
 - The reminder to keep a copy of the plan is built but **switched off** because it was in the way.
 
-### Meta
+### Pantry and settings
 
-The fourth tab holds the **Fun** setting, the **health of the data** (recipes waiting for review, recipes without a photo, ingredients without a price or a pack size, recipes without a method, ingredients no recipe uses, stores and how many ingredients each has, what the checks said), and facts about the app (version, data version, rules version, number of plans on this device, links to the style sheet and the motion trial page).
+The fourth tab, **Pantry**, shows what the app has to cook with: how many recipes, ingredients and stores; how complete the data is (bars for ingredients with a price, recipes with a method, recipes with a photo, ingredients with a pack size, each opening the list of what is missing); the recipes waiting for review; one bar cut into the stores by how many ingredients each has; ingredients no recipe uses, and what the checks said.
+
+The gear in its corner opens **Settings**: the **Fun** switch, and facts about the app (version, data version, rules version, number of plans on this device, links to the style sheet, the motion trial page and the offline check).
 
 ### Fun and motion
 
@@ -160,7 +162,7 @@ Options:
 
 ### Decided since the first decisions note
 
-- **Things that are not cooked (jam at breakfast) stay recipes**, with a `no_cooking: true` flag. They need no method, the checks that weigh a recipe do not apply, and Meta counts them apart. A separate kind of thing would have meant a second picker, data format and set of rules for nothing.
+- **Things that are not cooked (jam at breakfast) stay recipes**, with a `no_cooking: true` flag. They need no method, the checks that weigh a recipe do not apply, and the Pantry counts them apart. A separate kind of thing would have meant a second picker, data format and set of rules for nothing.
 - **The headcount is typed**, like the plan's name, not counted with buttons.
 - **The cost on the plan is per person.** The total is no longer on the plan page; the stores on the Shopping screen show their own costs.
 - **Fun** is a setting with two sets of animations, chosen idea by idea in `choices.ts`.

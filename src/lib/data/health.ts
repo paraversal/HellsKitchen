@@ -1,4 +1,4 @@
-// How healthy the data is: what is missing, what is waiting for a second look. Worked out when the data is built, and shown on the Meta screen.
+// How healthy the data is: what is missing, what is waiting for a second look. Worked out when the data is built, and shown on the Pantry screen.
 import type { Issue } from './issues.ts';
 import type { DataSet } from './validate.ts';
 
@@ -12,13 +12,17 @@ export type DataHealth = {
 		inApp: number;
 		needsReview: (Named & { note?: string })[];
 		noMethod: Named[];
-		/** Put out as they are, like jam. They need no method. */
+		/** The recipes of the app that are put out as they are, like jam. They need no method. */
 		noCooking: number;
 		/** The recipes of the app that have no photo, and so show the icon of their kind. */
 		noPhoto: Named[];
 	};
 	ingredients: {
 		total: number;
+		/** Bought in some store, so they should have a price. */
+		bought: number;
+		/** Bought and counted in grams or millilitres, so they could have a pack size. */
+		weighed: number;
 		/** Bought somewhere, but nobody has said what it costs. */
 		noPrice: Named[];
 		/** Counted in grams or millilitres, with no usual pack size, so the list shows the exact need only. */
@@ -38,6 +42,8 @@ export function dataHealth(set: DataSet, issues: Issue[]): DataHealth {
 	const used = new Set(recipes.flatMap(([, recipe]) => Object.keys(recipe.per100g)));
 	const ingredients = Object.entries(set.ingredients);
 	const named = (id: string, name: string): Named => ({ id, name });
+	const bought = ingredients.filter(([, i]) => i.store !== 'none');
+	const weighed = bought.filter(([, i]) => i.unit === 'g' || i.unit === 'ml');
 	return {
 		recipes: {
 			total: recipes.length,
@@ -46,14 +52,16 @@ export function dataHealth(set: DataSet, issues: Issue[]): DataHealth {
 				.filter(([, recipe]) => recipe.needsReview)
 				.map(([id, recipe]) => ({ ...named(id, recipe.name), ...(recipe.reviewNote ? { note: recipe.reviewNote } : {}) }))
 				.sort(byName),
-			noCooking: recipes.filter(([, recipe]) => recipe.noCooking).length,
+			noCooking: recipes.filter(([, recipe]) => !recipe.needsReview && recipe.noCooking).length,
 			noPhoto: recipes.filter(([id, recipe]) => !recipe.needsReview && !(set.images ?? []).includes(id)).map(([id, recipe]) => named(id, recipe.name)).sort(byName),
 			noMethod: recipes.filter(([, recipe]) => !recipe.needsReview && !recipe.method && !recipe.noCooking).map(([id, recipe]) => named(id, recipe.name)).sort(byName)
 		},
 		ingredients: {
 			total: ingredients.length,
-			noPrice: ingredients.filter(([, i]) => i.store !== 'none' && i.price === undefined).map(([id, i]) => named(id, i.name)).sort(byName),
-			noPack: ingredients.filter(([, i]) => (i.unit === 'g' || i.unit === 'ml') && i.store !== 'none' && i.pack === undefined).length,
+			bought: bought.length,
+			weighed: weighed.length,
+			noPrice: bought.filter(([, i]) => i.price === undefined).map(([id, i]) => named(id, i.name)).sort(byName),
+			noPack: weighed.filter(([, i]) => i.pack === undefined).length,
 			unused: ingredients.filter(([id]) => !used.has(id)).map(([id, i]) => named(id, i.name)).sort(byName)
 		},
 		stores: Object.entries(set.stores)

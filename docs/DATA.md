@@ -35,7 +35,7 @@ Any size works. When the data is built, the app makes its own copies from each p
 
 A recipe without a photo shows an icon for its kind on a small plate: a soup bowl for main dishes (all of them), a croissant for brunch, a slice of cake for helper snacks, a cup for drinks, an open box for misc. They are designed on the Design System sheet of `UI.fig`. Photos replace the icon; the ring around them keeps the color of the kind.
 
-The checks (`npm run validate`): a photo that matches no recipe is an error, with "Did you mean ...?" for a typo (`image-without-recipe`); so are a format that cannot be used (`image-format`) and two photos of one recipe (`image-twice`); a photo over 3 MB is a warning (`image-big`). The Meta screen of the app lists the recipes that have no photo yet.
+The checks (`npm run validate`): a photo that matches no recipe is an error, with "Did you mean ...?" for a typo (`image-without-recipe`); so are a format that cannot be used (`image-format`) and two photos of one recipe (`image-twice`); a photo over 3 MB is a warning (`image-big`). The Pantry screen of the app lists the recipes that have no photo yet.
 
 ## Stores (`stores.yaml`)
 

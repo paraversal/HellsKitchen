@@ -26,7 +26,7 @@ On a computer, just open the address. A red bar on the left shows the places of 
 | **Plan** | Your event: days, meals, dishes, headcount, cost per person |
 | **Recipes** | All the recipes, to browse, try out and add to the plan |
 | **Shopping** | What to buy, store by store, to tick off |
-| **Meta** | Settings and information about the app and its data |
+| **Pantry** | The recipes and ingredients behind the app, and how complete they are. Its gear opens the settings |
 
 ## Planning an event
 
@@ -120,11 +120,20 @@ Open the share sheet and choose **Print the shopping list** (every store on its 
 - On an **iPhone with the app on the home screen** there is no print window, so you only see **PDF**: it makes a PDF and opens the share sheet, from where you can print it, save it to Files, or send it.
 - On a computer, the print window can also save as PDF.
 
-## Settings and the Meta tab
+## The Pantry and the settings
+
+The **Pantry** shows what the app has to cook with:
+
+- How many recipes, ingredients and stores there are.
+- **How complete**: a bar each for ingredients with a price, recipes with a method, recipes with a photo and ingredients with a pack size. Press one to see what is missing.
+- **Waiting for review**: recipes whose amounts look wrong. They are not shown in the app until someone has checked them.
+- **Stores**: one bar cut into the stores by how many ingredients each has.
+- Ingredients no recipe uses, and what the checks of the data said.
+
+The **gear** at the top opens **Settings**:
 
 - **Fun** turns the playful animations and little surprises on or off. With it off the app still moves a little, but calmly. If your device is set to reduce motion, the app is always calm.
-- **The data** shows the health of the recipes and ingredients behind the app: how many recipes are waiting for review (they are not shown in the app until fixed), which ingredients have no price, which recipes have no method, which ingredients no recipe uses, and what each store has.
-- **The app** shows the version, and the number of plans on your device.
+- **This app** shows the version, and the number of plans on your device.
 
 ## How the numbers are calculated
 
@@ -141,7 +150,7 @@ The hunger factor only applies to main dishes of a meal switched to *hungrier th
 | **"Your plan is not available yet"** | The phone could not read its storage. This can happen right after a restart without a connection. Press *Try again* once you are online. The app does not make a new plan over yours until you say so. |
 | A plan seems gone | Open the app from the same browser or home-screen icon you used before. Plans live in one browser on one device. Restore from a saved file if you have one. |
 | The app shows old things | Open it once with a connection and close it; it updates itself in the background. |
-| A shopping ingredient has no price | It is not in the data yet. The estimate is then partial; the Meta tab lists them. |
+| A shopping ingredient has no price | It is not in the data yet. The estimate is then partial; the Pantry lists them. |
 | A link says it cannot be read | It was probably cut off when it was sent. Ask for it again, or use a file. |
 | Print does nothing | On an iPhone from the home screen use the **PDF** button. |
 
