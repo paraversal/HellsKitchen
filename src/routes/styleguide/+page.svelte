@@ -64,6 +64,8 @@
 	});
 </script>
 
+<svelte:head><title>Style sheet · Hell's Kitchen</title></svelte:head>
+
 <main>
 	<header>
 		<span class="logo"><Flame size={28} color="var(--color-mustard)" /></span>

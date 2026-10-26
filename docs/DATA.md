@@ -121,6 +121,7 @@ A complete example with comments is in [examples/plan.example.yaml](examples/pla
 | event.organisers | The organiser count (the Thursday arrivals). |
 | event.appetite_factor | A multiplier for main dishes in meals that switch it on. Default 1. |
 | days[].date | A date. |
+| days[].meals[].id | Made by the app, to tell meals apart while they are edited. Leave it out when writing a plan by hand; the app adds one. |
 | days[].meals[].type | `breakfast`, `lunch`, `coffee`, `dinner` or `snack`. |
 | days[].meals[].time | The time, as text. |
 | days[].meals[].for | `everyone` (the default) or `organisers`. The meal always uses 100 % of that event number. |

@@ -26,10 +26,22 @@
 		void active;
 		void tabs.length;
 		place(true);
+		buttons[active]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: allows.flights() ? 'smooth' : 'auto' });
+	});
+
+	// The tabs change width when the font has loaded, the window changes size, or a count changes. The line follows without moving.
+	let row = $state<HTMLElement>();
+	$effect(() => {
+		if (!row) return;
+		const watch = new ResizeObserver(() => place(false));
+		watch.observe(row);
+		for (const button of Object.values(buttons)) watch.observe(button);
+		void document.fonts?.ready.then(() => place(false));
+		return () => watch.disconnect();
 	});
 </script>
 
-<div class="tabs" role="tablist">
+<div class="tabs" role="tablist" bind:this={row}>
 	<span class="indicator" bind:this={bar} aria-hidden="true"></span>
 	{#each tabs as tab (tab.id)}
 		<button class="tab" class:active={tab.id === active} role="tab" aria-selected={tab.id === active} bind:this={buttons[tab.id]} onclick={() => (active = tab.id)}>

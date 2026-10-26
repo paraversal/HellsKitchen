@@ -23,7 +23,7 @@ body {
 }
 
 a {
-	color: var(--color-tomato);
+	color: var(--color-tomato-ink);
 }
 
 /* No grey or blue flash over a pressed thing: it is a square, and most things here are round. Pressed things show their own, rounded, state. */

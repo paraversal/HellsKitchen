@@ -14,6 +14,8 @@
 	const pills: HTMLElement[] = [];
 	const icons: HTMLElement[] = [];
 	let placed: Spot | null = null;
+	/** False until the sliding pill has found its place. Until then the active entry shows its own background, so it is never invisible. */
+	let ready = $state(false);
 
 	function spot(index: number): Spot | undefined {
 		const box = nav?.getBoundingClientRect();
@@ -31,6 +33,7 @@
 			if (how === 'playful') hop(icons[index]);
 		} else setPill(bg, to);
 		placed = to;
+		ready = true;
 	}
 
 	$effect(() => {
@@ -73,7 +76,7 @@
 
 <svelte:window ontouchstart={begin} ontouchend={end} ontouchcancel={() => (touch = null)} />
 
-<nav class="tabs" aria-label="Main" bind:this={nav}>
+<nav class="tabs" aria-label="Main" bind:this={nav} class:ready>
 	<span class="slider" bind:this={bg} aria-hidden="true"></span>
 	{#each NAV as item, i (item.id)}
 		<a href={resolve(item.path)} onclick={click} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined}>
@@ -109,6 +112,12 @@
 		font-weight: var(--weight-medium);
 		text-decoration: none;
 		touch-action: manipulation;
+	}
+	.tabs:not(.ready) .active .pill {
+		background: var(--color-mustard);
+	}
+	.tabs:not(.ready) .slider {
+		display: none;
 	}
 	.slider {
 		position: absolute;

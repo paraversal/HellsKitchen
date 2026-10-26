@@ -20,6 +20,8 @@
 
 </script>
 
+<svelte:head><title>Motion · Hell's Kitchen</title></svelte:head>
+
 <main>
 	<header>
 		<a class="back" href={resolve('/styleguide')}><ArrowLeft size={18} /> Style sheet</a>

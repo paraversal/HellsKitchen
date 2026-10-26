@@ -3,25 +3,45 @@
 	import Check from './Check.svelte';
 
 	// One line of the shopping list: tick box, name, and what to buy. The tag marks an ingredient without a price.
+	// The whole row is the tick box, so it is easy to hit with one thumb in a shop.
 	type Props = { name: string; buy: string; need?: string; checked?: boolean; unpriced?: boolean };
 	let { name, buy, need, checked = $bindable(false), unpriced = false }: Props = $props();
+	let fresh = $state(false);
 </script>
 
-<div class="row" class:done={checked}>
-	<Check bind:checked label="Bought: {name}" />
-	<span class="name">{name}{#if unpriced}<Tag size={14} aria-label="no price" />{/if}</span>
+<button
+	class="row pressable"
+	class:done={checked}
+	role="checkbox"
+	aria-checked={checked}
+	aria-label="{name}, {buy}{unpriced ? ', no price' : ''}"
+	onclick={() => {
+		fresh = true;
+		checked = !checked;
+	}}
+>
+	<Check {checked} still {fresh} />
+	<span class="name">{name}{#if unpriced}<Tag size={14} />{/if}</span>
 	<span class="amounts">
 		<span class="buy">{buy}</span>
 		{#if need}<span class="need">{need}</span>{/if}
 	</span>
-</div>
+</button>
 
 <style>
 	.row {
 		display: flex;
 		align-items: center;
 		gap: 14px;
+		width: 100%;
+		min-height: 52px;
 		padding: var(--space-3) 0;
+		border: 0;
+		background: none;
+		color: inherit;
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
 	}
 	.name {
 		display: flex;

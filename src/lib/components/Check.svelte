@@ -3,13 +3,18 @@
 
 	// The round tick box of the shopping list.
 	// D1. A tick that was just made draws itself. A tick that was already there when the list opened is simply there.
-	let { checked = $bindable(false), label }: { checked?: boolean; label: string } = $props();
+	// `still` draws only the circle, for a row that is itself the control (the whole shopping row), with `fresh` telling it the tick was just made.
+	let { checked = $bindable(false), label = '', still = false, fresh: freshly = false }: { checked?: boolean; label?: string; still?: boolean; fresh?: boolean } = $props();
 	let fresh = $state(false);
 </script>
 
+{#if still}
+	<span class="check" class:checked class:fresh={freshly} aria-hidden="true">{#if checked}<CheckIcon size={16} strokeWidth={3} />{/if}</span>
+{:else}
 <button class="check" class:checked class:fresh role="checkbox" aria-checked={checked} aria-label={label} onclick={() => { fresh = true; checked = !checked; }}>
 	{#if checked}<CheckIcon size={16} strokeWidth={3} />{/if}
 </button>
+{/if}
 
 <style>
 	.check {

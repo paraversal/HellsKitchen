@@ -43,6 +43,8 @@ const planDish = z.strictObject({
 });
 
 const planMeal = z.strictObject({
+	// Tells meals apart while they are edited, even when they change place. Made by the app; older plans get one when they are opened.
+	id: z.string().optional(),
 	type: z.enum(MEAL_TYPES),
 	time: z
 		.string()

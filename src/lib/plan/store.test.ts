@@ -163,6 +163,16 @@ describe('changing and saving', () => {
 	});
 });
 
+describe('meal ids', () => {
+	it('gives the meals of a plan saved before meals had ids an id when it is read', async () => {
+		const library = saved();
+		library.plans['plan-1'].plan.days[0].meals = [{ type: 'lunch', dishes: [] }];
+		const store = new PlanStore(memory(library).storage, mark().m, clock);
+		await store.load();
+		expect(store.plan?.days[0].meals[0].id).toEqual(expect.any(String));
+	});
+});
+
 describe('several plans', () => {
 	it('adds a plan from outside, opens it, and saves both', async () => {
 		const { storage, data } = memory(saved());

@@ -10,7 +10,7 @@ export type MealType = 'breakfast' | 'lunch' | 'coffee' | 'dinner' | 'snack';
 
 /** How each kind of meal looks: its name, icon, and the tint behind the icon. */
 export const MEAL_TYPES: Record<MealType, { label: string; short: string; icon: Component<{ size?: number }>; color: string; tint: string }> = {
-	breakfast: { ...MEAL_LABELS.breakfast, icon: Coffee, color: 'mustard', tint: 'mustard-tint' },
+	breakfast: { ...MEAL_LABELS.breakfast, icon: Coffee, color: 'mustard-ink', tint: 'mustard-tint' },
 	lunch: { ...MEAL_LABELS.lunch, icon: Sun, color: 'leaf', tint: 'leaf-tint' },
 	coffee: { ...MEAL_LABELS.coffee, icon: Cookie, color: 'sky', tint: 'sky-tint' },
 	dinner: { ...MEAL_LABELS.dinner, icon: Moon, color: 'plum', tint: 'plum-tint' },

@@ -41,7 +41,7 @@
 		height: 40px;
 		padding: 0 var(--space-3);
 		border: 0;
-		color: var(--color-tomato);
+		color: var(--color-tomato-ink);
 		font-weight: var(--weight-bold);
 	}
 	.ghost:global([data-pressed]) {

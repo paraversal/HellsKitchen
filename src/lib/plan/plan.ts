@@ -105,10 +105,30 @@ export function suggestMealType(plan: PlanFile, day: number): MealType {
 }
 
 /** Adds an empty meal to a day. Returns the plan and where the meal ended up. */
+/** A short name for a meal, unique enough within one plan. */
+export const newMealId = (): string => Math.random().toString(36).slice(2, 8);
+
+/** The plan, with an id on every meal. Plans made before meals had ids get them here. Returns the same plan when nothing was missing. */
+export function withMealIds(plan: PlanFile): PlanFile {
+	if (plan.days.every((day) => day.meals.every((meal) => meal.id))) return plan;
+	const next = copy(plan);
+	const used = new Set(next.days.flatMap((day) => day.meals.map((meal) => meal.id)));
+	for (const day of next.days) {
+		for (const meal of day.meals) {
+			if (meal.id) continue;
+			let id = newMealId();
+			while (used.has(id)) id = newMealId();
+			used.add(id);
+			meal.id = id;
+		}
+	}
+	return next;
+}
+
 export function addMeal(plan: PlanFile, day: number, type?: MealType): { plan: PlanFile; meal: number } {
 	const next = copy(plan);
 	const kind = type ?? suggestMealType(plan, day);
-	const meal: Meal = { type: kind, time: DEFAULT_TIME[kind], dishes: [] };
+	const meal: Meal = { id: newMealId(), type: kind, time: DEFAULT_TIME[kind], dishes: [] };
 	next.days[day].meals.push(meal);
 	sortMeals(next.days[day].meals);
 	return { plan: next, meal: next.days[day].meals.indexOf(meal) };

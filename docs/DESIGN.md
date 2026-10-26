@@ -19,6 +19,8 @@ All styling reads from CSS variables, never from loose values. They live in `src
 | `tokens.colors.css` | The 16 colors of the design (`--color-paper`, `--color-tomato`, ...) | **Generated** from the color variables in `UI.fig` |
 | `tokens.css` | The font and its weights, the type sizes, the spacing, the corner radii, the line | Written by hand from what the design uses |
 
+Three darker colors are mixed in `tokens.css` from the design colors, for where a design color is too light to read: `--color-tomato-ink` (red text and links), `--color-mustard-ink` (mustard icons on light backgrounds) and `--color-edge` (the edge of a field). They meet the WCAG contrast minimums (4.5 for text, 3 for icons and field edges) and follow the design colors when those change. They are not yet in `UI.fig`.
+
 **After a color change in the design:** open `UI.fig` in OpenPencil, export the variables as CSS (the `design_to_tokens` tool, format `css`), and replace the whole `:root` block in `tokens.colors.css`.
 Nothing else needs to change. A test (`tokens.test.ts`) fails if a component uses a token that does not exist, so a renamed color is caught straight away.
 

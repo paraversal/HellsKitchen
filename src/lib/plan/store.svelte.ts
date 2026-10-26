@@ -3,7 +3,7 @@
 // when there is something. The app must not take that for an empty library and save a new one over it (see docs/DEPLOY.md).
 import type { PlanFile } from '../data/schema.ts';
 import { addPlan, newLibrary, parseLibrary, removePlan, replacePlan, switchPlan, type Library, type PlanRecord } from './library.ts';
-import { newPlan } from './plan.ts';
+import { newPlan, withMealIds } from './plan.ts';
 
 export const KEY = 'hk:library';
 
@@ -68,6 +68,7 @@ export class PlanStore {
 		}
 		const library = parseLibrary(stored);
 		if (!library) return this.#unreadable('The saved plans are in a form this version of the app does not understand. They have not been changed.');
+		for (const record of Object.values(library.plans)) record.plan = withMealIds(record.plan);
 		this.library = library;
 		this.status = 'ready';
 		this.#mark.set();
@@ -86,8 +87,9 @@ export class PlanStore {
 		const record = this.record;
 		if (this.status !== 'ready' || !this.library || !record) return;
 		const before = $state.snapshot(record.plan) as PlanFile;
-		const plan = edit(structuredClone(before));
-		if (plan === undefined) return;
+		const edited = edit(structuredClone(before));
+		if (edited === undefined) return;
+		const plan = withMealIds(edited);
 		this.library.plans[record.id] = { id: record.id, updatedAt: this.#clock().toISOString(), plan };
 		this.#saveSoon();
 		this.onchange?.(before, plan);
@@ -97,7 +99,7 @@ export class PlanStore {
 	addPlan(plan: PlanFile): string | undefined {
 		let id: string | undefined;
 		this.#update((library) => {
-			const added = addPlan(library, plan, this.#clock().toISOString());
+			const added = addPlan(library, withMealIds(plan), this.#clock().toISOString());
 			id = added.id;
 			return added.library;
 		});
@@ -107,7 +109,7 @@ export class PlanStore {
 
 	/** Puts a plan that came from outside in the place of the open one. */
 	replaceOpen(plan: PlanFile): void {
-		this.#update((library) => replacePlan(library, library.current, plan, this.#clock().toISOString()));
+		this.#update((library) => replacePlan(library, library.current, withMealIds(plan), this.#clock().toISOString()));
 		this.onchange?.();
 	}
 

@@ -52,6 +52,8 @@
 	}
 </script>
 
+<svelte:head><title>Offline check · Hell's Kitchen</title></svelte:head>
+
 <main>
 	<h1>Hell's Kitchen</h1>
 	<p class="soft">Walking skeleton. Version <code>{version}</code>{installed ? ', opened from the home screen' : ''}.</p>

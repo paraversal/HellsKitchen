@@ -23,10 +23,10 @@ export async function copyLink(link: string): Promise<boolean> {
 	try {
 		await navigator.clipboard.writeText(link);
 		backup.reset();
-		showToast('Link copied');
+		showToast('Link copied', 'done');
 		return true;
 	} catch {
-		showToast('The link could not be copied');
+		showToast('The link could not be copied', 'problem');
 		return false;
 	}
 }
@@ -40,7 +40,7 @@ export async function sendLink(link: string, title: string): Promise<boolean> {
 		return true;
 	} catch (error) {
 		// Closing the share window is not a problem.
-		if (!(error instanceof DOMException && error.name === 'AbortError')) showToast('The link could not be sent');
+		if (!(error instanceof DOMException && error.name === 'AbortError')) showToast('The link could not be sent', 'problem');
 		return false;
 	}
 }
@@ -57,7 +57,7 @@ export function saveFile(plan: PlanFile, updatedAt: string): boolean {
 	anchor.remove();
 	setTimeout(() => URL.revokeObjectURL(url), 10_000);
 	backup.reset();
-	showToast('Plan saved as a file');
+	showToast('Plan saved as a file', 'done');
 	return true;
 }
 
@@ -72,12 +72,12 @@ export async function pasteLink(): Promise<void> {
 	try {
 		text = await navigator.clipboard.readText();
 	} catch {
-		showToast('The clipboard could not be read');
+		showToast('The clipboard could not be read', 'problem');
 		return;
 	}
 	const start = text.indexOf('#plan=');
 	if (start < 0) {
-		showToast('There is no plan link on the clipboard');
+		showToast('There is no plan link on the clipboard', 'problem');
 		return;
 	}
 	transfer.sharing = false;
@@ -102,10 +102,10 @@ export function acceptIncoming(mode: 'replace' | 'new'): void {
 		// A link leaves the shopping ticks out. The ones on this device stay, they are still about the same shopping.
 		if (!plan.shopping && planStore.plan?.shopping) plan = { ...plan, shopping: planStore.plan.shopping };
 		planStore.replaceOpen(plan);
-		showToast('Plan replaced');
+		showToast('Plan replaced', 'done');
 	} else {
 		planStore.addPlan(plan);
-		showToast('Plan added next to your other plans');
+		showToast('Plan added next to your other plans', 'done');
 	}
 	transfer.incoming = null;
 }

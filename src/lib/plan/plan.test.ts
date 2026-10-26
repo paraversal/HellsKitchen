@@ -21,7 +21,8 @@ import {
 	setDish,
 	setEvent,
 	suggestMealType,
-	updateMeal
+	updateMeal,
+	withMealIds
 } from './plan.ts';
 
 const start = '2027-07-09';
@@ -118,8 +119,28 @@ describe('meals', () => {
 		plan = updateMeal(plan, 0, 0, { for: 'organisers', appetite: true }).plan;
 		expect(plan.days[0].meals[0]).toMatchObject({ for: 'organisers', appetite: true });
 		plan = updateMeal(plan, 0, 0, { for: 'everyone', appetite: false, time: null }).plan;
-		expect(plan.days[0].meals[0]).toEqual({ type: 'lunch', dishes: [] });
+		expect(plan.days[0].meals[0]).toEqual({ id: expect.any(String), type: 'lunch', dishes: [] });
 		expect(planSchema.safeParse(plan).success).toBe(true);
+	});
+
+	it('gives every new meal an id of its own, which it keeps when it changes place', () => {
+		let plan = addMeal(newPlan(start), 0, 'dinner').plan;
+		const dinner = plan.days[0].meals[0].id;
+		plan = addMeal(plan, 0, 'breakfast').plan; // breakfast sorts before dinner
+		expect(plan.days[0].meals.map((m) => m.type)).toEqual(['breakfast', 'dinner']);
+		expect(plan.days[0].meals[1].id).toBe(dinner);
+		expect(plan.days[0].meals[0].id).not.toBe(dinner);
+	});
+
+	it('adds ids to the meals of a plan made before meals had them, and leaves a plan that has them alone', () => {
+		const old = { ...newPlan(start), days: [{ date: start, meals: [{ type: 'lunch' as const, dishes: [] }, { type: 'dinner' as const, dishes: [] }] }] };
+		const fixed = withMealIds(old);
+		const ids = fixed.days[0].meals.map((m) => m.id);
+		expect(ids.every(Boolean)).toBe(true);
+		expect(new Set(ids).size).toBe(2);
+		expect(old.days[0].meals[0]).not.toHaveProperty('id');
+		expect(withMealIds(fixed)).toBe(fixed);
+		expect(planSchema.safeParse(fixed).success).toBe(true);
 	});
 
 	it('removes a meal', () => {

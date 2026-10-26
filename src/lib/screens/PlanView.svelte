@@ -74,7 +74,7 @@
 						<DayLabel name={label.name} date={label.date} />
 						<IconButton icon={Ellipsis} label="Edit {label.name}" size={36} onclick={() => (day = index)} />
 					</div>
-					{#each d.meals as m, mealIndex (mealIndex)}
+					{#each d.meals as m, mealIndex (m.id ?? mealIndex)}
 						<div class="meal" data-meal="{index}-{mealIndex}" in:mealIn>
 							<MealRow
 								type={m.type}

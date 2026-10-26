@@ -38,7 +38,7 @@
 		}
 		const when = dayLabel(plan.days[day].date).name;
 		const kind = planStore.plan?.days[day].meals[index]?.type ?? 'meal';
-		showToast(already ? `Already in ${when} ${kind}` : `Added to ${when} ${kind}`);
+		showToast(already ? `Already in ${when} ${kind}` : `Added to ${when} ${kind}`, already ? 'info' : 'done');
 		adding.recipe = null;
 		if (!already) void dishAdded(id);
 	}
@@ -52,7 +52,7 @@
 				<section>
 					<DayLabel name={label.name} date={label.date} />
 					<ul>
-						{#each day.meals as meal, m (m)}
+						{#each day.meals as meal, m (meal.id ?? m)}
 							{@const type = MEAL_TYPES[meal.type]}
 							{@const has = meal.dishes.some((x) => x.recipe === adding.recipe)}
 							<li>

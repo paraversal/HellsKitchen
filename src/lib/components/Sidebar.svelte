@@ -18,6 +18,8 @@
 	const links: HTMLElement[] = [];
 	const icons: HTMLElement[] = [];
 	let placed: Spot | null = null;
+	/** False until the sliding pill has found its place. Until then the active entry shows its own background, so it is never invisible. */
+	let ready = $state(false);
 
 	function spot(index: number): Spot | undefined {
 		const box = nav?.getBoundingClientRect();
@@ -35,6 +37,7 @@
 			if (how === 'playful') hop(icons[index]);
 		} else setPill(bg, to);
 		placed = to;
+		ready = true;
 	}
 
 	$effect(() => {
@@ -55,7 +58,7 @@
 		<span class="logo"><Flame size={18} /></span>
 		Hell's Kitchen
 	</a>
-	<nav aria-label="Main" bind:this={nav}>
+	<nav aria-label="Main" bind:this={nav} class:ready>
 		<span class="slider" bind:this={bg} aria-hidden="true"></span>
 		{#each NAV as item, i (item.id)}
 			<a href={resolve(item.path)} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined} bind:this={links[i]}>
@@ -200,6 +203,12 @@
 	}
 	nav a:not(.active):global([data-pressed]) {
 		background: color-mix(in srgb, var(--color-on-tomato) 28%, transparent);
+	}
+	nav:not(.ready) .active {
+		background: var(--color-on-tomato);
+	}
+	nav:not(.ready) .slider {
+		display: none;
 	}
 	nav .active {
 		color: var(--color-tomato);

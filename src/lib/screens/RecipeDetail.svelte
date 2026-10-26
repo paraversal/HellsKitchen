@@ -90,7 +90,7 @@
 
 <style>
 	article {
-		padding-bottom: 104px;
+		padding-bottom: calc(104px + env(safe-area-inset-bottom));
 	}
 	/* A phone: a tinted band with the plate, then the recipe. */
 	.hero-plate {

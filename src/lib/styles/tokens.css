@@ -49,6 +49,12 @@
   /* Lines */
   --border: 1.5px solid var(--color-line);
 
+  /* Darker versions of design colors, for where the design color is too light to read (WCAG contrast: 4.5 for text, 3 for icons and the edges of fields).
+     They are mixed from the design colors, so they follow when those change. Mirror them in UI.fig when the design is next touched. */
+  --color-tomato-ink: color-mix(in srgb, var(--color-tomato) 85%, var(--color-ink)); /* text: 5.2 on paper */
+  --color-mustard-ink: color-mix(in srgb, var(--color-mustard) 55%, var(--color-ink)); /* icons: 3.6 on mustard-tint, 4.3 on sheet */
+  --color-edge: color-mix(in srgb, var(--color-line) 55%, var(--color-ink)); /* the edge of a field: 3.1 on paper */
+
   /* Motion. See docs/ANIMATIONS.md. The springs are CSS `linear()` curves that overshoot and settle; the cubic-bezier is what older browsers use instead. */
   --motion-instant: 90ms;
   --motion-quick: 180ms;

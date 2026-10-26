@@ -20,7 +20,7 @@
 		padding: 0 14px;
 		border-radius: var(--radius-m);
 		background: var(--color-sheet);
-		border: var(--border);
+		border: 1.5px solid var(--color-edge);
 		color: var(--color-ink-soft);
 	}
 	input {

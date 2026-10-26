@@ -5,6 +5,7 @@
 	import { toasts } from '#lib/toast.svelte.ts';
 
 	// Short messages at the bottom of the screen, like "Added to Saturday lunch".
+	// They live in the browser's top layer (a popover), shown again for every new message, so they stay above an open sheet instead of behind it.
 	// A5. Without fun a toast slides up and settles. With fun it pops up like toast from a toaster, and the check draws itself.
 	const playful = () => strength('A5') === 'playful';
 
@@ -15,15 +16,29 @@
 			: { duration: 380, easing: backOut, css: (_t: number, u: number) => `transform: translateY(${u * 44}px); opacity: ${1 - u}` };
 	}
 
+	let layer = $state<HTMLElement>();
+	const canPop = () => typeof HTMLElement !== 'undefined' && 'showPopover' in HTMLElement.prototype;
+	let hideTimer: ReturnType<typeof setTimeout> | undefined;
+	$effect(() => {
+		const count = toasts.items.length;
+		if (!layer || !canPop()) return;
+		clearTimeout(hideTimer);
+		if (count) {
+			// Shown again, so it is the newest thing in the top layer, above a sheet that opened after it.
+			if (layer.matches(':popover-open')) layer.hidePopover();
+			layer.showPopover();
+		} else hideTimer = setTimeout(() => layer?.matches(':popover-open') && layer.hidePopover(), 300);
+	});
+
 	function leave(_node: Element) {
 		return allows.flights() ? { duration: 220, easing: cubicIn, css: (_t: number, u: number) => `transform: translateY(${u * 30}px); opacity: ${1 - u}` } : { duration: 0 };
 	}
 </script>
 
-<div class="toasts" aria-live="polite">
+<div class="toasts" aria-live="polite" popover="manual" bind:this={layer}>
 	{#each toasts.items as toast (toast.id)}
-		<div class="toast" in:enter out:leave>
-			{#if playful()}
+		<div class="toast {toast.tone}" in:enter out:leave>
+			{#if playful() && toast.tone === 'done'}
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-mustard)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="draw" d="M4 12.5l5 5L20 6.5" /></svg>
 			{/if}
 			{toast.text}
@@ -35,6 +50,13 @@
 	.toasts {
 		position: fixed;
 		inset: auto 0 calc(96px + env(safe-area-inset-bottom));
+		width: auto;
+		height: auto;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		overflow: visible;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -52,6 +74,10 @@
 		color: var(--color-paper);
 		font-size: var(--text-small);
 		font-weight: var(--weight-medium);
+	}
+	.problem {
+		background: var(--color-tomato);
+		color: var(--color-on-tomato);
 	}
 	.draw {
 		stroke-dasharray: 30;

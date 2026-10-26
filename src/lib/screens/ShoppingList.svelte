@@ -187,8 +187,10 @@
 		background: var(--color-leaf);
 		transition: width 600ms var(--spring-soft);
 	}
+	/* The rolling digit is exactly one line of type high, the text next to it a little more: centred, they sit on one line. */
 	.count {
 		display: inline-flex;
+		align-items: center;
 		gap: 4px;
 	}
 	.all-done {
