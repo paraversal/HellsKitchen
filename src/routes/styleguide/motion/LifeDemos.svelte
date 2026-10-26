@@ -6,7 +6,7 @@
 	import Badge from '#lib/components/Badge.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import Odometer from '#lib/components/Odometer.svelte';
-	import Plate from '#lib/components/Plate.svelte';
+	import Plate from './Plate.svelte';
 	import { NAV } from '#lib/nav.ts';
 	import { easing, wait } from '#lib/motion/easing.ts';
 	import { allows } from '#lib/motion/mode.svelte.ts';

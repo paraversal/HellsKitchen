@@ -22,6 +22,8 @@
 	import { MEAL_ORDER, addDish, dayLabel, peopleIn, portionOverride, removeDish, removeMeal, setDish, updateMeal, type MealPatch } from '#lib/plan/plan.ts';
 	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { vanish } from '#lib/motion/vanish.ts';
+	import { portionShare } from '#lib/kitchen-engine/rules/share.ts';
+	import type { Meal as EngineMeal } from '#lib/kitchen-engine/types.ts';
 	import { categoriesInUse, filterRecipes, summaries } from '#lib/recipes.ts';
 
 	// Everything about one meal: what kind, when, for whom, and its dishes. Changes apply at once.
@@ -64,6 +66,18 @@
 		planStore.change((p) => removeMeal(p, day, index));
 	}
 
+	/** What one dish of the meal comes to, with the kitchen engine's rule for shares (R4): "Main · 100 people · 250 g each". */
+	function dishFacts(dish: { recipe: string; share?: number; portion?: string }): string {
+		const recipe = appData.recipes[dish.recipe];
+		if (!recipe || !meal || !plan) return 'No longer available';
+		const known = meal.dishes.filter((d) => appData.recipes[d.recipe]).map((d) => ({ recipe: d.recipe, share: d.share }));
+		const share = portionShare({ recipe: dish.recipe, share: dish.share }, { type: meal.type, for: meal.for ?? 'everyone', appetite: !!meal.appetite, dishes: known } as EngineMeal, appData.recipes);
+		const people = Math.round(peopleIn(plan, meal) * share);
+		const grams = portionOverride(dish as Parameters<typeof portionOverride>[0]) ?? recipe.portion;
+		const hungry = meal.appetite && recipe.category === 'main' ? ` ×${plan.event.appetite_factor ?? 1}` : '';
+		return `${categoryName(recipe.category)} · ${people} ${people === 1 ? 'person' : 'people'} · ${grams} g each${hungry}`;
+	}
+
 	const toggle = (recipe: string) => {
 		if (!target || !meal) return;
 		const { day, meal: index } = target;
@@ -95,7 +109,7 @@
 	const present = $derived(new Set(meal?.dishes.map((d) => d.recipe)));
 </script>
 
-<Sheet bind:open title={view === 'picker' ? 'Add dishes' : meal ? MEAL_TYPES[meal.type].label : 'Meal'} onclose={close}>
+<Sheet bind:open title={view === 'picker' ? 'Add dishes' : meal && target && plan ? `${dayLabel(plan.days[target.day].date).name} · ${MEAL_TYPES[meal.type].label}` : 'Meal'} onclose={close}>
 	{#if meal && plan}
 		{#if view === 'meal'}
 			<div class="stack">
@@ -131,10 +145,7 @@
 									<RecipeImage id={dish.recipe} size={40} />
 									<div class="grow">
 										<strong>{recipe?.name ?? dish.recipe}</strong>
-										<span class="soft note">
-											{recipe ? categoryName(recipe.category) : 'No longer available'}
-											{#if portionOverride(dish) || dish.share} · adjusted{/if}
-										</span>
+										<span class="soft note">{dishFacts(dish)}</span>
 									</div>
 									{#if recipe}
 										<IconButton icon={SlidersHorizontal} label="Adjust {recipe.name}" size={34} onclick={() => (adjusting = adjusting === dish.recipe ? null : dish.recipe)} />

@@ -51,11 +51,11 @@ Built beyond the roadmap: the Fun setting and the motion work, the Meta tab, the
 
 ### Shopping
 
-- One tab per store that has something to buy; the tab shows how many items are left, or a check when the store is done.
+- One tab per store that has something to buy; the tab shows how many items are left, or a check when the store is done. An arrow at the edge shows when there are more tabs than fit. On a desktop the stores are a column on the left, with the cost of each.
 - Every line shows the amount to buy, with whole packs when the ingredient has a pack size (almost none have one yet, so the exact amount is shown nearly everywhere).
 - Items are ticked off; the ticks are saved with the plan. A bar shows progress per store. A store shows its estimated cost and how many items have no price.
 - When the whole list is done the screen says so.
-- With Fun on, a ticked item flies into the basket of the Shopping tab and waits under "Bought", where it can be unticked.
+- "Hide bought items" (on by default, kept on the device) moves a ticked item under "Bought", where it can be unticked. With Fun on, it flies into the basket of the Shopping tab on the way.
 
 ### Sharing, backup and printing
 

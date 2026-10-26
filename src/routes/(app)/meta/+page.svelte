@@ -2,6 +2,7 @@
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import { version } from '$app/env';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import Switch from '#lib/components/Switch.svelte';
 	import { appData } from '#lib/app-data.ts';
 	import { RULES_VERSION } from '#lib/kitchen-engine/config.ts';
@@ -80,9 +81,9 @@
 			{#if plans !== undefined}<div><dt>Plans on this device</dt><dd>{plans}</dd></div>{/if}
 		</dl>
 		<p class="links">
-			<a href={resolve('/styleguide')}>Style sheet</a>
-			<a href={resolve('/styleguide/motion')}>Motion trial page</a>
-			<a href={resolve('/status')}>Offline check</a>
+			<a href={slash(resolve('/styleguide'))}>Style sheet</a>
+			<a href={slash(resolve('/styleguide/motion'))}>Motion trial page</a>
+			<a href={slash(resolve('/status'))}>Offline check</a>
 		</p>
 	</section>
 </div>

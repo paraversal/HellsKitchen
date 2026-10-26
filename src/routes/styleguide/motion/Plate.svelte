@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { plateLook } from './plate.ts';
-	// A flat plate illustration for a recipe. The look comes from the recipe's id, so every recipe keeps its plate without any extra data.
+	// A flat plate illustration for a recipe, from before the app had photos. Only the motion trial page still draws it, for the animations kept for later.
 	let { seed, size = 48 }: { seed: string; size?: number } = $props();
 
 	const look = $derived(plateLook(seed));

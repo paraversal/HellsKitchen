@@ -50,7 +50,7 @@
 			{#each plan.days as day, d (day.date)}
 				{@const label = dayLabel(day.date)}
 				<section>
-					<DayLabel name={label.name} date={label.date} />
+					<DayLabel name={label.name} date={label.date} heading="h3" />
 					<ul>
 						{#each day.meals as meal, m (meal.id ?? m)}
 							{@const type = MEAL_TYPES[meal.type]}

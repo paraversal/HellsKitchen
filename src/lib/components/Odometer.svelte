@@ -10,6 +10,8 @@
 	let columns: (HTMLElement | undefined)[] = [];
 	let previous = untrack(() => text);
 	const isDigit = (c: string | undefined) => c !== undefined && /\d/.test(c);
+	// The digits of a column are drawn by CSS, not written in the page, so copying the number or searching the page does not pick up 0123456789.
+	const digits = $derived(`"${Array.from({ length: 10 * (laps + 3) }, (_, n) => n % 10).join('\\A ')}"`);
 
 	$effect(() => {
 		const now = [...text].reverse();
@@ -34,8 +36,7 @@
 	{#each chars as c, i (chars.length - i)}
 		{#if isDigit(c)}
 			<span class="window" aria-hidden="true">
-				<span class="column" bind:this={columns[i]} style:transform="translateY({-(Number(c) + 10)}em)">
-					{#each Array(10 * (laps + 3)) as _, n (n)}<span class="digit">{n % 10}</span>{/each}
+				<span class="column" bind:this={columns[i]} style:transform="translateY({-(Number(c) + 10)}em)" style:--digits={digits}>
 				</span>
 			</span>
 		{:else}
@@ -58,9 +59,10 @@
 	.column {
 		display: block;
 	}
-	.digit {
+	.column::before {
+		content: var(--digits);
 		display: block;
-		height: 1em;
+		white-space: pre;
 		line-height: 1;
 	}
 	.still {

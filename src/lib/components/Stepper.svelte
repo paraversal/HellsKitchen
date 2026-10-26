@@ -45,7 +45,7 @@
 
 <div class="stepper">
 	<IconButton icon={Minus} label="Fewer {name}" size={40} onpointerdown={() => hold(-step)} onpointerup={release} onpointerleave={release} onpointercancel={release} onclick={key(-step)} />
-	<output class={size} aria-label={name} data-people-number bind:this={figure}><Odometer text={String(value)} /></output>
+	<output class={size} aria-label="{value} {name}" bind:this={figure}><Odometer text={String(value)} /></output>
 	<IconButton icon={Plus} label="More {name}" size={40} variant="dark" onpointerdown={() => hold(step)} onpointerup={release} onpointerleave={release} onpointercancel={release} onclick={key(step)} />
 	{#if label}<span class="label">{label}</span>{/if}
 </div>

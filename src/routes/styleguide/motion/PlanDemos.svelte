@@ -7,7 +7,7 @@
 	import DayLabel from '#lib/components/DayLabel.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import { MEAL_TYPES, type MealType } from '#lib/components/meal-types.ts';
-	import Plate from '#lib/components/Plate.svelte';
+	import Plate from './Plate.svelte';
 	import { easing, wait } from '#lib/motion/easing.ts';
 	import { allows } from '#lib/motion/mode.svelte.ts';
 	import { fly } from '#lib/motion/fly.ts';

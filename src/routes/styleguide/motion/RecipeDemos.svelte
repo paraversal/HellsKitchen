@@ -4,7 +4,7 @@
 	import { tick } from 'svelte';
 	import Chip from '#lib/components/Chip.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
-	import Plate from '#lib/components/Plate.svelte';
+	import Plate from './Plate.svelte';
 	import { easing } from '#lib/motion/easing.ts';
 	import { fly } from '#lib/motion/fly.ts';
 	import { allows } from '#lib/motion/mode.svelte.ts';

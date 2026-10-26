@@ -4,6 +4,7 @@
 	import { allows } from '#lib/motion/mode.svelte.ts';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import { page } from '$app/state';
 	import Chip from '#lib/components/Chip.svelte';
 	import RecipeRow from '#lib/components/RecipeRow.svelte';
@@ -28,7 +29,7 @@
 
 	// On a desktop there is room for a recipe next to the list, so show the first one.
 	onMount(() => {
-		if (!selected && matchMedia('(min-width: 900px)').matches) goto(resolve('/(app)/recipes/[id]', { id: all[0].id }), { replaceState: true });
+		if (!selected && matchMedia('(min-width: 900px)').matches) goto(slash(resolve('/(app)/recipes/[id]', { id: all[0].id })), { replaceState: true });
 	});
 </script>
 
@@ -46,16 +47,16 @@
 		</div>
 
 		{#each groups as group (group.letter)}
-			<div class="letter"><span>{group.letter}</span></div>
+			<h2 class="letter"><span>{group.letter}</span></h2>
 			{#each group.recipes as recipe, i (recipe.id)}
 				<div class="item" style:--i={Math.min(i, 11)} animate:flip={{ duration: allows.flights() ? 300 : 0 }}>
 				<RecipeRow
 					id={recipe.id}
 					name={recipe.name}
 					meta="{categoryName(recipe.category)} · {ingredientCountText(recipe.ingredientCount)}"
-					href={resolve('/(app)/recipes/[id]', { id: recipe.id })}
+					href={slash(resolve('/(app)/recipes/[id]', { id: recipe.id }))}
 					selected={selected === recipe.id}
-					canAdd={planStore.status === 'ready'}
+					canAdd={planStore.status !== 'unreadable'}
 					onadd={() => (adding.recipe = recipe.id)}
 				/>
 				</div>
@@ -98,6 +99,7 @@
 		}
 	}
 	.letter {
+		margin: 0;
 		display: flex;
 		align-items: center;
 		gap: var(--space-3);

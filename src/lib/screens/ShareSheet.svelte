@@ -7,6 +7,7 @@
 	import Printer from '@lucide/svelte/icons/printer';
 	import Send from '@lucide/svelte/icons/send';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import ActionRow from '#lib/components/ActionRow.svelte';
 	import QrCode from '#lib/components/QrCode.svelte';
 	import Sheet from '#lib/components/Sheet.svelte';
@@ -37,8 +38,8 @@
 				<ActionRow icon={FileDown} check label="Save the plan as a file" hint="A copy to keep, with the shopping ticks" onclick={() => saveFile(record.plan, record.updatedAt)} />
 				<ActionRow icon={ClipboardPaste} label="Paste a plan link" hint="For a link that opened in the browser instead of this app" onclick={() => pasteLink()} />
 				<ActionRow icon={FileUp} label="Open a plan file" onclick={() => picker?.click()} />
-				<ActionRow icon={Printer} label="Print the shopping list" href={resolve('/print/shopping')} />
-				<ActionRow icon={FileText} label="Print the recipe sheets" hint="Every dish, scaled to its meal" href={resolve('/print/recipes')} />
+				<ActionRow icon={Printer} label="Print the shopping list" href={slash(resolve('/print/shopping'))} />
+				<ActionRow icon={FileText} label="Print the recipe sheets" hint="Every dish, scaled to its meal" href={slash(resolve('/print/recipes'))} />
 			</div>
 			<input bind:this={picker} type="file" accept=".json,application/json" hidden onchange={picked} />
 		</div>

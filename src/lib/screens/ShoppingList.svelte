@@ -7,12 +7,15 @@
 	import { cubicOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import EmptyNote from '#lib/components/EmptyNote.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import NoPricePill from '#lib/components/NoPricePill.svelte';
 	import Odometer from '#lib/components/Odometer.svelte';
 	import ShopRow from '#lib/components/ShopRow.svelte';
+	import StoreList from '#lib/components/StoreList.svelte';
 	import StoreTabs from '#lib/components/StoreTabs.svelte';
+	import Switch from '#lib/components/Switch.svelte';
 	import { easing } from '#lib/motion/easing.ts';
 	import { fly } from '#lib/motion/fly.ts';
 	import { strength } from '#lib/motion/fun.svelte.ts';
@@ -21,6 +24,7 @@
 	import { tabIcon } from '#lib/motion/pill.ts';
 	import { planStore } from '#lib/plan/browser.ts';
 	import { current } from '#lib/plan/current.svelte.ts';
+	import { hideBought, setHideBought } from '#lib/plan/hide-bought.svelte.ts';
 	import { setChecked } from '#lib/plan/plan.ts';
 	import { euro, type ShoppingLine } from '#lib/plan/shopping.ts';
 
@@ -28,17 +32,18 @@
 	const view = $derived(current.shopping);
 	let selected = $state<string | null>(null);
 	const store = $derived(view?.stores.find((s) => s.id === selected) ?? view?.stores[0]);
-	const tabs = $derived(view?.stores.map((s) => ({ id: s.id, label: s.name, count: s.open })) ?? []);
+	const tabs = $derived(view?.stores.map((s) => ({ id: s.id, label: s.name, count: s.open, cost: s.cost })) ?? []);
 	const done = $derived(store ? store.lines.filter((l) => l.checked).length : 0);
 
-	// D1. With fun, a ticked item flies into the basket of the Shopping tab and the list closes over the gap. The bought items wait under "Bought", where they can be ticked off again.
-	const leaving = $derived(strength('D1') === 'crazy');
+	// With "Hide bought items" on, a ticked item leaves the list and waits under "Bought", where it can be ticked off again.
+	// D1. With fun, it flies into the basket of the Shopping tab on the way.
+	const leaving = $derived(hideBought.on);
 	const todo = $derived(store ? (leaving ? store.lines.filter((l) => !l.checked) : store.lines) : []);
 	const bought = $derived(store && leaving ? store.lines.filter((l) => l.checked) : []);
 	let showBought = $state(false);
 
 	function tick(line: ShoppingLine, value: boolean) {
-		if (value && leaving && allows.flights()) {
+		if (value && leaving && strength('D1') === 'crazy' && allows.flights()) {
 			const check = document.querySelector<HTMLElement>(`[data-line="${line.id}"] .check`);
 			const basket = tabIcon('shopping');
 			if (check && basket) {
@@ -92,64 +97,106 @@
 </script>
 
 {#if view && store}
-	<div class="list">
-		{#if view.open === 0}
-			<p class="all-done" role="status"><Check size={20} strokeWidth={3} /> Everything is bought</p>
-		{/if}
-		<StoreTabs {tabs} bind:active={() => store.id, (id) => (selected = id)} />
-
-		<div class="summary">
-			<span class="cost"><strong>{euro(store.cost)}</strong> <span class="soft">estimated</span></span>
-			<span class="end">
-				{#if store.unpriced}<NoPricePill count={store.unpriced} />{/if}
-				<IconButton icon={Printer} label="Print the list for {store.name}" size={36} href="{resolve('/print/shopping')}?store={store.id}" />
-			</span>
-		</div>
-
-		<div class="progress">
-			<div class="meter" role="meter" aria-label="Bought in {store.name}" aria-valuemin={0} aria-valuemax={store.lines.length} aria-valuenow={done}>
-				<div class="fill" style:width="{(done / store.lines.length) * 100}%"></div>
-			</div>
-			<span class="count"><Odometer text={String(done)} /> / {store.lines.length}</span>
-		</div>
-
-		<ul>
-			{#each todo as line (line.id)}
-				<li data-line={line.id} animate:flip={{ duration: allows.flights() ? 300 : 0 }} out:slide={{ duration: allows.flights() ? 260 : 0, easing: cubicOut }}>
-					<ShopRow name={line.name} buy={line.buy} need={line.need} unpriced={line.unpriced} bind:checked={() => line.checked, (value) => tick(line, value)} />
-				</li>
-			{/each}
-		</ul>
-
-		{#if bought.length}
-			<button class="bought-toggle" aria-expanded={showBought} onclick={() => (showBought = !showBought)}>
-				Bought · {bought.length}
-				<span class="chevron" class:open={showBought}><ChevronDown size={18} /></span>
-			</button>
-			{#if showBought}
-				<ul transition:slide={{ duration: allows.flights() ? 260 : 0 }}>
-					{#each bought as line (line.id)}
-						<li data-line={line.id}>
-							<ShopRow name={line.name} buy={line.buy} need={line.need} unpriced={line.unpriced} bind:checked={() => line.checked, (value) => tick(line, value)} />
-						</li>
-					{/each}
-				</ul>
+	<div class="shopping">
+		<div class="stores">
+			{#if view.open === 0}
+				<p class="all-done" role="status"><Check size={20} strokeWidth={3} /> Everything is bought</p>
 			{/if}
-		{/if}
+			<div class="tabs"><StoreTabs {tabs} bind:active={() => store.id, (id) => (selected = id)} /></div>
+			<div class="column"><StoreList stores={tabs} bind:active={() => store.id, (id) => (selected = id)} /></div>
+		</div>
+
+		<div class="list">
+			<h2 class="store-name">{store.name}</h2>
+			<div class="summary">
+				<span class="cost"><strong>{euro(store.cost)}</strong> <span class="soft">estimated</span></span>
+				<span class="end">
+					{#if store.unpriced}<NoPricePill count={store.unpriced} />{/if}
+					<IconButton icon={Printer} label="Print the list for {store.name}" size={36} href="{slash(resolve('/print/shopping'))}?store={store.id}" />
+				</span>
+			</div>
+
+			<div class="progress">
+				<div class="meter" role="meter" aria-label="Bought in {store.name}" aria-valuemin={0} aria-valuemax={store.lines.length} aria-valuenow={done}>
+					<div class="fill" style:width="{(done / store.lines.length) * 100}%"></div>
+				</div>
+				<span class="count"><Odometer text={String(done)} /> / {store.lines.length}</span>
+			</div>
+			<div class="hide"><Switch bind:checked={() => hideBought.on, setHideBought}>Hide bought items</Switch></div>
+
+			<ul>
+				{#each todo as line (line.id)}
+					<li data-line={line.id} animate:flip={{ duration: allows.flights() ? 300 : 0 }} out:slide={{ duration: allows.flights() ? 260 : 0, easing: cubicOut }}>
+						<ShopRow name={line.name} buy={line.buy} need={line.need} unpriced={line.unpriced} bind:checked={() => line.checked, (value) => tick(line, value)} />
+					</li>
+				{/each}
+			</ul>
+
+			{#if bought.length}
+				<button class="bought-toggle" aria-expanded={showBought} onclick={() => (showBought = !showBought)}>
+					Bought · {bought.length}
+					<span class="chevron" class:open={showBought}><ChevronDown size={18} /></span>
+				</button>
+				{#if showBought}
+					<ul transition:slide={{ duration: allows.flights() ? 260 : 0 }}>
+						{#each bought as line (line.id)}
+							<li data-line={line.id}>
+								<ShopRow name={line.name} buy={line.buy} need={line.need} unpriced={line.unpriced} bind:checked={() => line.checked, (value) => tick(line, value)} />
+							</li>
+						{/each}
+					</ul>
+				{/if}
+			{/if}
+		</div>
 	</div>
 	{#if stamp}<span class="stamp" aria-hidden="true"><ChefHat size={46} /></span>{/if}
 {:else}
 	<EmptyNote>
 		<span>Nothing to buy yet.</span>
-		<a href={resolve('/(app)/plan')}>Put dishes in the plan</a>
+		<a href={slash(resolve('/(app)/plan'))}>Put dishes in the plan</a>
 	</EmptyNote>
 {/if}
 
 <style>
+	.shopping,
+	.stores,
 	.list {
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
+	}
+	.column,
+	.store-name {
+		display: none;
+	}
+	.hide {
+		padding: 2px 0;
+		font-size: var(--text-small);
+	}
+	/* A desktop: the stores in a column on the left, with what each costs, and the open store next to them. */
+	@media (min-width: 900px) {
+		.shopping {
+			display: grid;
+			grid-template-columns: 240px minmax(0, 640px);
+			align-items: start;
+			gap: var(--space-8);
+		}
+		.stores {
+			position: sticky;
+			top: var(--space-8);
+		}
+		.tabs {
+			display: none;
+		}
+		.column {
+			display: block;
+		}
+		.store-name {
+			display: block;
+			margin: 0;
+			font-size: var(--text-heading);
+			font-weight: var(--weight-heavy);
+		}
 	}
 	.summary {
 		display: flex;

@@ -7,6 +7,7 @@
 	import Share2 from '@lucide/svelte/icons/share-2';
 	import SlidersHorizontal from '@lucide/svelte/icons/sliders-horizontal';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import ActionRow from '#lib/components/ActionRow.svelte';
 	import AddRow from '#lib/components/AddRow.svelte';
 	import Badge from '#lib/components/Badge.svelte';
@@ -19,7 +20,6 @@
 	import MealRow from '#lib/components/MealRow.svelte';
 	import { MEAL_TYPES } from '#lib/components/meal-types.ts';
 	import NoPricePill from '#lib/components/NoPricePill.svelte';
-	import Plate from '#lib/components/Plate.svelte';
 	import QrCode from '#lib/components/QrCode.svelte';
 	import RecipeImage from '#lib/components/RecipeImage.svelte';
 	import { RECIPE_KINDS } from '#lib/components/recipe-kinds.ts';
@@ -43,7 +43,6 @@
 		{ spec: '16 · 400', size: 'var(--text-body)', weight: 400, text: 'Red lentils, 18 kg' },
 		{ spec: '13 · 400', size: 'var(--text-note)', weight: 400, text: '21.6 kg needed' }
 	];
-	const plates = ['dal', 'reis', 'suppe', 'chili', 'salat', 'pasta', 'gratin', 'kuerbis', 'muesli', 'brot', 'pfann', 'kompott', 'kuchen', 'couscous'];
 	const tabs = [
 		{ id: 'supermarket', label: 'Supermarket', count: 6 },
 		{ id: 'asian-market', label: 'Asian market', count: 4 },
@@ -159,10 +158,6 @@
 				</div>
 			</div>
 			<div class="row">
-				<span class="soft small label">Plates</span>
-				<div class="inline">{#each plates as seed (seed)}<Plate {seed} size={52} />{/each}</div>
-			</div>
-			<div class="row">
 				<span class="soft small label">Recipe pictures</span>
 				<div class="inline">
 					{#each Object.keys(RECIPE_KINDS) as kind (kind)}<span class="kind"><RecipeImage id="none" category={kind as keyof typeof RECIPE_KINDS} size={64} /><span class="soft small">{kind}</span></span>{/each}
@@ -204,7 +199,7 @@
 		</div>
 	</section>
 
-	<p><a href={resolve('/styleguide/motion')}>Motion trial page</a> · <a href={resolve('/')}>Back to the start</a></p>
+	<p><a href={slash(resolve('/styleguide/motion'))}>Motion trial page</a> · <a href={resolve('/')}>Back to the start</a></p>
 </main>
 
 <style>

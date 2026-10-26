@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import type { AppData } from './data/app-data.ts';
 import { categoriesInUse, filterRecipes, groupByLetter, ingredientCountText, scaledIngredients, summaries } from './recipes.ts';
 import { formatAmount } from './format.ts';
-import { plateLook } from './components/plate.ts';
 
 const data: AppData = {
 	version: 't',
@@ -92,11 +91,3 @@ describe('formatAmount', () => {
 	});
 });
 
-describe('plate looks', () => {
-	it('stay the same for the same recipe, and use only design colors', () => {
-		expect(plateLook('lentil-dal')).toEqual(plateLook('lentil-dal'));
-		const look = plateLook('anything');
-		expect(look.rim).toMatch(/-tint$/);
-		expect(look.garnish).toHaveLength(3);
-	});
-});

@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { get, set } from 'idb-keyval';
 	import { asset, resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import { version } from '$app/env';
 
 	// A page of checks for the walking skeleton (roadmap step 5). It is replaced by the real app later.
@@ -10,7 +11,7 @@
 	let online = $state(true);
 	let worker = $state<Check>({ label: 'Works offline', ok: null, detail: 'checking' });
 	let storage = $state<Check>({ label: 'Browser keeps the data', ok: null, detail: 'checking' });
-	let data = $state<Check>({ label: 'Data file loaded', ok: null, detail: 'checking' });
+	let data = $state<Check>({ label: 'A file from the cache', ok: null, detail: 'checking' });
 	let installed = $state(false);
 	let note = $state('');
 	let saved = $state<string | null>(null);
@@ -36,8 +37,8 @@
 		};
 
 		try {
-			const res = await fetch(asset('hello.json'));
-			data = { label: data.label, ok: res.ok, detail: (await res.json()).message };
+			const res = await fetch(asset('manifest.webmanifest'));
+			data = { label: data.label, ok: res.ok, detail: res.ok ? 'the app description was loaded' : 'could not load' };
 		} catch {
 			data = { label: data.label, ok: false, detail: 'could not load' };
 		}
@@ -79,7 +80,7 @@
 	</form>
 	<p>{saved === null ? 'Nothing saved yet.' : `Saved on this device: "${saved}"`}</p>
 
-	<p><a href={resolve('/about')}>Open another page</a> · <a href={resolve('/styleguide')}>Style sheet</a> · <a href={resolve('/')}>The app</a></p>
+	<p><a href={slash(resolve('/(app)/recipes'))}>Open another page</a> · <a href={slash(resolve('/styleguide'))}>Style sheet</a> · <a href={resolve('/')}>The app</a></p>
 </main>
 
 <style>

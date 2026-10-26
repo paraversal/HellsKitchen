@@ -50,7 +50,8 @@ The app starts with one empty plan, named "New event", with a single day (today)
 - **Add meal** under a day opens the new meal. Choose the kind (breakfast, lunch, coffee & cake, dinner, snack) and optionally a time.
 - **For**: *Everyone* or *Organisers*. A meal is always for all of the people you pick. There are no percentages.
 - **Hungrier than usual**: switch it on for a meal where people eat more (the old sheet used this for the Friday dinner). The main dishes of that meal are multiplied by the appetite factor from the event settings.
-- Press a meal in the plan to open it again.
+- Press a meal in the plan to open it again (the small arrow on the right says it can be opened). A meal for the organisers is marked **Organisers**, a hungrier meal **Hungry ×1.3**, and a dish whose amount or share you changed shows it next to its name.
+- Inside a meal, every dish says how many people get it and how many grams each, so you can see that two main dishes split the guests.
 - **Delete this meal** is at the bottom of the meal; the app asks first.
 
 ### Dishes
@@ -80,10 +81,10 @@ On a computer, the box at the bottom of the left bar shows the open plan (its na
 
 ## Shopping
 
-- One tab per store that has something to buy. The number on the tab is what is left to buy there; a check means the store is done.
+- One tab per store that has something to buy. The number on the tab is what is left to buy there; a check means the store is done. When the tabs do not all fit, an arrow at the edge shows there are more. On a computer the stores are a column on the left instead, each with its cost.
 - Every line shows the amount to buy. Where the ingredient has a known pack size you also see the number of packs, with the exact need under it.
 - **Tick** an item when it is in the basket. The ticks are saved with the plan, so you can close the app and come back. A bar shows how far you are in the store.
-- With **Fun** on, a ticked item flies into the basket of the Shopping tab and moves under **Bought**, at the bottom of the list. Press *Bought* to see those items; tick one again to bring it back.
+- **Hide bought items** (on at first) moves a ticked item under **Bought**, at the bottom of the list. Press *Bought* to see those items; tick one again to bring it back. Turn it off to keep ticked items where they are. The choice is kept on your device. With **Fun** on, the item flies into the basket of the Shopping tab on its way.
 - A store shows its **estimated cost**, and how many of its items have no price.
 - The printer button prints the list of the open store (see *Printing*).
 

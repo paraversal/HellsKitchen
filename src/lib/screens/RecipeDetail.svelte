@@ -2,6 +2,7 @@
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 	import Plus from '@lucide/svelte/icons/plus';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import Badge from '#lib/components/Badge.svelte';
 	import Button from '#lib/components/Button.svelte';
 	import IconButton from '#lib/components/IconButton.svelte';
@@ -44,7 +45,7 @@
 {#if recipe}
 	<article bind:this={page}>
 		<div class="hero" style:background="var(--color-{RECIPE_KINDS[recipe.category].tint})">
-			<div class="back"><IconButton icon={ArrowLeft} label="Back to the recipes" href={resolve('/(app)/recipes')} /></div>
+			<div class="back"><IconButton icon={ArrowLeft} label="Back to the recipes" href={slash(resolve('/(app)/recipes'))} /></div>
 			<span class="hero-plate" data-plate={id} style:view-transition-name="hk-plate"><RecipeImage {id} size={168} /></span>
 		</div>
 
@@ -58,7 +59,7 @@
 					{#if source}<span class="soft note">Source: {source}</span>{/if}
 				</div>
 			</div>
-			<div class="action"><Button icon={Plus} disabled={planStore.status !== 'ready'} onclick={() => (adding.recipe = id)}>Add to plan</Button></div>
+			<div class="action"><Button icon={Plus} disabled={planStore.status === 'unreadable'} onclick={() => (adding.recipe = id)}>Add to plan</Button></div>
 		</header>
 
 		<div class="columns">
@@ -84,7 +85,7 @@
 			{/if}
 		</div>
 
-		<div class="cta"><Button icon={Plus} block disabled={planStore.status !== 'ready'} onclick={() => (adding.recipe = id)}>Add to plan</Button></div>
+		<div class="cta"><Button icon={Plus} block disabled={planStore.status === 'unreadable'} onclick={() => (adding.recipe = id)}>Add to plan</Button></div>
 	</article>
 {/if}
 
@@ -99,11 +100,11 @@
 	/* C5. The ingredients arrive one after the other: they fade up, or with fun they drop in and settle. */
 	li.fade {
 		animation: arrive var(--motion-normal) var(--ease-out) backwards;
-		animation-delay: calc(var(--i) * 40ms);
+		animation-delay: calc(min(var(--i), 8) * 25ms);
 	}
 	li.drop {
 		animation: drop-in 550ms var(--spring-bouncy) backwards;
-		animation-delay: calc(var(--i) * 40ms);
+		animation-delay: calc(min(var(--i), 8) * 25ms);
 	}
 	@keyframes arrive {
 		from {

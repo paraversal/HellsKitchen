@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import { motion, setMotion, type MotionMode } from '#lib/motion/mode.svelte.ts';
 	import FrameDemos from './FrameDemos.svelte';
 	import LifeDemos from './LifeDemos.svelte';
@@ -24,7 +25,7 @@
 
 <main>
 	<header>
-		<a class="back" href={resolve('/styleguide')}><ArrowLeft size={18} /> Style sheet</a>
+		<a class="back" href={slash(resolve('/styleguide'))}><ArrowLeft size={18} /> Style sheet</a>
 		<h1>Motion</h1>
 		<p class="soft">Press a strength to see it. The ids are those of <code>docs/ANIMATIONS.md</code>. The strengths the app uses are marked under each title (set in <code>src/lib/motion/choices.ts</code>); the others are kept here as a reference.</p>
 		<div class="modes" role="group" aria-label="How much the page moves">

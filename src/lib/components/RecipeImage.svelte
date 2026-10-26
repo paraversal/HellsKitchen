@@ -12,6 +12,8 @@
 	const kind = $derived(RECIPE_KINDS[category ?? appData.recipes[id]?.category ?? 'misc']);
 	const src = $derived(recipeImage(id, size > 72 ? 'l' : 's'));
 	const rim = $derived(Math.max(2, Math.round(size * 0.05)));
+	// Below 30 px the plate's middle would leave the icon too small to read, so a small picture is the colored circle and a bigger icon.
+	const small = $derived(size < 30);
 	let failed = $state(false);
 	$effect(() => {
 		void src;
@@ -24,7 +26,7 @@
 		<img {src} alt="" width={size - 2 * rim} height={size - 2 * rim} loading="lazy" decoding="async" onerror={() => (failed = true)} />
 	{:else}
 		{@const Icon = kind.icon}
-		<span class="disc" style:color="var(--color-{kind.accent})"><Icon size={Math.max(11, Math.round(size * 0.42))} /></span>
+		<span class="disc" class:small style:color="var(--color-{kind.accent})"><Icon size={small ? Math.round(size * 0.62) : Math.max(11, Math.round(size * 0.42))} /></span>
 	{/if}
 </span>
 
@@ -50,5 +52,10 @@
 		height: 74%;
 		border-radius: 50%;
 		background: var(--color-sheet);
+	}
+	.disc.small {
+		width: 100%;
+		height: 100%;
+		background: none;
 	}
 </style>

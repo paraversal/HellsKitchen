@@ -12,7 +12,7 @@
 	import { appData } from '#lib/app-data.ts';
 	import { planStore } from '#lib/plan/browser.ts';
 	import { current } from '#lib/plan/current.svelte.ts';
-	import { addDay, addMeal, dayLabel, peopleIn, rename, setEvent } from '#lib/plan/plan.ts';
+	import { addDay, addMeal, dayLabel, peopleIn, portionOverride, rename, setEvent } from '#lib/plan/plan.ts';
 	import { euro } from '#lib/plan/shopping.ts';
 	import { dayIn, mealIn } from '#lib/motion/arrive.ts';
 	import { transfer } from '#lib/plan/transfer.svelte.ts';
@@ -25,6 +25,13 @@
 	let meal = $state<{ day: number; meal: number } | null>(null);
 	let day = $state<number | null>(null);
 	let event = $state(false);
+
+	/** What was changed for a dish, shown next to its name: its own grams per person, its own share of the guests. */
+	function dishNote(dish: Parameters<typeof portionOverride>[0]): string | undefined {
+		const grams = portionOverride(dish);
+		const parts = [grams !== undefined ? `${grams} g` : '', dish.share === undefined ? '' : dish.share === 1 ? 'for everyone' : `for ${Math.round(dish.share * 100)} %`].filter(Boolean);
+		return parts.length ? parts.join(' · ') : undefined;
+	}
 
 	/** The headcount is typed. Anything that is not a whole number of at least 1 is ignored. */
 	function people(text: string) {
@@ -71,7 +78,7 @@
 				{@const label = dayLabel(d.date)}
 				<section class="day" data-day={index} in:dayIn>
 					<div class="day-head">
-						<DayLabel name={label.name} date={label.date} />
+						<DayLabel name={label.name} date={label.date} heading="h2" />
 						<IconButton icon={Ellipsis} label="Edit {label.name}" size={36} onclick={() => (day = index)} />
 					</div>
 					{#each d.meals as m, mealIndex (m.id ?? mealIndex)}
@@ -79,8 +86,11 @@
 							<MealRow
 								type={m.type}
 								time={m.time}
+								day={label.name}
 								people={peopleIn(plan, m)}
-								dishes={m.dishes.map((dish) => ({ id: dish.recipe, name: appData.recipes[dish.recipe]?.name ?? dish.recipe }))}
+								organisers={m.for === 'organisers'}
+								hungry={m.appetite ? `×${plan.event.appetite_factor ?? 1}` : undefined}
+								dishes={m.dishes.map((dish) => ({ id: dish.recipe, name: appData.recipes[dish.recipe]?.name ?? dish.recipe, note: dishNote(dish) }))}
 								onopen={() => (meal = { day: index, meal: mealIndex })}
 							/>
 						</div>

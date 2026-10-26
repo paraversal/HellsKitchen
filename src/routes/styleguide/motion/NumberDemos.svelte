@@ -8,7 +8,7 @@
 	import { scale } from 'svelte/transition';
 	import IconButton from '#lib/components/IconButton.svelte';
 	import Odometer from '#lib/components/Odometer.svelte';
-	import Plate from '#lib/components/Plate.svelte';
+	import Plate from './Plate.svelte';
 	import { formatAmount } from '#lib/format.ts';
 	import { easing, wait } from '#lib/motion/easing.ts';
 	import { allows } from '#lib/motion/mode.svelte.ts';

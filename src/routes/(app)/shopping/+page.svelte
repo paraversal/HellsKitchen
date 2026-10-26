@@ -15,4 +15,9 @@
 		max-width: 640px;
 		margin-top: var(--space-4);
 	}
+	@media (min-width: 900px) {
+		.content {
+			max-width: none;
+		}
+	}
 </style>

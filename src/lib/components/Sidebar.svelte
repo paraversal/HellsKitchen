@@ -2,6 +2,7 @@
 	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 	import Flame from '@lucide/svelte/icons/flame';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { hop, movePill, setPill, type Spot } from '#lib/motion/pill.ts';
 	import { NAV, type NavId } from '#lib/nav.ts';
@@ -61,7 +62,7 @@
 	<nav aria-label="Main" bind:this={nav} class:ready>
 		<span class="slider" bind:this={bg} aria-hidden="true"></span>
 		{#each NAV as item, i (item.id)}
-			<a href={resolve(item.path)} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined} bind:this={links[i]}>
+			<a href={slash(resolve(item.path))} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined} bind:this={links[i]}>
 				<span class="icon" data-tab-icon={item.id} bind:this={icons[i]}><item.icon size={22} /></span>
 				<span class="label">{item.label}</span>
 				{#if item.id === 'shopping' && openItems}<span class="badge"><Odometer text={String(openItems)} /></span>{/if}

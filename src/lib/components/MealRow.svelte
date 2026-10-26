@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import Users from '@lucide/svelte/icons/users';
 	import { untrack } from 'svelte';
 	import { MEAL_TYPES, type MealType } from './meal-types.ts';
@@ -7,9 +8,12 @@
 	import RecipeImage from './RecipeImage.svelte';
 
 	// One meal of the plan: what kind, when, how many people, and its dishes. `compact` is the narrow version for the desktop day columns.
-	// With `onopen`, the whole row can be pressed, for example to edit the meal.
-	type Props = { type: MealType; time?: string; people: number; dishes: { id: string; name: string }[]; compact?: boolean; onopen?: () => void };
-	let { type, time, people, dishes, compact = false, onopen }: Props = $props();
+	// With `onopen`, the whole row can be pressed, for example to edit the meal; a small arrow says so.
+	// `organisers` and `hungry` mark a meal that is only for the organisers, or that is hungrier than usual (`hungry` is the factor, like "×1.3").
+	// A dish's `note` says what was changed for it, like "70 g".
+	type Dish = { id: string; name: string; note?: string };
+	type Props = { type: MealType; time?: string; people: number; dishes: Dish[]; organisers?: boolean; hungry?: string; day?: string; compact?: boolean; onopen?: () => void };
+	let { type, time, people, dishes, organisers = false, hungry, day, compact = false, onopen }: Props = $props();
 	const meal = $derived(MEAL_TYPES[type]);
 
 	// B2. When the kind of a meal is changed, its icon plays the scene of the new kind (with fun).
@@ -36,12 +40,14 @@
 			{#if compact}{@render badge(28, 15)}{/if}
 			<span class="name">{compact ? meal.short : meal.label}</span>
 			{#if time}<span class="time">{time}</span>{/if}
-			<span class="people"><Users size={compact ? 14 : 15} />{people}</span>
+			{#if organisers}<span class="tag organisers">Organisers</span>{/if}
+			{#if hungry}<span class="tag hungry">Hungry {hungry}</span>{/if}
+			<span class="people"><Users size={compact ? 14 : 15} />{people}{#if onopen}<span class="more" aria-hidden="true"><ChevronRight size={16} /></span>{/if}</span>
 		</div>
 		{#if dishes.length}
 			<ul>
 				{#each dishes as dish (dish.id)}
-					<li><RecipeImage id={dish.id} size={compact ? 24 : 22} />{dish.name}</li>
+					<li><RecipeImage id={dish.id} size={compact ? 24 : 22} /><span>{dish.name}{#if dish.note}<span class="note"> · {dish.note}</span>{/if}</span></li>
 				{/each}
 			</ul>
 		{/if}
@@ -55,7 +61,7 @@
 		class:compact
 		role="button"
 		tabindex="0"
-		aria-label="Edit {meal.label}"
+		aria-label="Edit {day ? `${day} ` : ''}{meal.label.toLowerCase()}{organisers ? ', for the organisers' : ''}{hungry ? ', hungrier than usual' : ''}"
 		onclick={onopen}
 		onkeydown={(event) => {
 			if (event.key === 'Enter' || event.key === ' ') {
@@ -94,8 +100,32 @@
 	.heading {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: var(--space-2);
 		margin-bottom: 9px;
+	}
+	.tag {
+		padding: 1px 7px;
+		border-radius: var(--radius-pill);
+		font-size: var(--text-caption);
+		font-weight: var(--weight-bold);
+		line-height: 1.5;
+		white-space: nowrap;
+	}
+	.organisers {
+		background: var(--color-leaf-tint);
+	}
+	.hungry {
+		background: var(--color-mustard-tint);
+	}
+	.more {
+		display: inline-flex;
+		margin-left: 2px;
+		color: var(--color-ink-soft);
+	}
+	.note {
+		color: var(--color-ink-soft);
+		font-size: var(--text-small);
 	}
 	.name {
 		font-weight: var(--weight-bold);

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { hop, movePill, setPill, type Spot } from '#lib/motion/pill.ts';
 	import { NAV, type NavId } from '#lib/nav.ts';
@@ -79,7 +80,7 @@
 <nav class="tabs" aria-label="Main" bind:this={nav} class:ready>
 	<span class="slider" bind:this={bg} aria-hidden="true"></span>
 	{#each NAV as item, i (item.id)}
-		<a href={resolve(item.path)} onclick={click} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined}>
+		<a href={slash(resolve(item.path))} onclick={click} class:active={item.id === active} aria-current={item.id === active ? 'page' : undefined}>
 			<span class="pill" bind:this={pills[i]}>
 				<span class="icon" data-tab-icon={item.id} bind:this={icons[i]}>
 					<item.icon size={22} />

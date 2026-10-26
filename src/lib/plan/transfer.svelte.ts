@@ -1,6 +1,7 @@
 // Moving the open plan in and out of the app: the share sheet, the sheet that asks what to do with a plan that arrived,
 // links, files, and the copies the person keeps. The formats are in transfer.ts.
 import { resolve } from '$app/paths';
+import { slash } from '../paths.ts';
 import { showToast } from '../toast.svelte.ts';
 import type { PlanFile } from '../data/schema.ts';
 import { backup } from './backup.svelte.ts';
@@ -14,8 +15,7 @@ export const transfer = $state<{ sharing: boolean; incoming: Incoming | null }>(
 
 /** The link to the open plan. The plan is in the part after the #, which a browser never sends anywhere. */
 export function shareLink(plan: PlanFile, updatedAt: string): string {
-	const path = resolve('/(app)/plan');
-	return `${location.origin}${path.endsWith('/') ? path : `${path}/`}#${encodeShare(plan, updatedAt)}`;
+	return `${location.origin}${slash(resolve('/(app)/plan'))}#${encodeShare(plan, updatedAt)}`;
 }
 
 /** Each of these answers whether it worked, so the button can show a check. */

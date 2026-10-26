@@ -3,6 +3,7 @@
 	import Printer from '@lucide/svelte/icons/printer';
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
+	import { slash } from '#lib/paths.ts';
 	import Button from '#lib/components/Button.svelte';
 	import { paperThen } from '#lib/motion/paper.ts';
 	import { planStore } from '#lib/plan/browser.ts';
@@ -22,7 +23,7 @@
 </svelte:head>
 
 <div class="bar">
-	<a href={resolve('/(app)/plan')}>Back to the plan</a>
+	<a href={slash(resolve('/(app)/plan'))}>Back to the plan</a>
 	<div class="actions">
 		{#if printJob.current}
 			<Button variant={canPrint() ? 'secondary' : 'primary'} icon={FileDown} onclick={() => sharePdf(printJob.current!.name, printJob.current!.build())}>PDF</Button>
