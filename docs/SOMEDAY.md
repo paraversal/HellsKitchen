@@ -40,3 +40,14 @@ The app starts on a `github.io` address. A custom domain costs money every year 
 
 The headcount of the plan used to have a minus and a plus (holding one counted on, faster the longer it was held, and with fun the number bounced). They were taken out so the number can simply be pressed and typed, like the name of the plan.
 The `Stepper` component still exists and the recipe page uses it for portions. To bring the buttons back on the plan screen, put `Stepper` back in `PlanView.svelte` in place of the pressable number; the steps used to grow with the count (1 below 20, 5 below 100, 10 from there).
+
+## Shopping progress that travels
+
+Whether the ticks of the shopping list should go with a link or a file, and how they would merge when two people shopped different stores. Today links leave them out and files keep them.
+The options and a recommendation are in [STATE.md](STATE.md#should-shopping-progress-travel-with-a-link-or-a-file).
+
+## Ticks that remember the amount
+
+A tick is kept by ingredient only. If the plan changes afterwards and more of that ingredient is needed, the tick hides it. The idea: remember the amount that was bought, and bring the row back with what is missing.
+The options and a recommendation are in [STATE.md](STATE.md#what-happens-to-a-tick-when-the-plan-changes).
+

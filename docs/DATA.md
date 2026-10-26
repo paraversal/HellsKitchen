@@ -185,6 +185,6 @@ A plan that is identical to the one on the device is recognised ("You already ha
 
 The app counts the changes made since the last copy (a file saved, a link sent or copied). After 15 it offers to save a file, with "Later" to ask again after another 15. Ticking things off in the shopping list does not count.
 
-**Paper.** The shopping list (all stores, or one) and the recipe sheets open as pages made for printing. The browser's print window also saves them as a PDF.
+**Paper.** The shopping list (all stores, or one) and the recipe sheets open as pages made for printing. The browser's print window also saves them as a PDF. A phone that cannot open the print window (an iPhone with the app on its home screen) gets a PDF button instead: the same lists are written as a plain PDF and handed to the share sheet, which can print, save or send it.
 A recipe sheet is made for every dish in the plan, scaled to its meal with the same rules as the shopping list: the people of the meal, the share of the dish, the appetite factor, grams per person.
 

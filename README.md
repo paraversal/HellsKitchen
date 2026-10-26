@@ -7,6 +7,8 @@ It runs in the browser, works offline, and keeps each plan on the user's own dev
 
 | What | Where |
 |---|---|
+| **What the app is and can do today, what is missing, and where it could go** | [docs/STATE.md](docs/STATE.md) |
+| **How to use it** (for the people who plan the event) | [docs/MANUAL.md](docs/MANUAL.md) |
 | The plan and what is done | [ROADMAP.md](ROADMAP.md) |
 | What has been decided, and what is still open | [docs/DECISIONS.md](docs/DECISIONS.md) |
 | The tech stack, in plain words | [docs/STACK.md](docs/STACK.md) |

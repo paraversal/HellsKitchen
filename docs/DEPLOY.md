@@ -61,8 +61,9 @@ On the phone, also try this. It should take a few minutes, not fifteen.
 1. Flick the recipe list and tap a recipe while it is still gliding: the glide must stop for good and nothing must open. Flick again and tap a tab in the bottom bar: the glide stops and the tab opens.
 2. In Shopping, drag the store tabs sideways: they must not move up and down.
 3. In a meal, press "Add dish" and search: the sheet must stay above the keyboard, with the results visible.
-4. On a print page, press Print: the print window must open.
-5. Meta (the fourth tab): the Fun switch works, and the data health shows.
+4. On a print page, press Print: the print window must open. In the app from the home screen of an iPhone there is no Print button but a PDF button: it must open the share sheet with a PDF, which the sheet can print. Check the PDF too: one store per page, every dish on a page.
+5. In the share sheet, "Paste a plan link": copy a plan link in Safari, open the app from the home screen, press it, and the plan that arrived must be offered.
+6. Meta (the fourth tab): the Fun switch works, and the data health shows.
 
 ## Results
 

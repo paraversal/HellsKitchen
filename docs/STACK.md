@@ -54,7 +54,7 @@ app code ───────────────────────�
 |---|---|---|---|
 | Share link | **`fflate`** compression, plan placed in the URL fragment (the part after `#`) | The plan is squeezed small and put in the link. Browsers never send the fragment to a server, so plans stay private. | JSON file only |
 | QR code | **`qrcode`** (generate only) | Moves a plan from a laptop to a phone without typing. | Copy the link |
-| PDF | **The browser's print dialog** with a print stylesheet | "Save as PDF" is built into every browser. No library. | `pdfmake` |
+| PDF | **The browser's print dialog** with a print stylesheet, and a **small PDF writer of our own** (`src/lib/plan/pdf.ts`) for phones | "Save as PDF" is built into every browser, but an iPhone with the app on its home screen has no print window. There the same lists are written as a plain PDF and handed to the share sheet, which can print it. No library. | `pdfmake` |
 | Backup | **JSON file** download and import | The answer to a browser clearing its storage. | None needed |
 
 ### Quality and hosting

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { planStore } from '#lib/plan/browser.ts';
+	import { printJob } from '#lib/plan/printjob.svelte.ts';
+	import { shoppingPdf } from '#lib/plan/pdf.ts';
 	import { current } from '#lib/plan/current.svelte.ts';
 	import { euro } from '#lib/plan/shopping.ts';
 
@@ -10,6 +12,14 @@
 	onMount(() => (only = new URLSearchParams(location.search).get('store')));
 
 	const stores = $derived((current.shopping?.stores ?? []).filter((s) => !only || s.id === only));
+
+	// The same list as a PDF, for phones that cannot print.
+	$effect(() => {
+		const name = planStore.plan?.name ?? 'plan';
+		const chosen = stores;
+		printJob.current = { name: `shopping-list-${only ?? 'all'}.pdf`, build: () => shoppingPdf(name, chosen) };
+		return () => (printJob.current = null);
+	});
 </script>
 
 {#each stores as store (store.id)}

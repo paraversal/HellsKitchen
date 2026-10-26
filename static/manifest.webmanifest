@@ -2,9 +2,12 @@
 	"name": "Hell's Kitchen",
 	"short_name": "Hell's Kitchen",
 	"description": "Plan the food for a big event",
+	"id": "./",
 	"start_url": "./",
 	"scope": "./",
 	"display": "standalone",
+	"launch_handler": { "client_mode": ["navigate-existing", "auto"] },
+	"handle_links": "preferred",
 	"background_color": "#F7F1E5",
 	"theme_color": "#CF3F26",
 	"icons": [

@@ -2,10 +2,19 @@
 	import { appData } from '#lib/app-data.ts';
 	import { MEAL_TYPES } from '#lib/components/meal-types.ts';
 	import { planStore } from '#lib/plan/browser.ts';
+	import { recipesPdf } from '#lib/plan/pdf.ts';
+	import { printJob } from '#lib/plan/printjob.svelte.ts';
 	import { recipeSheets, sheetFacts } from '#lib/plan/sheets.ts';
 
 	// One page for every dish of the plan, scaled to the meal it is cooked for: who eats it, how much, and the method.
 	const sheets = $derived(planStore.plan ? recipeSheets(planStore.plan, appData) : []);
+
+	// The same sheets as a PDF, for phones that cannot print.
+	$effect(() => {
+		const chosen = sheets;
+		printJob.current = { name: 'recipe-sheets.pdf', build: () => recipesPdf(chosen) };
+		return () => (printJob.current = null);
+	});
 </script>
 
 {#each sheets as sheet (sheet.key)}

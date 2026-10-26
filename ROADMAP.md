@@ -10,7 +10,7 @@ Working rules:
 - Each step ends with something you can click or run yourself.
 - Terms stay consistent. A glossary (plan, meal, recipe, ingredient, store) lives in the docs from step 6.
 
-Decisions so far are recorded in [docs/DECISIONS.md](docs/DECISIONS.md). Things we deliberately left out
+What the app can do today, and what is missing, is in [docs/STATE.md](docs/STATE.md). Decisions so far are recorded in [docs/DECISIONS.md](docs/DECISIONS.md). Things we deliberately left out
 of the first version are collected in [docs/SOMEDAY.md](docs/SOMEDAY.md).
 
 ---

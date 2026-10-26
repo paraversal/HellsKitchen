@@ -66,6 +66,24 @@ export async function openFile(file: File): Promise<void> {
 	transfer.incoming = { source: 'file', result: file.size > 2_000_000 ? { ok: false, problem: 'This file is too big to be a plan.' } : fromFile(await file.text()) };
 }
 
+/** For a phone that opened a link in the browser, not in the app on its home screen: copy the link, open the app, and paste it here. */
+export async function pasteLink(): Promise<void> {
+	let text = '';
+	try {
+		text = await navigator.clipboard.readText();
+	} catch {
+		showToast('The clipboard could not be read');
+		return;
+	}
+	const start = text.indexOf('#plan=');
+	if (start < 0) {
+		showToast('There is no plan link on the clipboard');
+		return;
+	}
+	transfer.sharing = false;
+	transfer.incoming = { source: 'link', result: decodeShare(text.slice(start).trim().split(/\s/)[0]) };
+}
+
 /** Looks for a plan in the address (`#plan=...`), offers it, and takes it out of the address so that a reload does not offer it again. */
 export function takeLinkFromAddress(): void {
 	const result = readLink(location.hash);

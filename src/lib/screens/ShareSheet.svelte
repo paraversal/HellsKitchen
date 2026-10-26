@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ClipboardPaste from '@lucide/svelte/icons/clipboard-paste';
 	import Copy from '@lucide/svelte/icons/copy';
 	import FileDown from '@lucide/svelte/icons/file-down';
 	import FileText from '@lucide/svelte/icons/file-text';
@@ -10,7 +11,7 @@
 	import QrCode from '#lib/components/QrCode.svelte';
 	import Sheet from '#lib/components/Sheet.svelte';
 	import { planStore } from '#lib/plan/browser.ts';
-	import { canSend, copyLink, openFile, saveFile, sendLink, shareLink, transfer } from '#lib/plan/transfer.svelte.ts';
+	import { canSend, copyLink, openFile, pasteLink, saveFile, sendLink, shareLink, transfer } from '#lib/plan/transfer.svelte.ts';
 
 	// Everything that takes the plan out of this screen: a link, a code to scan, a file, paper. And the way back in: a file.
 	const record = $derived(planStore.record);
@@ -34,6 +35,7 @@
 				{/if}
 				<ActionRow icon={Copy} check label="Copy the link" hint={canSend() ? undefined : 'The whole plan is inside the link'} onclick={() => copyLink(link)} />
 				<ActionRow icon={FileDown} check label="Save the plan as a file" hint="A copy to keep, with the shopping ticks" onclick={() => saveFile(record.plan, record.updatedAt)} />
+				<ActionRow icon={ClipboardPaste} label="Paste a plan link" hint="For a link that opened in the browser instead of this app" onclick={() => pasteLink()} />
 				<ActionRow icon={FileUp} label="Open a plan file" onclick={() => picker?.click()} />
 				<ActionRow icon={Printer} label="Print the shopping list" href={resolve('/print/shopping')} />
 				<ActionRow icon={FileText} label="Print the recipe sheets" hint="Every dish, scaled to its meal" href={resolve('/print/recipes')} />
