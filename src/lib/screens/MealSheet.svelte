@@ -25,6 +25,7 @@
 	import { portionShare } from '#lib/kitchen-engine/rules/share.ts';
 	import type { Meal as EngineMeal } from '#lib/kitchen-engine/types.ts';
 	import { categoriesInUse, filterRecipes, summaries } from '#lib/recipes.ts';
+	import { cap, words } from '#lib/words.ts';
 
 	// Everything about one meal: what kind, when, for whom, and its dishes. Changes apply at once.
 	let { target = $bindable() }: { target: { day: number; meal: number } | null } = $props();
@@ -124,8 +125,8 @@
 					<div class="who">
 						<span class="label">For</span>
 						<div class="chips" role="group" aria-label="Who the meal is for">
-							<Chip active={(meal.for ?? 'everyone') === 'everyone'} onclick={() => patch({ for: 'everyone' })}>Everyone · {plan.event.everyone}</Chip>
-							<Chip active={meal.for === 'organisers'} onclick={() => patch({ for: 'organisers' })}>Organisers · {plan.event.organisers}</Chip>
+							<Chip active={(meal.for ?? 'everyone') === 'everyone'} onclick={() => patch({ for: 'everyone' })}>{cap(words.everyone)} · {plan.event.everyone}</Chip>
+							<Chip active={meal.for === 'organisers'} onclick={() => patch({ for: 'organisers' })}>{cap(words.organisers.many)} · {plan.event.organisers}</Chip>
 						</div>
 					</div>
 				</div>

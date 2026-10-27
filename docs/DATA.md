@@ -12,6 +12,8 @@ data/
   stores.yaml           the shops
   ingredients.yaml      every ingredient
   recipes/              one file per recipe, named after the recipe: tzatziki.yaml
+config/
+  words.yaml            the words the app uses for the people of the event
 docs/examples/
   plan.example.yaml     an example plan
 ```
@@ -46,6 +48,21 @@ none: Not bought
 ```
 
 The store `none` is for things that are never bought, like tap water. They count in recipes but never appear in the shopping list or the cost.
+
+## Words of the event (`config/words.yaml`)
+
+Some things an event may call differently. The file sets the word the app uses for them; a word left out keeps the app's own.
+
+```yaml
+everyone: everyone          # the whole headcount: "Everyone · 200"
+organisers:                 # the group that arrives early: one of them, and more than one
+  one: organiser
+  many: organisers
+```
+
+Write each word as it reads in the middle of a sentence ("32 organisers"); the app gives it a capital where a label starts ("Organisers"). The file is checked with the data (an unknown word is an error, with "Did you mean ...?") and goes into `src/lib/generated/words.json`, so a change shows after the next build. It is not part of a plan: a plan file keeps saying `for: organisers`, whatever the word.
+
+To make another word changeable, add it to `Words` and `DEFAULT_WORDS` in `src/lib/data/words.ts`, to this file, and use `words` from `src/lib/words.ts` where the app shows it.
 
 ## Ingredients (`ingredients.yaml`)
 

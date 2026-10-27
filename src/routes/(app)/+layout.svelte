@@ -14,6 +14,7 @@
 	import ShareSheet from '#lib/screens/ShareSheet.svelte';
 	import { appData } from '#lib/app-data.ts';
 	import { NAV, type NavId } from '#lib/nav.ts';
+	import { counted, words } from '#lib/words.ts';
 
 	// The frame around the four places of the app: a bar at the bottom on a phone (below 900 px), a bar on the left on a desktop.
 	let { children } = $props();
@@ -25,7 +26,7 @@
 		const { everyone, organisers, appetite_factor: appetite = 1 } = plan.event;
 		const days = plan.days.length;
 		return [
-			`${everyone} people${organisers ? ` · ${organisers} organisers` : ''}`,
+			`${everyone} people${organisers ? ` · ${counted(organisers, words.organisers)}` : ''}`,
 			`${days} ${days === 1 ? 'day' : 'days'}${appetite !== 1 ? ` · hungry ×${appetite}` : ''}`
 		];
 	});

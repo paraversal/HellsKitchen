@@ -5,6 +5,7 @@
 	import { MEAL_TYPES, type MealType } from './meal-types.ts';
 	import { strength } from '#lib/motion/fun.svelte.ts';
 	import { mealScene } from '#lib/motion/arrive.ts';
+	import { cap, words } from '#lib/words.ts';
 	import RecipeImage from './RecipeImage.svelte';
 
 	// One meal of the plan: what kind, when, how many people, and its dishes. `compact` is the narrow version for the desktop day columns.
@@ -42,7 +43,7 @@
 				{#if compact}{@render badge(28, 15)}{/if}
 				<span class="name">{compact ? meal.short : meal.label}</span>
 				{#if time}<span class="time">{time}</span>{/if}
-				{#if organisers}<span class="tag organisers">Organisers</span>{/if}
+				{#if organisers}<span class="tag organisers">{cap(words.organisers.many)}</span>{/if}
 				{#if hungry}<span class="tag hungry">Hungry {hungry}</span>{/if}
 			</div>
 			<span class="people"><Users size={compact ? 14 : 15} />{people}{#if onopen}<span class="more" aria-hidden="true"><ChevronRight size={16} /></span>{/if}</span>
@@ -64,7 +65,7 @@
 		class:compact
 		role="button"
 		tabindex="0"
-		aria-label="Edit {day ? `${day} ` : ''}{meal.label.toLowerCase()}{organisers ? ', for the organisers' : ''}{hungry ? ', hungrier than usual' : ''}"
+		aria-label="Edit {day ? `${day} ` : ''}{meal.label.toLowerCase()}{organisers ? `, for the ${words.organisers.many}` : ''}{hungry ? ', hungrier than usual' : ''}"
 		onclick={onopen}
 		onkeydown={(event) => {
 			if (event.key === 'Enter' || event.key === ' ') {

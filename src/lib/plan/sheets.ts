@@ -9,6 +9,7 @@ import { dishPortion } from '../kitchen-engine/rules/portion.ts';
 import { portionShare } from '../kitchen-engine/rules/share.ts';
 import type { MealType } from '../kitchen-engine/types.ts';
 import { formatAmount } from '../format.ts';
+import { words } from '../words.ts';
 import { dayLabel } from './plan.ts';
 import { enginePlan } from './shopping.ts';
 
@@ -76,7 +77,7 @@ export function recipeSheets(plan: PlanFile, data: AppData): Sheet[] {
 
 /** What a sheet says about how much to cook, as short facts: "200 people", "half of them" ... in the order they are read. */
 export function sheetFacts(sheet: Sheet): string[] {
-	const facts = [`${sheet.people} ${sheet.people === 1 ? 'person' : 'people'}${sheet.forOrganisers ? ' (organisers)' : ''}`];
+	const facts = [`${sheet.people} ${sheet.people === 1 ? 'person' : 'people'}${sheet.forOrganisers ? ` (${words.organisers.many})` : ''}`];
 	if (sheet.share !== 1) facts.push(`${Math.round(sheet.share * 100)} % of them`);
 	if (sheet.appetite !== 1) facts.push(`hungry meal, × ${sheet.appetite}`);
 	facts.push(`${formatAmount(sheet.portion, 'g')} each`);

@@ -1,0 +1,13 @@
+# The words the app uses for the people of the event. Change them here to fit how your event talks;
+# the app picks them up the next time it is built (npm run dev, build and check all read this file).
+#
+# Write each word as it appears in the middle of a sentence ("32 organisers"). The app gives it a capital
+# where it starts a label ("Organisers"). Leave a word out to keep the app's own.
+
+# The whole headcount of the event: "Everyone · 200".
+everyone: everyone
+
+# The smaller group that arrives early and has some meals on its own: one of them, and more than one.
+organisers:
+  one: organiser
+  many: organisers

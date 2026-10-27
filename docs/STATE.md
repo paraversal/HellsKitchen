@@ -84,7 +84,7 @@ No zoom, no highlight when a scroll starts on a button, the bottom bar answers e
 
 ### Data and contributing
 
-Recipes, ingredients and stores are YAML files, checked by one validator (`npm run validate`) that runs locally, in CI and, for plans, in the app. The formats are in [DATA.md](DATA.md). Pushing to `main` deploys to GitHub Pages. The contribution flow for other people is not written yet (step 16).
+Recipes, ingredients and stores are YAML files, checked by one validator (`npm run validate`) that runs locally, in CI and, for plans, in the app. The formats are in [DATA.md](DATA.md). The words the app uses for the groups of people (everyone, organisers) are set in `config/words.yaml`, so an event can rename them without touching the code. Pushing to `main` deploys to GitHub Pages. The contribution flow for other people is not written yet (step 16).
 
 ## How it fits together
 
@@ -92,6 +92,8 @@ Recipes, ingredients and stores are YAML files, checked by one validator (`npm r
 data/*.yaml ──(validator)──► src/lib/generated/app-data.json ──► the app
                                             │
 plan (IndexedDB, one library per device) ───┴──► kitchen engine ──► shopping list, cost, recipe sheets
+
+config/words.yaml ──(check)──► src/lib/generated/words.json ──► the words on screen and on paper
 ```
 
 - `src/lib/kitchen-engine/` is pure calculation and knows nothing about screens. Its spec and code are kept in step by a test.

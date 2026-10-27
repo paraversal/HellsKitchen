@@ -3,6 +3,7 @@
 	import Sheet from '#lib/components/Sheet.svelte';
 	import { planStore } from '#lib/plan/browser.ts';
 	import { rename, setEvent } from '#lib/plan/plan.ts';
+	import { cap, words } from '#lib/words.ts';
 	import PlansList from './PlansList.svelte';
 
 	// The settings of the whole event: its name, the two headcounts, and the appetite factor.
@@ -24,8 +25,8 @@
 			<div class="stack">
 				<Field label="Name" value={plan.name} oncommit={(value) => value.trim() ? planStore.change((p) => rename(p, value.trim())) : bump++} />
 				<div class="two">
-					<Field label="Everyone" type="number" min={1} step={1} value={String(plan.event.everyone)} oncommit={(v) => number(v, (n) => planStore.change((p) => setEvent(p, { everyone: n })), true, 1)} />
-					<Field label="Organisers" type="number" min={0} step={1} value={String(plan.event.organisers)} oncommit={(v) => number(v, (n) => planStore.change((p) => setEvent(p, { organisers: n })))} />
+					<Field label={cap(words.everyone)} type="number" min={1} step={1} value={String(plan.event.everyone)} oncommit={(v) => number(v, (n) => planStore.change((p) => setEvent(p, { everyone: n })), true, 1)} />
+					<Field label={cap(words.organisers.many)} type="number" min={0} step={1} value={String(plan.event.organisers)} oncommit={(v) => number(v, (n) => planStore.change((p) => setEvent(p, { organisers: n })))} />
 				</div>
 				<Field
 					label="Appetite factor, for meals that are hungrier than usual"

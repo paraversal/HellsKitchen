@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { parse, YAMLParseError } from 'yaml';
 import type { Issue } from '../src/lib/data/issues.ts';
 import type { RawData } from '../src/lib/data/validate.ts';
+import { readWords, WORDS_FILE, type Words } from '../src/lib/data/words.ts';
 
 /** Reads one YAML file. If it cannot be read, says why in plain language and returns undefined. */
 export function readYaml(root: string, file: string, problems: Issue[]): unknown {
@@ -56,4 +57,12 @@ export function readDataFolder(root: string): { raw: RawData; problems: Issue[] 
 		raw.images?.push({ name, bytes: statSync(join(photos, name)).size });
 	}
 	return { raw, problems };
+}
+
+/** The words of config/words.yaml, checked. Without the file the app keeps its own words. */
+export function readWordsFile(root: string, problems: Issue[]): Words {
+	const raw = existsSync(join(root, WORDS_FILE)) ? readYaml(root, WORDS_FILE, problems) : undefined;
+	const { words, issues } = readWords(raw);
+	problems.push(...issues);
+	return words;
 }
