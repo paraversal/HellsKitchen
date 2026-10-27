@@ -36,18 +36,21 @@
 {#snippet inner()}
 	{#if !compact}{@render badge(40, 20)}{/if}
 	<div class="body">
+		<!-- The headcount keeps its place at the top right; when the tags do not fit, they wrap under the name instead of pushing it down. -->
 		<div class="heading">
-			{#if compact}{@render badge(28, 15)}{/if}
-			<span class="name">{compact ? meal.short : meal.label}</span>
-			{#if time}<span class="time">{time}</span>{/if}
-			{#if organisers}<span class="tag organisers">Organisers</span>{/if}
-			{#if hungry}<span class="tag hungry">Hungry {hungry}</span>{/if}
+			<div class="title">
+				{#if compact}{@render badge(28, 15)}{/if}
+				<span class="name">{compact ? meal.short : meal.label}</span>
+				{#if time}<span class="time">{time}</span>{/if}
+				{#if organisers}<span class="tag organisers">Organisers</span>{/if}
+				{#if hungry}<span class="tag hungry">Hungry {hungry}</span>{/if}
+			</div>
 			<span class="people"><Users size={compact ? 14 : 15} />{people}{#if onopen}<span class="more" aria-hidden="true"><ChevronRight size={16} /></span>{/if}</span>
 		</div>
 		{#if dishes.length}
 			<ul>
 				{#each dishes as dish (dish.id)}
-					<li><RecipeImage id={dish.id} size={compact ? 24 : 22} /><span>{dish.name}{#if dish.note}<span class="note"> · {dish.note}</span>{/if}</span></li>
+					<li><RecipeImage id={dish.id} size={compact ? 24 : 22} /><span>{dish.name}{#if dish.note}<span class="note">{` · ${dish.note}`}</span>{/if}</span></li>
 				{/each}
 			</ul>
 		{/if}
@@ -99,10 +102,17 @@
 	}
 	.heading {
 		display: flex;
+		align-items: baseline;
+		gap: var(--space-3);
+		margin-bottom: 9px;
+	}
+	.title {
+		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
 		gap: var(--space-2);
-		margin-bottom: 9px;
+		flex: 1;
+		min-width: 0;
 	}
 	.tag {
 		padding: 1px 7px;
@@ -138,7 +148,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 5px;
-		margin-left: auto;
+		flex: none;
 		font-weight: var(--weight-bold);
 	}
 	.people :global(svg) {
