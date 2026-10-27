@@ -19,16 +19,16 @@ It runs in the browser, works offline, and keeps each plan on the user's own dev
 
 ## Working on it
 
-You need Node 24 (see `.nvmrc`).
+You need Node 24 (see `.nvmrc`) and [pnpm](https://pnpm.io).
 
 ```
-npm ci            # install what the project needs
-npm run dev       # start it locally
-npm run check     # types
-npm run validate  # check the data files (recipes, ingredients, stores)
-npm run build:data  # turn the data files into what the app ships with (runs by itself before dev, build and check)
-npm test          # tests
-npm run build     # build the site into build/
+pnpm install         # install what the project needs
+pnpm dev             # start it locally
+pnpm check           # types
+pnpm validate        # check the data files (recipes, ingredients, stores)
+pnpm build:data      # turn the data files into what the app ships with (runs by itself before dev, build and check)
+pnpm test            # tests
+pnpm build           # build the site into build/
 ```
 
 ## Folders
