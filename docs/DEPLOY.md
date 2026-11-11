@@ -8,7 +8,7 @@ whenever something is merged into `main`. Pull requests only run the checks in `
 1. **Make the repository public.** GitHub Pages is free only for public repositories. (Recipes are public on purpose.)
 2. **Commit and push to `main`.** The first push starts the deploy workflow.
 3. **Turn on Pages:** repository Settings, Pages, Source: **GitHub Actions**.
-4. Open the **Actions** tab. When "Deploy" is green, the address is shown there. It looks like `https://<owner>.github.io/HellsKitchen/`.
+4. Open the **Actions** tab. When "Deploy" is green, the address is shown there. It looks like `https://<owner>.github.io/hells-kitchen/`.
 
 If the first deploy ran before step 3, run it again: Actions, Deploy, Run workflow.
 
@@ -34,7 +34,7 @@ That is expected and is the reason the app will remind people to back up a plan.
 
 On a computer, with the server switched off after the first visit: the home page and the other page opened from the offline cache,
 the data file and font loaded, and a note saved while offline was still there after navigating away and back.
-The site was also built and served under a sub-path (`/HellsKitchen/`), as on GitHub Pages.
+The site was also built and served under a sub-path (`/hells-kitchen/`), as on GitHub Pages.
 
 ## The plan screens (step 12)
 
